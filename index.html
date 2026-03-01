@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="styles.css?v=20260302">
+</head>
+<body>
+    <div class="container">
+        <div class="game-info">
+            <h1>🐍 贪吃蛇冒险</h1>
+
+            <div class="stage-selector" id="stageSelector">
+                <span class="selector-label">👉 选择关卡开始游戏 👈</span>
+                <div class="stage-buttons">
+                    <button class="stage-btn" data-stage="1">
+                        <span class="stage-icon">🌟</span>
+                        <span class="stage-name">新手</span>
+                    </button>
+                    <button class="stage-btn" data-stage="2">
+                        <span class="stage-icon">🔥</span>
+                        <span class="stage-name">中等</span>
+                    </button>
+                    <button class="stage-btn" data-stage="3">
+                        <span class="stage-icon">⚡</span>
+                        <span class="stage-name">困难</span>
+                    </button>
+                    <button class="stage-btn" data-stage="4">
+                        <span class="stage-icon">💀</span>
+                        <span class="stage-name">极难</span>
+                    </button>
+                    <button class="stage-btn" data-stage="5">
+                        <span class="stage-icon">🎲</span>
+                        <span class="stage-name">随机</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stage-info" id="stageInfo"></div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">分数:</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">目标:</span>
+                    <span class="stat-value" id="target">10</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">进度:</span>
+                    <span class="stat-value" id="progress">0/10</span>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard"></div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="startBtn">开始游戏</button>
+            <button class="btn btn-secondary" id="pauseBtn" disabled>暂停</button>
+            <button class="btn btn-danger" id="resetBtn">重新开始</button>
+            <button class="btn btn-sound" id="soundBtn" title="切换音效">🔊 音效</button>
+        </div>
+
+        <div class="instructions">
+            <h3>游戏说明</h3>
+            <ul>
+                <li>先点击上方关卡按钮选择难度，再点击“开始游戏”</li>
+                <li>使用 <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> 或 <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> 控制蛇的方向</li>
+                <li>吃掉食物增加分数和身体长度</li>
+                <li>每个关卡有不同的目标和障碍物</li>
+                <li>撞到墙壁、障碍物或自己的身体则游戏结束</li>
+                <li>完成目标后进入下一个关卡</li>
+                <li>第5关为随机障碍关卡：无通关分数限制，每吃1个食物会在已有障碍旁新增1个障碍</li>
+            </ul>
+        </div>
+
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="game.js?v=20260302"></script>
+</body>
+</html>
