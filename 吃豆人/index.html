@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>吃豆人</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="app">
+        <header class="hud">
+            <h1>👻 吃豆人</h1>
+            <div class="stats">
+                <div class="card"><span>分数</span><strong id="score">0</strong></div>
+                <div class="card"><span>关卡</span><strong id="level">1</strong></div>
+                <div class="card"><span>生命</span><strong id="lives">3</strong></div>
+            </div>
+        </header>
+
+        <main class="game-wrap">
+            <canvas id="gameCanvas" width="546" height="546" aria-label="吃豆人游戏画布"></canvas>
+            <div id="floatLayer" class="float-layer"></div>
+
+            <div id="startMenu" class="overlay show">
+                <div class="panel">
+                    <h2>开始游戏</h2>
+                    <p>方向键控制，支持预输入；空格暂停/继续。</p>
+                    <button id="startBtn" class="btn primary">开始</button>
+                    <button id="howBtn" class="btn">操作说明</button>
+                </div>
+            </div>
+
+            <div id="pauseMenu" class="overlay">
+                <div class="panel">
+                    <h2>已暂停</h2>
+                    <button id="resumeBtn" class="btn primary">继续</button>
+                </div>
+            </div>
+
+            <div id="gameOverMenu" class="overlay">
+                <div class="panel">
+                    <h2 id="endTitle">游戏结束</h2>
+                    <p id="endText"></p>
+                    <button id="restartBtn" class="btn primary">重新开始</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="controls">
+            <button id="pauseBtn" class="btn" disabled>暂停</button>
+            <button id="muteBtn" class="btn">🔊 音效</button>
+            <p class="tips">提示：吃掉四角能量豆可让幽灵进入 frightened 模式。</p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
