@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>扫雷</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>扫雷</h1>
+      <p class="subtitle">翻开所有非雷格子，别被炸飞。</p>
+    </header>
+
+    <section class="panel controls">
+      <div class="difficulty-group">
+        <button data-level="beginner" class="level-btn active">初级 9x9 / 10 雷</button>
+        <button data-level="intermediate" class="level-btn">中级 16x16 / 40 雷</button>
+        <button data-level="expert" class="level-btn">高级 16x30 / 99 雷</button>
+      </div>
+
+      <div class="custom-group">
+        <label>行 <input id="rowsInput" type="number" min="5" max="30" value="9" /></label>
+        <label>列 <input id="colsInput" type="number" min="5" max="40" value="9" /></label>
+        <label>雷 <input id="minesInput" type="number" min="1" max="999" value="10" /></label>
+        <button id="customStartBtn">自定义开局</button>
+      </div>
+
+      <div class="command-group">
+        <input id="commandInput" type="text" placeholder="输入 /mine 初级、开始扫雷、重来、新一局" />
+        <button id="commandBtn">执行</button>
+      </div>
+    </section>
+
+    <section class="panel hud">
+      <div>剩余雷数：<span id="mineCounter">0</span></div>
+      <div>用时：<span id="timer">0</span>s</div>
+      <div class="status" id="statusText">准备开始</div>
+      <button id="restartBtn">重玩</button>
+    </section>
+
+    <section class="panel board-wrap">
+      <div id="board" class="board" aria-label="扫雷棋盘"></div>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>左键：翻开格子</li>
+        <li>右键：未翻开格子在 🚩 / ❓ / 未标记 之间切换</li>
+        <li>双击已翻开的数字格：若周围 🚩 数量等于数字，自动翻开周围未标记格子</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
