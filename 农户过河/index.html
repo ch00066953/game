@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>农户过河 - 狼羊菜谜题</title>
+    <link rel="stylesheet" href="styles.css?v=20260308">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1>👨‍🌾 农户过河</h1>
+            <p>把狼、羊、白菜安全送到右岸。船每次最多带一样，可独自过河。</p>
+        </header>
+
+        <section class="status-panel">
+            <div class="meta">
+                <span>状态：<strong id="gameStateText">进行中</strong></span>
+                <span>步数：<strong id="stepCount">0</strong></span>
+                <span>最优：<strong>7</strong></span>
+            </div>
+
+            <div class="river-view" id="riverView"></div>
+
+            <div class="quick-actions">
+                <button data-command="带狼">带狼</button>
+                <button data-command="带羊">带羊</button>
+                <button data-command="带菜">带菜</button>
+                <button data-command="独自">独自</button>
+                <button data-command="状态">状态</button>
+                <button data-command="提示">提示</button>
+                <button data-command="解法">解法</button>
+                <button data-command="重置">重置</button>
+            </div>
+        </section>
+
+        <section class="console-panel">
+            <div class="input-row">
+                <input id="commandInput" type="text" placeholder="输入命令：带羊 / 独自 / 状态 / 提示 / 解法 / 重置 / /river" />
+                <button id="sendBtn">执行</button>
+            </div>
+            <div class="tips">可用命令：<span>/river</span> <span>开始过河谜题</span> <span>带狼</span> <span>带羊</span> <span>带菜</span> <span>独自</span> <span>状态</span> <span>提示</span> <span>解法</span> <span>重置</span></div>
+            <pre id="messageLog" class="message-log"></pre>
+        </section>
+    </main>
+
+    <script src="game.js?v=20260308"></script>
+</body>
+</html>
