@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根本守不住</title>
+    <link rel="stylesheet" href="styles.css?v=20260304e">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <h1>根本守不住</h1>
+            <p class="subtitle">左右对抗策略原型</p>
+            <div class="status-row">
+                <div class="base-stat">我方基地: <span id="playerBaseHp">2000</span></div>
+                <div class="base-stat">敌方基地: <span id="enemyBaseHp">2000</span></div>
+                <div class="timer">时间: <span id="gameTime">0</span>s</div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label">战线拉扯</div>
+                <div class="progress-track">
+                    <div class="progress-red" id="progressRed"></div>
+                    <div class="progress-blue" id="progressBlue"></div>
+                    <div class="progress-center"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="battlefield" id="battlefield">
+            <canvas id="battlefieldCanvas"></canvas>
+            <div id="debugLayer" style="position: absolute; inset: 0; pointer-events: none;"></div>
+        </main>
+
+        <section class="hud">
+            <div class="mode-selector" id="modeSelector">
+                <div class="mode-label">选择模式</div>
+                <div class="mode-buttons">
+                    <button class="mode-btn" data-mode="practice">🎯 练习 (对抗）</button>
+                    <button class="mode-btn" data-mode="campaign-1">📖 战役 1-5</button>
+                    <button class="mode-btn" data-mode="campaign-2">📖 战役 6-10</button>
+                    <button class="mode-btn" data-mode="endless">♾️ 无尽模式</button>
+                </div>
+            </div>
+
+            <div class="energy-box">
+                <div class="energy-title">能量</div>
+                <div class="energy-track">
+                    <div class="energy-fill" id="energyFill"></div>
+                </div>
+                <div class="energy-text"><span id="energyText">4</span> / 10</div>
+            </div>
+
+            <div class="card-row" id="cardRow"></div>
+
+            <div class="hero-row" id="heroRow"></div>
+
+            <div class="action-row">
+                <button id="startBtn" class="btn btn-primary">开始对战</button>
+                <button id="pauseBtn" class="btn btn-secondary" disabled>暂停</button>
+                <button id="resetBtn" class="btn">重开</button>
+            </div>
+
+            <p class="hint" id="hintText">点击开始后，消耗能量召唤单位。单位会自动前进并攻击。</p>
+        </section>
+    </div>
+
+    <script src="game.js?v=20260304d"></script>
+</body>
+</html>

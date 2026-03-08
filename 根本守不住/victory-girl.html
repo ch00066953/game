@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>胜利女孩 - Canvas 绘制</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Microsoft YaHei, Arial, sans-serif;
+      background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+    }
+    canvas {
+      border: 3px solid #ff6b9d;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <canvas id="victoryCanvas" width="800" height="600"></canvas>
+  </div>
+  <script src="victory-girl.js"></script>
+</body>
+</html>

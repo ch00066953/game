@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24点游戏</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎯 24点挑战</h1>
+        
+        <div class="game-info">
+            <div class="score-board">
+                <span>正确：<strong id="correct-count">0</strong></span>
+                <span>错误：<strong id="wrong-count">0</strong></span>
+            </div>
+        </div>
+
+        <div class="cards-container" id="cards-container">
+            <!-- 卡片将由JS动态生成 -->
+        </div>
+
+        <div class="message" id="message">
+            点击"开始游戏"获取数字
+        </div>
+
+        <div class="input-section">
+            <input 
+                type="text" 
+                id="answer-input" 
+                placeholder="输入算式，例如：(7-1-4)*8" 
+                disabled
+            />
+            <button id="submit-btn" class="btn btn-primary" disabled>提交答案</button>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn" class="btn btn-success">开始游戏</button>
+            <button id="hint-btn" class="btn btn-warning" disabled>提示</button>
+            <button id="skip-btn" class="btn btn-secondary" disabled>跳过</button>
+            <button id="next-btn" class="btn btn-info" disabled>下一题</button>
+        </div>
+
+        <div class="rules">
+            <h3>游戏规则</h3>
+            <ul>
+                <li>使用给定的4个数字和 +、-、*、/ 运算符</li>
+                <li>每个数字必须且仅能使用一次</li>
+                <li>可以使用括号改变运算顺序</li>
+                <li>使最终结果等于24</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

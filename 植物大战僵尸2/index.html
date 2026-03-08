@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>植物大战僵尸2 - 迷你版</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>植物大战僵尸2 - 迷你版</h1>
+      <div class="stats">
+        <span>关卡: <strong id="levelValue">1</strong></span>
+        <span>阳光: <strong id="sunValue">150</strong></span>
+        <span>波次: <strong id="waveValue">1</strong></span>
+        <span>击杀: <strong id="killValue">0</strong></span>
+      </div>
+    </header>
+
+    <section class="controls">
+      <button id="cardPea" class="card-btn active" draggable="true">豌豆射手 (100)</button>
+      <button id="cardSunflower" class="card-btn" draggable="true">向日葵 (50)</button>
+      <button id="cardWallnut" class="card-btn" draggable="true">坚果墙 (75)</button>
+      <button id="cardRepeater" class="card-btn" draggable="true">双发射手 (175)</button>
+      <button id="cardIcepea" class="card-btn" draggable="true">寒冰射手 (125)</button>
+      <button id="cardLily" class="card-btn" draggable="true">睡莲 (25)</button>
+      <button id="pauseBtn">暂停: 关</button>
+      <button id="shovelBtn">铲子: 关</button>
+      <button id="soundBtn">音效: 开</button>
+      <button id="restartBtn">重新开始</button>
+      <p class="tip">拖拽卡牌到草地种植；第3关起出现水域，需要先放睡莲。可暂停与铲除植物。</p>
+    </section>
+
+    <section id="cardPicker" class="picker hidden" aria-label="选卡界面">
+      <h2>选卡界面</h2>
+      <p id="pickerHint" class="picker-hint">请选择本局要携带的植物卡（至少3张）。</p>
+      <div id="pickerList" class="picker-list"></div>
+      <button id="startLevelBtn">开始战斗</button>
+    </section>
+
+    <section class="board-wrap">
+      <canvas id="board" width="900" height="500" aria-label="游戏棋盘"></canvas>
+      <div id="overlay" class="overlay hidden"></div>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
