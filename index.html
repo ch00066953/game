@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="编程拾光 — 用代码还原经典，收录多款原生 HTML/JS 小游戏作品，包括贪吃蛇、吃豆人、扫雷、魂斗罗等。" />
+  <meta name="keywords" content="编程拾光,HTML游戏,JavaScript游戏,贪吃蛇,吃豆人,扫雷,魂斗罗,植物大战僵尸,24点,小游戏" />
+  <title>编程拾光 — 用代码还原经典</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">编程拾光</span>
+      </div>
+      <nav class="site-nav">
+        <a href="#works">作品集</a>
+        <a href="#about">关于本站</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero 区域 -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">原生 HTML / CSS / JavaScript</div>
+      <h1 class="hero-title">编程拾光</h1>
+      <p class="hero-subtitle">用代码还原记忆中的经典，每一款游戏都是一段光阴的拾取</p>
+      <a href="#works" class="btn-primary">浏览作品</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>向下滚动</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- 作品展示区 -->
+  <section class="works" id="works">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">作品集</h2>
+        <p class="section-desc">共 <strong>8</strong> 款游戏，均使用原生前端技术实现，无任何框架依赖</p>
+      </div>
+
+      <div class="game-grid">
+
+        <!-- 贪吃蛇 -->
+        <article class="game-card">
+          <div class="card-cover card-snake">
+            <div class="card-emoji">🐍</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-classic">经典</span>
+              <span class="tag tag-keyboard">键盘操控</span>
+            </div>
+            <h3 class="card-title">贪吃蛇</h3>
+            <p class="card-desc">方向键 / WASD 操控，吃食物自动升级难度，本地最高分持久化。</p>
+            <a class="card-btn" href="贪吃蛇/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 吃豆人 -->
+        <article class="game-card">
+          <div class="card-cover card-pacman">
+            <div class="card-emoji">👻</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-classic">经典</span>
+              <span class="tag tag-ai">幽灵AI</span>
+            </div>
+            <h3 class="card-title">吃豆人</h3>
+            <p class="card-desc">21×21 经典迷宫，4 只幽灵独立 AI，炸弹系统、传送门与 8 关递进难度。</p>
+            <a class="card-btn" href="吃豆人/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 扫雷 -->
+        <article class="game-card">
+          <div class="card-cover card-mine">
+            <div class="card-emoji">💣</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-classic">经典</span>
+              <span class="tag tag-puzzle">益智</span>
+            </div>
+            <h3 class="card-title">扫雷</h3>
+            <p class="card-desc">初 / 中 / 高级难度及自定义配置，首次点击保护，支持命令行控制。</p>
+            <a class="card-btn" href="扫雷/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 24点 -->
+        <article class="game-card">
+          <div class="card-cover card-24">
+            <div class="card-emoji">🔢</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-puzzle">益智</span>
+              <span class="tag tag-math">数学</span>
+            </div>
+            <h3 class="card-title">24 点</h3>
+            <p class="card-desc">经典数学益智游戏，用 4 个随机数字的加减乘除凑出 24，内置提示系统。</p>
+            <a class="card-btn" href="24点/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 魂斗罗 -->
+        <article class="game-card">
+          <div class="card-cover card-contra">
+            <div class="card-emoji">🔫</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-action">动作</span>
+              <span class="tag tag-boss">Boss战</span>
+            </div>
+            <h3 class="card-title">魂斗罗</h3>
+            <p class="card-desc">横版卷轴射击，4 种武器系统，肌肉男 Boss，粒子特效与屏幕震动反馈。</p>
+            <a class="card-btn" href="魂斗罗/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 根本守不住 -->
+        <article class="game-card">
+          <div class="card-cover card-defense">
+            <div class="card-emoji">⚔️</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-strategy">策略</span>
+              <span class="tag tag-pvp">对抗</span>
+            </div>
+            <h3 class="card-title">根本守不住</h3>
+            <p class="card-desc">左右对抗策略，10 种兵种 Canvas 渲染，资源管理 + 波次战役系统。</p>
+            <a class="card-btn" href="根本守不住/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 植物大战僵尸2 -->
+        <article class="game-card">
+          <div class="card-cover card-pvz">
+            <div class="card-emoji">🌻</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-strategy">策略</span>
+              <span class="tag tag-tower">塔防</span>
+            </div>
+            <h3 class="card-title">植物大战僵尸 2</h3>
+            <p class="card-desc">经典道路防御，3 种植物卡牌对抗 3 型僵尸，阳光拾取与音效系统。</p>
+            <a class="card-btn" href="植物大战僵尸2/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+        <!-- 农户过河 -->
+        <article class="game-card">
+          <div class="card-cover card-river">
+            <div class="card-emoji">🚣</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag tag-puzzle">益智</span>
+              <span class="tag tag-logic">逻辑</span>
+            </div>
+            <h3 class="card-title">农户过河</h3>
+            <p class="card-desc">经典狼羊菜过河谜题，支持按钮与命令行双模式，BFS 算法提供最优解提示。</p>
+            <a class="card-btn" href="农户过河/index.html" target="_blank">开始游戏 →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于本站 -->
+  <section class="about" id="about">
+    <div class="container about-inner">
+      <div class="about-text">
+        <h2>关于编程拾光</h2>
+        <p>
+          本站收录使用原生 <strong>HTML、CSS、JavaScript</strong> 实现的网页小游戏，
+          不依赖任何第三方框架，追求在浏览器中还原经典游戏体验。
+          每一个项目都是对代码能力的磨练，也是对那些年经典游戏的一次致敬。
+        </p>
+        <p>
+          所有游戏均可直接在浏览器中运行，无需安装任何插件，欢迎体验与交流。
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-num">8</span>
+          <span class="stat-label">款游戏</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">框架依赖</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">游玩时间</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚（备案信息） -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-icon">✦</span>
+          <span>编程拾光</span>
+        </div>
+        <p class="footer-slogan">用代码还原经典，用光阴记录成长</p>
+      </div>
+      <div class="footer-links">
+        <a href="#works">作品集</a>
+        <span class="divider">|</span>
+        <a href="#about">关于本站</a>
+        <span class="divider">|</span>
+        <a href="mailto:contact@example.com">联系我们</a>
+      </div>
+      <div class="footer-icp">
+        <p>© 2025 编程拾光 版权所有</p>
+        <p>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+              闽ICP备XXXXXXXX号
+          </a>
+          &emsp;
+          <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAANklEQVQokWP8z8BQDwAChgH/QZITBgYGBgZGBgYGhv//GRj+MzD8Z2BgYGBgZGBg+P+fgQEAi3sI4SgHmV0AAAAASUVORK5CYII=" alt="公安备案图标" style="vertical-align:middle;margin-right:4px;" />
+              闽公网安备 XXXXXXXXXXXXXX 号
+          </a>
+        </p>
+        <p class="footer-disclaimer">本站所有游戏均为原创复刻，仅供学习交流，不涉及商业用途。</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
