@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石器时代</title>
+    <link rel="stylesheet" href="styles.css?v=20260616">
+</head>
+<body>
+    <div id="app">
+        <!-- 标题画面 -->
+        <div id="titleScreen" class="screen active">
+            <div class="title-bg">
+                <div class="floating-dino d1">🦕</div>
+                <div class="floating-dino d2">🦖</div>
+                <div class="floating-dino d3">🐊</div>
+                <div class="floating-cloud c1">☁️</div>
+                <div class="floating-cloud c2">☁️</div>
+            </div>
+            <div class="title-content">
+                <h1 class="game-title">🗿 石器时代 🗿</h1>
+                <p class="game-subtitle">驯服远古巨兽，探索原始大陆</p>
+                <button class="btn-start" id="btnNewGame">开始冒险</button>
+                <button class="btn-continue" id="btnContinue" style="display:none">继续游戏</button>
+            </div>
+        </div>
+
+        <!-- 角色创建 -->
+        <div id="charCreate" class="screen">
+            <div class="panel create-panel">
+                <h2>创建角色</h2>
+                <div class="create-body">
+                    <!-- 左侧：预览 -->
+                    <div class="create-preview">
+                        <canvas id="charPreview" width="128" height="160"></canvas>
+                        <div class="preview-label">角色预览</div>
+                    </div>
+                    <!-- 右侧：选项 -->
+                    <div class="create-options">
+                        <div class="input-group">
+                            <label>角色名</label>
+                            <input type="text" id="charName" maxlength="8" placeholder="请输入名字">
+                        </div>
+                        <div class="class-select">
+                            <h3>选择职业</h3>
+                            <div class="class-options">
+                                <div class="class-card selected" data-class="warrior">
+                                    <div class="class-icon">⚔️</div>
+                                    <div class="class-name">战士</div>
+                                    <div class="class-desc">高攻高防，近战猛将</div>
+                                    <div class="class-stats">攻+3 防+2 速+1</div>
+                                </div>
+                                <div class="class-card" data-class="hunter">
+                                    <div class="class-icon">🏹</div>
+                                    <div class="class-name">猎人</div>
+                                    <div class="class-desc">高速高闪，捕获率+</div>
+                                    <div class="class-stats">攻+2 防+1 速+3</div>
+                                </div>
+                                <div class="class-card" data-class="shaman">
+                                    <div class="class-icon">🔮</div>
+                                    <div class="class-name">巫师</div>
+                                    <div class="class-desc">强力技能，回复魔法</div>
+                                    <div class="class-stats">攻+1 防+2 速+1 技+3</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 外观自定义 -->
+                        <div class="appear-section">
+                            <h3>自定义外观</h3>
+                            <div class="appear-row">
+                                <span class="appear-label">性别</span>
+                                <div class="appear-picks" id="genderPicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">身材</span>
+                                <div class="appear-picks" id="bodyTypePicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">发型</span>
+                                <div class="appear-picks" id="hairStylePicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">发色</span>
+                                <div class="appear-picks" id="hairColorPicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">肤色</span>
+                                <div class="appear-picks" id="skinColorPicks"></div>
+                            </div>
+                            <div class="appear-subsection">
+                                <h4>服装风格</h4>
+                                <div class="appear-tabs" id="clothingCategoryTabs"></div>
+                                <div class="appear-picks" id="clothingStylePicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">主色</span>
+                                <div class="appear-picks" id="outfitColorPicks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">副色</span>
+                                <div class="appear-picks" id="outfitColor2Picks"></div>
+                            </div>
+                            <div class="appear-row">
+                                <span class="appear-label">材质</span>
+                                <div class="appear-picks" id="materialPicks"></div>
+                            </div>
+                            <div class="appear-subsection">
+                                <h4>服装配件</h4>
+                                <div class="appear-picks" id="detailPicks"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary" id="btnCreate">确认创建</button>
+            </div>
+        </div>
+
+        <!-- 主游戏界面 -->
+        <div id="gameMain" class="screen">
+            <!-- 顶部状态栏 -->
+            <div class="top-bar">
+                <div class="player-info">
+                    <span id="pName">勇者</span>
+                    <span class="level-badge">Lv.<span id="pLevel">1</span></span>
+                </div>
+                <div class="resource-bar">
+                    <div class="res-item hp-res">
+                        <span class="res-icon">❤️</span>
+                        <div class="bar-wrap"><div class="bar bar-hp" id="pHpBar"></div></div>
+                        <span class="res-text"><span id="pHp">100</span>/<span id="pMaxHp">100</span></span>
+                    </div>
+                    <div class="res-item mp-res">
+                        <span class="res-icon">💧</span>
+                        <div class="bar-wrap"><div class="bar bar-mp" id="pMpBar"></div></div>
+                        <span class="res-text"><span id="pMp">50</span>/<span id="pMaxMp">50</span></span>
+                    </div>
+                    <div class="res-item exp-res">
+                        <span class="res-icon">⭐</span>
+                        <div class="bar-wrap"><div class="bar bar-exp" id="pExpBar"></div></div>
+                        <span class="res-text"><span id="pExp">0</span>/<span id="pMaxExp">100</span></span>
+                    </div>
+                </div>
+                <div class="gold-display">
+                    <span>💰</span> <span id="pGold">100</span>
+                </div>
+            </div>
+
+            <!-- 地图区域 -->
+            <div class="map-area" id="mapArea">
+                <canvas id="mapCanvas"></canvas>
+                <div class="area-name" id="areaName">加加村</div>
+                <div class="map-hint" id="mapHint">方向键/WASD 移动 · 靠近地标按空格交互</div>
+                <div class="interact-prompt" id="interactPrompt" style="display:none">按 空格/Enter 交互</div>
+            </div>
+
+            <!-- 底部操作栏 -->
+            <div class="bottom-bar">
+                <button class="action-btn" id="btnPets">🦕 宠物</button>
+                <button class="action-btn" id="btnBag">🎒 背包</button>
+                <button class="action-btn" id="btnSave">💾 存档</button>
+            </div>
+        </div>
+
+        <!-- 战斗界面 -->
+        <div id="battleScreen" class="screen">
+            <div class="battle-bg" id="battleBg">
+                <!-- 敌方区域 -->
+                <div class="enemy-area">
+                    <div class="enemy-info-bar">
+                        <span class="enemy-name" id="eName">野生暴龙</span>
+                        <span class="enemy-level">Lv.<span id="eLevel">1</span></span>
+                    </div>
+                    <div class="enemy-hp-bar">
+                        <div class="bar bar-enemy-hp" id="eHpBar"></div>
+                    </div>
+                    <span class="enemy-hp-text"><span id="eHp">100</span>/<span id="eMaxHp">100</span></span>
+                    <canvas class="enemy-sprite" id="enemySprite" width="120" height="120"></canvas>
+                </div>
+
+                <!-- 我方区域 -->
+                <div class="ally-area">
+                    <canvas class="ally-sprite" id="allySprite" width="80" height="100"></canvas>
+                    <canvas class="pet-sprite" id="petSprite" width="60" height="60" style="display:none"></canvas>
+                    <div class="ally-info" id="allyInfo">
+                        <div class="ally-name"><span id="bpName">原始人</span> <span class="ally-level">Lv.<span id="bpLevel">1</span></span></div>
+                        <div class="ally-bars">
+                            <div class="ally-bar-row"><span class="bar-label">HP</span><div class="ally-bar-wrap"><div class="bar bar-ally-hp" id="bpHpBar"></div></div><span class="ally-bar-text" id="bpHpText">100/100</span></div>
+                            <div class="ally-bar-row"><span class="bar-label">MP</span><div class="ally-bar-wrap"><div class="bar bar-ally-mp" id="bpMpBar"></div></div><span class="ally-bar-text" id="bpMpText">30/30</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 战斗动画层 -->
+                <div class="battle-effects" id="battleEffects"></div>
+            </div>
+
+            <!-- 战斗信息 -->
+            <div class="battle-log" id="battleLog">
+                <p>野生暴龙出现了！</p>
+            </div>
+
+            <!-- 战斗指令 -->
+            <div class="battle-commands" id="battleCommands">
+                <button class="cmd-btn" data-cmd="attack">⚔️ 攻击</button>
+                <button class="cmd-btn" data-cmd="skill">✨ 技能</button>
+                <button class="cmd-btn" data-cmd="catch">🥅 捕获</button>
+                <button class="cmd-btn" data-cmd="item">🧪 道具</button>
+                <button class="cmd-btn" data-cmd="pet">🦕 换宠</button>
+                <button class="cmd-btn" data-cmd="flee">🏃 逃跑</button>
+            </div>
+
+            <!-- 技能面板 -->
+            <div class="skill-panel" id="skillPanel" style="display:none">
+                <div class="skill-list" id="skillList"></div>
+                <button class="btn-back" id="btnSkillBack">返回</button>
+            </div>
+
+            <!-- 道具面板 -->
+            <div class="item-panel" id="itemPanel" style="display:none">
+                <div class="item-list" id="battleItemList"></div>
+                <button class="btn-back" id="btnItemBack">返回</button>
+            </div>
+
+            <!-- 换宠面板 -->
+            <div class="pet-switch-panel" id="petSwitchPanel" style="display:none">
+                <div class="pet-switch-list" id="petSwitchList"></div>
+                <button class="btn-back" id="btnPetSwitchBack">返回</button>
+            </div>
+        </div>
+
+        <!-- 宠物面板(弹窗) -->
+        <div id="petModal" class="modal">
+            <div class="modal-content pet-modal">
+                <h2>🦕 我的宠物</h2>
+                <div class="pet-list" id="petList"></div>
+                <button class="btn-close" id="btnPetClose">关闭</button>
+            </div>
+        </div>
+
+        <!-- 背包面板 -->
+        <div id="bagModal" class="modal">
+            <div class="modal-content bag-modal">
+                <h2>🎒 背包</h2>
+                <div class="bag-list" id="bagList"></div>
+                <button class="btn-close" id="btnBagClose">关闭</button>
+            </div>
+        </div>
+
+        <!-- 商店面板 -->
+        <div id="shopModal" class="modal">
+            <div class="modal-content shop-modal">
+                <h2>🏪 部落商店</h2>
+                <div class="shop-gold">💰 持有: <span id="shopGold">0</span></div>
+                <div class="shop-list" id="shopList"></div>
+                <button class="btn-close" id="btnShopClose">关闭</button>
+            </div>
+        </div>
+
+        <!-- 地图选择面板 -->
+        <div id="mapModal" class="modal">
+            <div class="modal-content map-modal">
+                <h2>🌍 世界地图</h2>
+                <div class="world-map" id="worldMap"></div>
+                <button class="btn-close" id="btnMapClose">关闭</button>
+            </div>
+        </div>
+
+        <!-- 战斗结果 -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content result-modal">
+                <h2 id="resultTitle">胜利！</h2>
+                <div id="resultContent"></div>
+                <button class="btn-primary" id="btnResultOk">确定</button>
+            </div>
+        </div>
+
+        <!-- 升级提示 -->
+        <div id="levelUpModal" class="modal">
+            <div class="modal-content levelup-modal">
+                <h2>🎉 等级提升！</h2>
+                <div id="levelUpContent"></div>
+                <button class="btn-primary" id="btnLevelUpOk">太好了！</button>
+            </div>
+        </div>
+
+        <!-- 消息提示 -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="data.js?v=20260615"></script>
+    <script src="game.js?v=20260615"></script>
+    <script src="character.js?v=20260616"></script>
+    <script src="enemies.js?v=20260615"></script>
+    <script src="map.js?v=20260615"></script>
+    <script src="battle.js?v=20260615"></script>
+</body>
+</html>

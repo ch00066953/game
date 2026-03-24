@@ -1,0 +1,27 @@
+{
+  "name": "five-elements-game",
+  "version": "1.0.0",
+  "description": "五位一体 - 3D冒险游戏，具有物理引擎和五个可切换角色",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "npx http-server -o",
+    "dev": "npx live-server --open=index.html"
+  },
+  "keywords": [
+    "three.js",
+    "cannon.js",
+    "3d-game",
+    "physics-engine",
+    "adventure-game"
+  ],
+  "author": "Five Elements Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "three": "^0.144.0",
+    "cannon-es": "^0.19.0"
+  }
+}

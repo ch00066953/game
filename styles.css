@@ -321,6 +321,9 @@ body {
 .card-defense{ background: linear-gradient(135deg, #14532d, #166534); }
 .card-pvz    { background: linear-gradient(135deg, #365314, #3f6212); }
 .card-river  { background: linear-gradient(135deg, #1e3a5f, #1e40af); }
+.card-craft  { background: linear-gradient(135deg, #254117, #4f772d); }
+.card-stoneage { background: linear-gradient(135deg, #8B4513, #D2691E); }
+.card-hunter { background: linear-gradient(135deg, #1a1a2e, #e74c3c); }
 
 /* 卡片内容 */
 .card-body {

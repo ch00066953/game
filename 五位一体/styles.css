@@ -1,0 +1,245 @@
+:root {
+    color-scheme: dark;
+    --bg: #04111b;
+    --panel: rgba(7, 19, 31, 0.72);
+    --line: rgba(148, 163, 184, 0.24);
+    --text: #eff6ff;
+    --muted: #bfd2e8;
+    --accent: #f59e0b;
+    --accent-2: #38bdf8;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(245, 158, 11, 0.18), transparent 28%),
+        linear-gradient(180deg, #0a1a28 0%, #04111b 60%, #02060b 100%);
+    color: var(--text);
+}
+
+.shell {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hud {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hud-left {
+    top: 22px;
+    left: 22px;
+    display: grid;
+    gap: 14px;
+    width: min(360px, calc(100vw - 44px));
+}
+
+.hud-top {
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, calc(100vw - 44px));
+}
+
+.hud-right {
+    top: 22px;
+    right: 22px;
+    display: grid;
+    gap: 14px;
+    width: min(300px, calc(100vw - 44px));
+}
+
+.hud-bottom {
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: min(760px, calc(100vw - 44px));
+}
+
+.panel {
+    pointer-events: auto;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    backdrop-filter: blur(16px);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+.brand,
+.objective,
+.message,
+.stats {
+    padding: 18px 20px;
+}
+
+.brand h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+}
+
+.summary,
+.panel p {
+    margin-top: 10px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: #7dd3fc;
+    text-transform: uppercase;
+}
+
+.panel h2 {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    color: #f8fafc;
+}
+
+.role-bar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px;
+}
+
+.role-button,
+.restart-button {
+    border: 0;
+    border-radius: 16px;
+    padding: 13px 12px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.86));
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.role-button:hover,
+.restart-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(56, 189, 248, 0.18);
+}
+
+.role-button.active {
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.95), rgba(217, 119, 6, 0.88));
+    color: #1f2937;
+}
+
+.stats {
+    display: grid;
+    gap: 12px;
+}
+
+.stats div {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: baseline;
+}
+
+.stats span {
+    color: #93c5fd;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+}
+
+.stats strong {
+    font-size: 18px;
+}
+
+.message {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: rgba(2, 6, 12, 0.74);
+    display: grid;
+    place-items: center;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.endcard {
+    width: min(480px, calc(100vw - 40px));
+    padding: 28px;
+    text-align: center;
+}
+
+.endcard h2 {
+    margin-top: 8px;
+    font-size: clamp(30px, 4vw, 42px);
+}
+
+.restart-button {
+    margin-top: 20px;
+    min-width: 180px;
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.96), rgba(14, 165, 233, 0.88));
+    color: #082f49;
+}
+
+@media (max-width: 960px) {
+    .hud-left,
+    .hud-right,
+    .hud-top,
+    .hud-bottom {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+
+    .shell {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto auto;
+    }
+
+    #game-canvas {
+        grid-row: 3;
+        min-height: 46vh;
+    }
+
+    .hud-left,
+    .hud-right,
+    .hud-top,
+    .hud-bottom {
+        padding: 12px;
+    }
+
+    .role-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

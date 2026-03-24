@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超级玛丽2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Platform Adventure</p>
+                <h1>超级玛丽2</h1>
+            </div>
+            <button id="restartBtn" class="restart-btn" type="button">重新开始</button>
+        </header>
+
+        <section class="hud">
+            <div class="hud-card">
+                <span class="label">得分</span>
+                <strong id="score">0</strong>
+            </div>
+            <div class="hud-card">
+                <span class="label">金币</span>
+                <strong id="coins">0 / 0</strong>
+            </div>
+            <div class="hud-card">
+                <span class="label">生命</span>
+                <strong id="lives">3</strong>
+            </div>
+            <div class="hud-card">
+                <span class="label">状态</span>
+                <strong id="status">准备出发</strong>
+            </div>
+        </section>
+
+        <main class="game-panel">
+            <canvas id="gameCanvas" width="960" height="540"></canvas>
+            <div class="legend">
+                <span>A / D 或 ← / → 移动</span>
+                <span>W / 空格 / ↑ 跳跃</span>
+                <span>踩踏敌人，收集金币，到达终点旗获胜</span>
+            </div>
+        </main>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

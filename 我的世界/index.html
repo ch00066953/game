@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的世界 - 像素沙盒</title>
+    <link rel="stylesheet" href="styles.css?v=20260321">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">原生 HTML / CSS / JavaScript</p>
+                <h1>⛏️ 我的世界：像素沙盒</h1>
+                <p class="subtitle">程序生成地形、采集与放置方块、昼夜循环、本地存档，一页打开直接玩。</p>
+            </div>
+            <div class="actions">
+                <button id="newWorldBtn" class="btn btn-primary">新建世界</button>
+                <button id="saveBtn" class="btn btn-secondary">保存进度</button>
+                <button id="clearSaveBtn" class="btn btn-danger">清空存档</button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <section class="viewport-card">
+                <div class="hud-row">
+                    <div class="hud-item">
+                        <span class="hud-label">天数</span>
+                        <strong id="dayValue">1</strong>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">时间</span>
+                        <strong id="timeValue">清晨</strong>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">地貌</span>
+                        <strong id="biomeValue">平原</strong>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">采集</span>
+                        <strong id="minedValue">0</strong>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">放置</span>
+                        <strong id="placedValue">0</strong>
+                    </div>
+                </div>
+
+                <div class="canvas-wrap">
+                    <canvas id="gameCanvas" width="960" height="640" aria-label="我的世界游戏画布"></canvas>
+                    <div class="status-pill" id="messageBox">世界已生成，使用 WASD 移动。</div>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <section class="panel">
+                    <h2>操作说明</h2>
+                    <ul class="tips-list">
+                        <li>WASD 或方向键移动角色</li>
+                        <li>鼠标左键挖掘邻近方块</li>
+                        <li>鼠标右键放置当前选中方块</li>
+                        <li>数字键 1-6 切换快捷栏</li>
+                        <li>R 重新生成世界，F 手动保存</li>
+                    </ul>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <h2>快捷栏</h2>
+                        <span id="selectedLabel">当前：泥土</span>
+                    </div>
+                    <div class="hotbar" id="hotbar"></div>
+                </section>
+
+                <section class="panel">
+                    <h2>背包</h2>
+                    <div class="inventory" id="inventoryGrid"></div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <h2>小地图</h2>
+                        <span>你的位置会闪烁</span>
+                    </div>
+                    <canvas id="miniMap" width="180" height="180" aria-label="小地图"></canvas>
+                </section>
+            </aside>
+        </main>
+    </div>
+
+    <script src="game.js?v=20260321"></script>
+</body>
+</html>

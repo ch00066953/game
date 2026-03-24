@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄金矿工</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>⛏️ 黄金矿工</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">关卡:</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">目标:</span>
+                    <span class="stat-value" id="target">$200</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">金钱:</span>
+                    <span class="stat-value" id="money">$0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">时间:</span>
+                    <span class="stat-value" id="timer">60</span>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas" width="800" height="550"></canvas>
+
+        <div class="game-controls">
+            <p class="hint">按 <kbd>↓</kbd> 或 <kbd>空格</kbd> 或 <kbd>点击屏幕</kbd> 释放钩子抓取矿物</p>
+        </div>
+
+        <div class="overlay" id="overlay">
+            <div class="overlay-content" id="overlayContent">
+                <h2>⛏️ 黄金矿工</h2>
+                <p>释放钩子抓取地下的金块和宝石！<br>避免抓到石头，它们又重又不值钱。</p>
+                <button class="btn-start" id="btnStart">开始游戏</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

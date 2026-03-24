@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怪物猎人</title>
+    <link rel="stylesheet" href="styles.css?v=20260322">
+</head>
+<body>
+    <div id="app">
+        <!-- 标题画面 -->
+        <div id="titleScreen" class="screen active">
+            <div class="title-bg">
+                <div class="floating-monster m1">🐉</div>
+                <div class="floating-monster m2">🦁</div>
+                <div class="floating-monster m3">🐺</div>
+                <div class="floating-cloud c1">⛰️</div>
+                <div class="floating-cloud c2">🌲</div>
+            </div>
+            <div class="title-content">
+                <h1 class="game-title">⚔️ 怪物猎人 ⚔️</h1>
+                <p class="game-subtitle">狩猎巨兽，铸造传说</p>
+                <button class="btn-start" id="btnNewGame">开始狩猎</button>
+                <button class="btn-continue" id="btnContinue" style="display:none">继续游戏</button>
+            </div>
+        </div>
+
+        <!-- 角色创建 -->
+        <div id="charCreate" class="screen">
+            <div class="panel create-panel">
+                <h2>创建猎人</h2>
+                <div class="input-group">
+                    <label>猎人名</label>
+                    <input type="text" id="charName" maxlength="8" placeholder="请输入名字">
+                </div>
+                <div class="weapon-select">
+                    <h3>选择武器</h3>
+                    <div class="weapon-options">
+                        <div class="weapon-card selected" data-weapon="greatsword">
+                            <div class="weapon-icon">⚔️</div>
+                            <div class="weapon-name">大剑</div>
+                            <div class="weapon-desc">蓄力重击，高伤害</div>
+                            <div class="weapon-stats">攻击+5 速度-2</div>
+                        </div>
+                        <div class="weapon-card" data-weapon="dualblades">
+                            <div class="weapon-icon">🗡️</div>
+                            <div class="weapon-name">双刀</div>
+                            <div class="weapon-desc">疾风连击，高速度</div>
+                            <div class="weapon-stats">攻击+2 速度+4</div>
+                        </div>
+                        <div class="weapon-card" data-weapon="bow">
+                            <div class="weapon-icon">🏹</div>
+                            <div class="weapon-name">弓</div>
+                            <div class="weapon-desc">远程精准，安全输出</div>
+                            <div class="weapon-stats">攻击+3 射程+3</div>
+                        </div>
+                        <div class="weapon-card" data-weapon="hammer">
+                            <div class="weapon-icon">🔨</div>
+                            <div class="weapon-name">大锤</div>
+                            <div class="weapon-desc">重击眩晕，破防利器</div>
+                            <div class="weapon-stats">攻击+4 眩晕+3</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-create" id="btnCreate">出发狩猎！</button>
+            </div>
+        </div>
+
+        <!-- 主界面：村庄 -->
+        <div id="gameMain" class="screen">
+            <!-- 顶部信息栏 -->
+            <div class="top-bar">
+                <div class="hunter-info">
+                    <span id="hunterIcon">⚔️</span>
+                    <span id="hunterName">猎人</span>
+                    <span class="hr-badge">HR <span id="hunterRank">1</span></span>
+                </div>
+                <div class="resource-bar">
+                    <span>💰 <span id="zenny">0</span>z</span>
+                    <span>📦 素材: <span id="matCount">0</span></span>
+                </div>
+            </div>
+            <!-- 村庄区域 -->
+            <div class="village-area">
+                <div class="village-bg">
+                    <div class="village-title">猎人集会所</div>
+                </div>
+                <div class="village-menu">
+                    <button class="village-btn" id="btnQuest">📋 接受任务</button>
+                    <button class="village-btn" id="btnForge">🔨 锻造装备</button>
+                    <button class="village-btn" id="btnItems">🎒 道具箱</button>
+                    <button class="village-btn" id="btnShop">🏪 商店</button>
+                    <button class="village-btn" id="btnStatus">📊 猎人状态</button>
+                    <button class="village-btn" id="btnSave">💾 保存</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 任务选择 -->
+        <div id="questScreen" class="screen">
+            <div class="panel quest-panel">
+                <div class="panel-header">
+                    <h2>📋 任务公告板</h2>
+                    <button class="btn-back" id="btnQuestBack">返回</button>
+                </div>
+                <div id="questList" class="quest-list"></div>
+            </div>
+        </div>
+
+        <!-- 战斗画面 -->
+        <div id="battleScreen" class="screen">
+            <canvas id="battleCanvas"></canvas>
+            <div class="battle-hud">
+                <div class="hud-left">
+                    <div class="monster-info-bar">
+                        <span id="monsterName">???</span>
+                        <div class="hp-bar monster-hp">
+                            <div id="monsterHpFill" class="hp-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <div class="hunter-hud">
+                        <div class="hp-bar hunter-hp">
+                            <span class="bar-label">HP</span>
+                            <div id="hunterHpFill" class="hp-fill hp-green"></div>
+                        </div>
+                        <div class="hp-bar stamina-bar">
+                            <span class="bar-label">体力</span>
+                            <div id="staminaFill" class="hp-fill stamina-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hud-bottom">
+                    <div class="action-hints">
+                        <span>WASD/方向键 移动</span>
+                        <span>J/Z 攻击</span>
+                        <span>K/X 翻滚</span>
+                        <span>L/C 使用道具</span>
+                    </div>
+                    <div class="battle-timer">
+                        ⏱️ <span id="battleTimer">50:00</span>
+                    </div>
+                </div>
+                <div class="item-bar">
+                    <div class="item-slot active" data-item="potion">🧪 回复药 x<span id="potionCount">0</span></div>
+                    <div class="item-slot" data-item="megapotion">💊 秘药 x<span id="megapotionCount">0</span></div>
+                    <div class="item-slot" data-item="trap">🪤 陷阱 x<span id="trapCount">0</span></div>
+                    <div class="item-slot" data-item="bomb">💣 炸弹 x<span id="bombCount">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 战斗结果 -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content result-content">
+                <h2 id="resultTitle">狩猎完成！</h2>
+                <div id="resultBody"></div>
+                <button class="btn-primary" id="btnResultOk">确定</button>
+            </div>
+        </div>
+
+        <!-- 锻造界面 -->
+        <div id="forgeModal" class="modal">
+            <div class="modal-content forge-content">
+                <div class="panel-header">
+                    <h2>🔨 锻造工坊</h2>
+                    <button class="btn-close" id="btnForgeClose">✕</button>
+                </div>
+                <div id="forgeList" class="forge-list"></div>
+            </div>
+        </div>
+
+        <!-- 道具箱 -->
+        <div id="itemsModal" class="modal">
+            <div class="modal-content items-content">
+                <div class="panel-header">
+                    <h2>🎒 道具箱</h2>
+                    <button class="btn-close" id="btnItemsClose">✕</button>
+                </div>
+                <div id="itemsList" class="items-list"></div>
+            </div>
+        </div>
+
+        <!-- 商店 -->
+        <div id="shopModal" class="modal">
+            <div class="modal-content shop-content">
+                <div class="panel-header">
+                    <h2>🏪 商店</h2>
+                    <button class="btn-close" id="btnShopClose">✕</button>
+                </div>
+                <div id="shopList" class="shop-list"></div>
+            </div>
+        </div>
+
+        <!-- 猎人状态 -->
+        <div id="statusModal" class="modal">
+            <div class="modal-content status-content">
+                <div class="panel-header">
+                    <h2>📊 猎人状态</h2>
+                    <button class="btn-close" id="btnStatusClose">✕</button>
+                </div>
+                <div id="statusBody"></div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="toast"></div>
+    </div>
+    <script src="game.js?v=20260322"></script>
+</body>
+</html>

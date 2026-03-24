@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五位一体</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="shell">
+        <canvas id="game-canvas"></canvas>
+        <section class="hud hud-left">
+            <div class="panel brand">
+                <p class="eyebrow">3D 物理解谜冒险</p>
+                <h1>五位一体</h1>
+                <p class="summary">战士破阵，法师造物，盗贼突进，工匠架桥，商人聚财。收集金币，穿过裂谷，抵达传送门。</p>
+            </div>
+            <div class="panel">
+                <h2>操作</h2>
+                <p>WASD 移动，空格跳跃，J 释放角色技能。</p>
+                <p>数字键 1-5 或点击按钮切换角色。</p>
+                <p>战士推开障碍，法师召唤方块，盗贼冲刺，工匠搭桥，商人吸附金币。</p>
+            </div>
+        </section>
+        <section class="hud hud-top">
+            <div class="panel role-bar" id="role-bar">
+                <button class="role-button active" data-role="warrior">1 战士</button>
+                <button class="role-button" data-role="mage">2 法师</button>
+                <button class="role-button" data-role="thief">3 盗贼</button>
+                <button class="role-button" data-role="artisan">4 工匠</button>
+                <button class="role-button" data-role="merchant">5 商人</button>
+            </div>
+        </section>
+        <section class="hud hud-right">
+            <div class="panel stats">
+                <div><span>角色</span><strong id="role-name">战士</strong></div>
+                <div><span>生命</span><strong id="health-value">100</strong></div>
+                <div><span>金币</span><strong id="coin-value">0 / 8</strong></div>
+                <div><span>状态</span><strong id="status-value">准备出发</strong></div>
+            </div>
+            <div class="panel objective">
+                <h2>目标</h2>
+                <p id="objective-text">先用工匠搭桥，再收集 8 枚金币，最后走进传送门。</p>
+            </div>
+        </section>
+        <section class="hud hud-bottom">
+            <div class="panel message" id="message-box">裂谷前方的旧桥已经断裂，队伍需要协作。</div>
+        </section>
+        <div class="overlay hidden" id="overlay">
+            <div class="panel endcard">
+                <p class="eyebrow">关卡完成</p>
+                <h2>五位英雄顺利会师</h2>
+                <p id="end-summary">你已完成这场物理解谜演示。</p>
+                <button id="restart-button" class="restart-button">重新开始</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
