@@ -157,6 +157,8 @@
             <div class="bottom-bar">
                 <button class="action-btn" id="btnPets">🦕 宠物</button>
                 <button class="action-btn" id="btnBag">🎒 背包</button>
+                <button class="action-btn" id="btnWorldMap">🗺️ 地图</button>
+                <button class="action-btn" id="btnCraft">⚒️ 合成</button>
                 <button class="action-btn" id="btnSave">💾 存档</button>
             </div>
         </div>
@@ -256,6 +258,17 @@
             </div>
         </div>
 
+        <!-- 合成工坊 -->
+        <div id="craftModal" class="modal">
+            <div class="modal-content craft-modal">
+                <h2>⚒️ 合成工坊</h2>
+                <div class="craft-mat-summary" id="craftMatSummary"></div>
+                <div class="craft-tabs" id="craftTabs"></div>
+                <div class="craft-list" id="craftList"></div>
+                <button class="btn-close" id="btnCraftClose">关闭</button>
+            </div>
+        </div>
+
         <!-- 地图选择面板 -->
         <div id="mapModal" class="modal">
             <div class="modal-content map-modal">
@@ -293,5 +306,6 @@
     <script src="enemies.js?v=20260615"></script>
     <script src="map.js?v=20260615"></script>
     <script src="battle.js?v=20260615"></script>
+    <script src="craft.js?v=20260326"></script>
 </body>
 </html>

@@ -123,6 +123,141 @@ const AREA_MAPS = {
     },
 };
 
+// ===== 材料信息 =====
+const MATERIAL_INFO = {
+    bone:         { name: '骨头',     icon: '🦴' },
+    leather:      { name: '皮革',     icon: '🟫' },
+    hard_stone:   { name: '坚硬石块', icon: '🪨' },
+    fire_stone:   { name: '火焰石',   icon: '🔴' },
+    ice_crystal:  { name: '冰晶',     icon: '💠' },
+    poison_gland: { name: '毒腺',     icon: '💚' },
+};
+
+// ===== 敌人掉落表 =====
+const ENEMY_DROPS = {
+    '小恐龙':   [{ id: 'bone',         chance: 0.50 }],
+    '野猪':     [{ id: 'leather',      chance: 0.40 }, { id: 'bone',         chance: 0.30 }],
+    '毒蛇':     [{ id: 'poison_gland', chance: 0.45 }],
+    '迅猛龙':   [{ id: 'bone',         chance: 0.60 }, { id: 'leather',      chance: 0.35 }],
+    '巨蜥':     [{ id: 'leather',      chance: 0.55 }, { id: 'poison_gland', chance: 0.30 }],
+    '森林猛犸': [{ id: 'leather',      chance: 0.65 }, { id: 'bone',         chance: 0.40 }],
+    '沙漠蝎':   [{ id: 'poison_gland', chance: 0.50 }, { id: 'hard_stone',   chance: 0.25 }],
+    '骆驼龙':   [{ id: 'leather',      chance: 0.40 }, { id: 'hard_stone',   chance: 0.35 }],
+    '沙暴巨虫': [{ id: 'bone',         chance: 0.55 }, { id: 'poison_gland', chance: 0.40 }],
+    '火蜥蜴':   [{ id: 'fire_stone',   chance: 0.50 }, { id: 'bone',         chance: 0.30 }],
+    '熔岩龙':   [{ id: 'fire_stone',   chance: 0.65 }, { id: 'bone',         chance: 0.40 }],
+    '火山暴龙': [{ id: 'fire_stone',   chance: 0.75 }, { id: 'leather',      chance: 0.30 }],
+    '冰霜狼':   [{ id: 'ice_crystal',  chance: 0.50 }, { id: 'leather',      chance: 0.30 }],
+    '猛犸象':   [{ id: 'ice_crystal',  chance: 0.45 }, { id: 'bone',         chance: 0.55 }],
+    '冰龙王':   [{ id: 'ice_crystal',  chance: 0.80 }, { id: 'fire_stone',   chance: 0.30 }],
+};
+
+// ===== 商店名称 =====
+const SHOP_NAMES = {
+    village: '🏘️ 加加村商店',
+    forest:  '🌲 流浪商人',
+    desert:  '🏜️ 沙漠商队',
+    volcano: '🌋 矮人铁匠',
+    ice:     '🏔️ 冰原行商',
+};
+
+// ===== 各村落商店商品 =====
+const VILLAGE_SHOPS = {
+    village: [
+        { id: 'potion',     name: '生命药水',   icon: '💉', desc: '恢复50HP',              price: 30,  effect: { type: 'heal',       value: 50  } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'catchStone', name: '捕兽石',     icon: '💎', desc: '战斗时捕获率+15%',      price: 50,  effect: { type: 'catchBonus', value: 15  } },
+        { id: 'bone',       name: '骨头',       icon: '🦴', desc: '合成材料',              price: 10,  effect: { type: 'material'                } },
+        { id: 'leather',    name: '皮革',       icon: '🟫', desc: '合成材料',              price: 15,  effect: { type: 'material'                } },
+    ],
+    forest: [
+        { id: 'potion',     name: '生命药水',   icon: '💉', desc: '恢复50HP',              price: 30,  effect: { type: 'heal',       value: 50  } },
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'bone',       name: '骨头',       icon: '🦴', desc: '合成材料',              price: 10,  effect: { type: 'material'                } },
+        { id: 'leather',    name: '皮革',       icon: '🟫', desc: '合成材料',              price: 15,  effect: { type: 'material'                } },
+        { id: 'hard_stone', name: '坚硬石块',   icon: '🪨', desc: '合成材料',              price: 20,  effect: { type: 'material'                } },
+    ],
+    desert: [
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'catchStone', name: '捕兽石',     icon: '💎', desc: '战斗时捕获率+15%',      price: 50,  effect: { type: 'catchBonus', value: 15  } },
+        { id: 'atkCharm',   name: '力量护符',   icon: '💪', desc: '战斗中攻击+5(单次)',    price: 100, effect: { type: 'atkBuff',    value: 5   } },
+        { id: 'hard_stone', name: '坚硬石块',   icon: '🪨', desc: '合成材料',              price: 20,  effect: { type: 'material'                } },
+        { id: 'fire_stone', name: '火焰石',     icon: '🔴', desc: '合成材料',              price: 35,  effect: { type: 'material'                } },
+    ],
+    volcano: [
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'fullPotion', name: '满血药水',   icon: '🧬', desc: '完全恢复HP与MP',        price: 200, effect: { type: 'fullHeal'                } },
+        { id: 'petPotion',  name: '宠物药水',   icon: '🍖', desc: '恢复出战宠物50HP',      price: 40,  effect: { type: 'petHeal',    value: 50  } },
+        { id: 'fire_stone', name: '火焰石',     icon: '🔴', desc: '合成材料',              price: 35,  effect: { type: 'material'                } },
+        { id: 'poison_gland', name: '毒腺',     icon: '💚', desc: '合成材料',              price: 30,  effect: { type: 'material'                } },
+    ],
+    ice: [
+        { id: 'fullPotion', name: '满血药水',   icon: '🧬', desc: '完全恢复HP与MP',        price: 200, effect: { type: 'fullHeal'                } },
+        { id: 'superMp',    name: '超级灵力',   icon: '💠', desc: '恢复80MP',              price: 120, effect: { type: 'healMp',     value: 80  } },
+        { id: 'petPotion',  name: '宠物药水',   icon: '🍖', desc: '恢复出战宠物50HP',      price: 40,  effect: { type: 'petHeal',    value: 50  } },
+        { id: 'ice_crystal', name: '冰晶',      icon: '💠', desc: '合成材料',              price: 50,  effect: { type: 'material'                } },
+        { id: 'atkCharm',   name: '力量护符',   icon: '💪', desc: '战斗中攻击+5(单次)',    price: 100, effect: { type: 'atkBuff',    value: 5   } },
+    ],
+};
+
+// ===== 合成配方 =====
+const CRAFT_RECIPES = [
+    // 武器
+    { id: 'stone_axe',    name: '石斧',     icon: '🪓', category: '武器',
+      desc: '原始石制武器，装备后攻击+6',
+      materials: [{ id: 'hard_stone', count: 2 }, { id: 'bone', count: 1 }],
+      result: { id: 'stone_axe',    name: '石斧',     icon: '🪓', count: 1, desc: '装备后攻击+6',   effect: { type: 'equipAtk', value: 6  } } },
+    { id: 'bone_spear',   name: '骨矛',     icon: '🗡️', category: '武器',
+      desc: '以骨头制成的长矛，装备后攻击+10',
+      materials: [{ id: 'bone', count: 3 }, { id: 'leather', count: 1 }],
+      result: { id: 'bone_spear',   name: '骨矛',     icon: '🗡️', count: 1, desc: '装备后攻击+10',  effect: { type: 'equipAtk', value: 10 } } },
+    { id: 'flame_knife',  name: '火焰刀',   icon: '🔥', category: '武器',
+      desc: '蕴含火焰之力，装备后攻击+14',
+      materials: [{ id: 'fire_stone', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'flame_knife',  name: '火焰刀',   icon: '🔥', count: 1, desc: '装备后攻击+14',  effect: { type: 'equipAtk', value: 14 } } },
+    { id: 'ice_bow',      name: '冰霜弓',   icon: '🏹', category: '武器',
+      desc: '凝结冰晶之力，装备后攻击+12',
+      materials: [{ id: 'ice_crystal', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'ice_bow',      name: '冰霜弓',   icon: '🏹', count: 1, desc: '装备后攻击+12',  effect: { type: 'equipAtk', value: 12 } } },
+    { id: 'poison_dagger', name: '毒匕首', icon: '💀', category: '武器',
+      desc: '涂有致命毒素，装备后攻击+9',
+      materials: [{ id: 'poison_gland', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'poison_dagger', name: '毒匕首',  icon: '💀', count: 1, desc: '装备后攻击+9',   effect: { type: 'equipAtk', value: 9  } } },
+    // 防具
+    { id: 'leather_armor', name: '皮甲',   icon: '🛡️', category: '防具',
+      desc: '坚韧的皮革甲，装备后防御+7',
+      materials: [{ id: 'leather', count: 3 }],
+      result: { id: 'leather_armor', name: '皮甲',    icon: '🛡️', count: 1, desc: '装备后防御+7',   effect: { type: 'equipDef', value: 7  } } },
+    { id: 'bone_helmet',  name: '骨盔',    icon: '⛑️', category: '防具',
+      desc: '骨头制成的头盔，装备后防御+4',
+      materials: [{ id: 'bone', count: 2 }, { id: 'leather', count: 1 }],
+      result: { id: 'bone_helmet',  name: '骨盔',     icon: '⛑️', count: 1, desc: '装备后防御+4',   effect: { type: 'equipDef', value: 4  } } },
+    // 饰品
+    { id: 'fire_amulet',  name: '火焰护符', icon: '🔮', category: '饰品',
+      desc: '蕴含火焰生命力，最大HP永久+40',
+      materials: [{ id: 'fire_stone', count: 1 }, { id: 'leather', count: 1 }],
+      result: { id: 'fire_amulet',  name: '火焰护符', icon: '🔮', count: 1, desc: '最大HP永久+40',  effect: { type: 'equipHp',  value: 40 } } },
+    { id: 'ice_totem',    name: '冰霜图腾', icon: '❄️', category: '饰品',
+      desc: '凝聚寒气，最大HP永久+60',
+      materials: [{ id: 'ice_crystal', count: 2 }, { id: 'leather', count: 1 }],
+      result: { id: 'ice_totem',    name: '冰霜图腾', icon: '❄️', count: 1, desc: '最大HP永久+60',  effect: { type: 'equipHp',  value: 60 } } },
+    // 道具
+    { id: 'super_catch',  name: '超级捕兽石', icon: '🟢', category: '道具',
+      desc: '战斗时捕获率+30%',
+      materials: [{ id: 'hard_stone', count: 1 }, { id: 'bone', count: 2 }],
+      result: { id: 'super_catch',  name: '超级捕兽石', icon: '🟢', count: 1, desc: '捕获率+30%',   effect: { type: 'catchBonus', value: 30 } } },
+    { id: 'mega_potion',  name: '超级药水',   icon: '🧪', category: '道具',
+      desc: '恢复300HP的强效药水',
+      materials: [{ id: 'bone', count: 1 }, { id: 'leather', count: 2 }],
+      result: { id: 'mega_potion',  name: '超级药水',   icon: '🧪', count: 1, desc: '恢复300HP',     effect: { type: 'heal',       value: 300 } } },
+    { id: 'power_stone',  name: '力量之石',   icon: '💥', category: '道具',
+      desc: '战斗中攻击力大幅提升+10(单次)',
+      materials: [{ id: 'hard_stone', count: 2 }, { id: 'fire_stone', count: 1 }],
+      result: { id: 'power_stone',  name: '力量之石',   icon: '💥', count: 1, desc: '战斗攻击+10',   effect: { type: 'atkBuff',    value: 10 } } },
+];
+
 // ===== 地图生成 =====
 function generateAreaTiles(areaId) {
     const def = AREA_MAPS[areaId];

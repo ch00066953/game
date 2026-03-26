@@ -29,7 +29,7 @@ function newGameState(name, cls, appearance) {
 // ===== DOM引用 =====
 const $ = id => document.getElementById(id);
 const screens = { title: $('titleScreen'), create: $('charCreate'), main: $('gameMain'), battle: $('battleScreen') };
-const modals = { pet: $('petModal'), bag: $('bagModal'), shop: $('shopModal'), map: $('mapModal'), result: $('resultModal'), levelUp: $('levelUpModal') };
+const modals = { pet: $('petModal'), bag: $('bagModal'), shop: $('shopModal'), map: $('mapModal'), result: $('resultModal'), levelUp: $('levelUpModal'), craft: $('craftModal') };
 
 // ===== 屏幕切换 =====
 let mapActive = false;
@@ -86,10 +86,13 @@ function bindMainButtons() {
     $('btnPets').onclick = () => { renderPetModal(); showModal('pet'); };
     $('btnBag').onclick = () => { renderBagModal(); showModal('bag'); };
     $('btnSave').onclick = saveGame;
+    $('btnWorldMap').onclick = () => { renderMapModal(); showModal('map'); };
+    $('btnCraft').onclick = () => { _craftFilter = 'all'; renderCraftModal(); showModal('craft'); };
     $('btnPetClose').onclick = () => hideModal('pet');
     $('btnBagClose').onclick = () => hideModal('bag');
     $('btnShopClose').onclick = () => hideModal('shop');
     $('btnMapClose').onclick = () => hideModal('map');
+    $('btnCraftClose').onclick = () => hideModal('craft');
 }
 
 // ===== 保存/读取 =====

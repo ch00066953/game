@@ -150,7 +150,7 @@ function detectNearPoi() {
 
 function interactWithPoi(poi) {
     switch (poi.type) {
-        case 'shop': renderShopModal(); showModal('shop'); break;
+        case 'shop': renderShopModal(AREAS[game.currentArea].id); showModal('shop'); break;
         case 'heal':
             game.player.hp = game.player.maxHp; game.player.mp = game.player.maxMp;
             game.pets.forEach(p => { p.hp = p.maxHp; p.mp = p.maxMp; });

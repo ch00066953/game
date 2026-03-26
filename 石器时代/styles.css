@@ -573,3 +573,99 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
     height: 100%; background: linear-gradient(90deg, #f39c12, #fdcb6e);
     border-radius: 3px; transition: width 0.4s;
 }
+
+/* ===== 合成系统 ===== */
+.craft-modal { max-width: 560px; }
+.craft-mat-summary {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    background: #f0f4f8; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+}
+.mat-summary-item {
+    display: flex; align-items: center; gap: 3px; font-size: 16px;
+    padding: 4px 10px; border-radius: 20px; background: #e8ecf0;
+    border: 1px solid #d0d8e0;
+}
+.mat-summary-item.mat-have { background: #e8f5e9; border-color: #81c784; color: #2e7d32; }
+.mat-summary-item.mat-none { opacity: 0.5; }
+.mat-sum-count { font-size: 13px; font-weight: bold; }
+
+.craft-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.craft-tab-btn {
+    padding: 5px 14px; border: 2px solid #ddd; border-radius: 20px;
+    background: #f5f5f5; font-size: 13px; cursor: pointer; font-weight: bold;
+    transition: all 0.15s; color: #666;
+}
+.craft-tab-btn:hover { border-color: #FF6B35; color: #FF6B35; }
+.craft-tab-btn.active { background: #FF6B35; border-color: #FF6B35; color: #fff; }
+
+.craft-list { display: flex; flex-direction: column; gap: 10px; max-height: 50vh; overflow-y: auto; }
+.craft-item {
+    display: flex; align-items: center; gap: 12px; padding: 12px;
+    background: #f8f9fa; border-radius: 10px; border: 2px solid #e8e8e8;
+    transition: all 0.15s;
+}
+.craft-item.craftable { border-color: #a8d8a8; background: #f0faf0; }
+.craft-item-icon { font-size: 32px; flex-shrink: 0; }
+.craft-item-info { flex: 1; min-width: 0; }
+.craft-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.craft-item-name { font-weight: bold; color: #333; font-size: 15px; }
+.craft-item-cat {
+    font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: bold;
+}
+.cat-武器 { background: #ffebee; color: #c62828; }
+.cat-防具 { background: #e3f2fd; color: #1565c0; }
+.cat-饰品 { background: #f3e5f5; color: #6a1b9a; }
+.cat-道具 { background: #fff8e1; color: #e65100; }
+.craft-item-desc { font-size: 12px; color: #888; margin-bottom: 6px; }
+.craft-mats { display: flex; flex-wrap: wrap; gap: 6px; }
+.craft-mat {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 12px; padding: 2px 8px; border-radius: 10px;
+    border: 1px solid #ddd; background: #fff;
+}
+.craft-mat.mat-ok { border-color: #81c784; background: #e8f5e9; color: #2e7d32; }
+.craft-mat.mat-lack { border-color: #ef9a9a; background: #ffebee; color: #c62828; }
+.mat-count { font-weight: bold; margin-left: 2px; }
+.craft-btn {
+    padding: 10px 14px; background: linear-gradient(135deg, #FF6B35, #F7C948);
+    color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    font-size: 13px; font-weight: bold; white-space: nowrap; transition: all 0.15s;
+}
+.craft-btn:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(255,107,53,0.4); }
+.craft-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ===== 背包分类 ===== */
+.bag-cat-header {
+    font-size: 13px; font-weight: bold; color: #888; padding: 4px 8px;
+    border-bottom: 1px solid #eee; margin-top: 4px;
+}
+.bag-item-right { display: flex; align-items: center; gap: 8px; }
+.bag-use-btn {
+    padding: 4px 10px; font-size: 12px; background: #4CAF50; color: #fff;
+    border: none; border-radius: 6px; cursor: pointer; font-weight: bold; white-space: nowrap;
+}
+.bag-use-btn:hover { background: #388E3C; }
+
+/* ===== 世界地图 ===== */
+.map-modal { max-width: 600px; }
+.map-area-list { display: flex; flex-direction: column; gap: 6px; }
+.map-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa;
+    transition: background 0.15s;
+}
+.map-row-current { border-color: #4ECDC4; background: #E0FFF8; font-weight: bold; }
+.map-row-locked { opacity: 0.5; }
+.map-row-icon { font-size: 22px; }
+.map-row-name { font-weight: bold; color: #333; min-width: 80px; }
+.map-row-lv { font-size: 11px; color: #FF6B35; font-weight: bold; min-width: 46px; }
+.map-row-desc { flex: 1; font-size: 12px; color: #888; }
+.map-row-lock { font-size: 16px; }
+.map-goto-btn {
+    padding: 5px 12px; background: #FF6B35; color: #fff; border: none;
+    border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; white-space: nowrap;
+}
+.map-goto-btn:hover { background: #e55a25; }
+
+/* ===== 商店已有标识 ===== */
+.shop-owned { font-size: 11px; color: #4CAF50; background: #e8f5e9; padding: 0 5px; border-radius: 8px; }
