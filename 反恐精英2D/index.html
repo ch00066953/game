@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>反恐精英 2D</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="app">
+        <header class="hud">
+            <h1>反恐精英 2D</h1>
+        </header>
+
+        <main class="game-wrap">
+            <canvas id="gameCanvas" width="960" height="640" aria-label="反恐精英2D游戏画布"></canvas>
+
+            <!-- 开始菜单 -->
+            <div id="startMenu" class="overlay show">
+                <div class="panel">
+                    <h2>反恐精英 2D</h2>
+                    <p class="panel-sub">俯视角双人射击 — 消灭全部敌人完成任务</p>
+                    <div class="mode-select">
+                        <button id="btnSingle" class="btn primary">单人模式</button>
+                        <button id="btnCoop" class="btn accent">双人合作</button>
+                    </div>
+                    <div class="controls-info">
+                        <div class="ctrl-col">
+                            <h4>P1 操作</h4>
+                            <p>W A S D — 移动</p>
+                            <p>Space — 射击</p>
+                            <p>R — 换弹</p>
+                            <p>E — 切换武器</p>
+                        </div>
+                        <div class="ctrl-col">
+                            <h4>P2 操作</h4>
+                            <p>↑ ↓ ← → — 移动</p>
+                            <p>/ — 射击</p>
+                            <p>. — 换弹</p>
+                            <p>, — 切换武器</p>
+                        </div>
+                    </div>
+                    <p class="hint">ESC 暂停游戏</p>
+                </div>
+            </div>
+
+            <!-- 地图选择 -->
+            <div id="mapSelectMenu" class="overlay">
+                <div class="panel">
+                    <h2>选择地图</h2>
+                    <div class="map-grid">
+                        <button class="btn map-btn" data-map="0">仓库</button>
+                        <button class="btn map-btn" data-map="1">巷战</button>
+                        <button class="btn map-btn" data-map="2">广场</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 暂停菜单 -->
+            <div id="pauseMenu" class="overlay">
+                <div class="panel">
+                    <h2>已暂停</h2>
+                    <button id="resumeBtn" class="btn primary">继续游戏</button>
+                    <button id="restartPauseBtn" class="btn">返回主菜单</button>
+                </div>
+            </div>
+
+            <!-- 结算 -->
+            <div id="gameOverMenu" class="overlay">
+                <div class="panel">
+                    <h2 id="endTitle">任务失败</h2>
+                    <p id="endText"></p>
+                    <button id="restartBtn" class="btn primary">返回主菜单</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="foot-bar">
+            <span>P1: WASD移动 Space射击 R换弹 E切枪</span>
+            <span>|</span>
+            <span>P2: 方向键移动 /射击 .换弹 ,切枪</span>
+            <span>|</span>
+            <span>ESC暂停</span>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
