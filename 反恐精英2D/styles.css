@@ -1,0 +1,134 @@
+/* ---------- 全局 ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #1a1a2e;
+  color: #ecf0f1;
+  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  display: flex; justify-content: center; align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ---------- 标题 ---------- */
+.hud h1 {
+  font-size: 20px;
+  padding: 10px 0 4px;
+  text-align: center;
+  letter-spacing: 4px;
+  color: #f1c40f;
+  text-shadow: 0 0 12px rgba(241,196,15,0.4);
+}
+
+/* ---------- 画布 ---------- */
+.game-wrap {
+  position: relative;
+  width: 960px; height: 640px;
+  border: 2px solid #2c3e50;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+#gameCanvas {
+  display: block;
+  background: #2c3e50;
+}
+
+/* ---------- Overlay 通用 ---------- */
+.overlay {
+  position: absolute; inset: 0;
+  display: none;
+  justify-content: center; align-items: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 10;
+}
+.overlay.show { display: flex; }
+
+.panel {
+  background: #16213e;
+  border: 1px solid #1a3a5c;
+  border-radius: 12px;
+  padding: 36px 48px;
+  text-align: center;
+  min-width: 340px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.panel h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #f1c40f;
+}
+.panel-sub {
+  color: #95a5a6;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 28px;
+  margin: 6px;
+  border: none; border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+  background: #34495e;
+  transition: background .2s, transform .1s;
+}
+.btn:hover { background: #4a6580; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn.primary { background: #2980b9; }
+.btn.primary:hover { background: #3498db; }
+.btn.accent { background: #27ae60; }
+.btn.accent:hover { background: #2ecc71; }
+
+/* ---------- 模式选择 ---------- */
+.mode-select {
+  margin: 16px 0;
+  display: flex; gap: 12px; justify-content: center;
+}
+
+/* ---------- 地图选择 ---------- */
+.map-grid {
+  display: flex; gap: 12px; justify-content: center; margin-top: 16px;
+}
+.map-btn {
+  min-width: 100px;
+  padding: 14px 24px;
+  font-size: 18px;
+}
+
+/* ---------- 控制说明 ---------- */
+.controls-info {
+  display: flex; gap: 36px; justify-content: center;
+  margin: 16px 0;
+  text-align: left;
+}
+.ctrl-col h4 {
+  color: #3498db;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.ctrl-col p {
+  font-size: 12px;
+  color: #b2bec3;
+  line-height: 1.7;
+}
+
+.hint {
+  color: #636e72;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* ---------- 底部栏 ---------- */
+.foot-bar {
+  display: flex; gap: 16px; justify-content: center;
+  padding: 8px 0;
+  font-size: 12px;
+  color: #636e72;
+}
