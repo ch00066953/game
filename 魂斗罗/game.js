@@ -466,17 +466,46 @@ function updateBoss() {
     if (boss.attackCd <= 0) {
         const dir = player.x > boss.x ? 1 : -1;
         const burst = boss.rage ? 3 : 2;
-        for (let i = 0; i < burst; i++) {
-            enemyBullets.push({
-                x: boss.x + (dir > 0 ? boss.w : -16),
-                y: boss.y + 56 + i * 18,
-                w: 16, h: 6,
-                vx: (boss.rage ? 8.8 : 7.3) * dir,
-                type: "boss"
+        const bx = boss.x + (dir > 0 ? boss.w : -16);
+        const by = boss.y + 56;
+        const dx = (player.x + player.w * 0.5) - bx;
+        const dy = (player.y + player.h * 0.5) - by;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const bulletSpeed = boss.rage ? 8.8 : 7.3;
+
+        const isAirborne = boss.y + boss.h < GROUND_Y - 10;
+
+        if (isAirborne) {
+            // 空中散射：向下方扇形发射
+            const angles = boss.rage ? [-0.4, -0.15, 0.1, 0.35, 0.6] : [-0.3, 0, 0.3];
+            angles.forEach(offset => {
+                const baseAngle = Math.atan2(dy, dx);
+                const angle = baseAngle + offset;
+                enemyBullets.push({
+                    x: bx, y: by,
+                    w: 14, h: 6,
+                    vx: Math.cos(angle) * bulletSpeed,
+                    vy: Math.sin(angle) * bulletSpeed,
+                    type: "boss"
+                });
             });
+        } else {
+            // 地面瞄准射击：略带散布
+            for (let i = 0; i < burst; i++) {
+                const spread = (i - (burst - 1) * 0.5) * 0.12;
+                const angle = Math.atan2(dy, dx) + spread;
+                enemyBullets.push({
+                    x: bx,
+                    y: by + i * 18,
+                    w: 16, h: 6,
+                    vx: Math.cos(angle) * bulletSpeed,
+                    vy: Math.sin(angle) * bulletSpeed,
+                    type: "boss"
+                });
+            }
         }
         spawnHitParticles(boss.x + boss.w * 0.5, boss.y + 62, "#ffb703", 16, 3.5);
-        boss.attackCd = boss.rage ? randomRange(45, 70) : randomRange(70, 100);
+        boss.attackCd = boss.rage ? randomRange(40, 65) : randomRange(65, 95);
     }
 
     if (boss.slamCd <= 0 && boss.y + boss.h >= GROUND_Y) {
@@ -623,13 +652,14 @@ function updateBullets() {
     for (let i = enemyBullets.length - 1; i >= 0; i--) {
         const b = enemyBullets[i];
         b.x += b.vx;
+        if (b.vy) b.y += b.vy;
 
         if (b.type === "shock") {
             b.w = Math.min(42, b.w + 0.6);
             b.h = Math.min(13, b.h + 0.08);
         }
 
-        if (b.x < -50 || b.x > WORLD_WIDTH + 50) {
+        if (b.x < -50 || b.x > WORLD_WIDTH + 50 || b.y < -50 || b.y > GROUND_Y + 50) {
             enemyBullets.splice(i, 1);
             continue;
         }
@@ -1261,3 +1291,40 @@ if (settlementImage && settlementWrap) {
 
 resetGame();
 gameLoop();
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    var shootInterval = null;
+    document.querySelectorAll('.ctrl-btn[data-key]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            var k = btn.dataset.key;
+            keys[k] = true;
+            if (k === 'KeyJ') {
+                shoot();
+                shootInterval = setInterval(shoot, 200);
+            }
+        }, { passive: false });
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            var k = btn.dataset.key;
+            keys[k] = false;
+            if (k === 'KeyJ' && shootInterval) {
+                clearInterval(shootInterval);
+                shootInterval = null;
+            }
+        }, { passive: false });
+        btn.addEventListener('touchcancel', function(e) {
+            e.preventDefault();
+            var k = btn.dataset.key;
+            keys[k] = false;
+            if (k === 'KeyJ' && shootInterval) {
+                clearInterval(shootInterval);
+                shootInterval = null;
+            }
+        }, { passive: false });
+    });
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

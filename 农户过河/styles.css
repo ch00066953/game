@@ -164,3 +164,19 @@ body {
         flex-direction: column;
     }
 }
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .container { padding: 10px; border-radius: 14px; }
+    .header { margin-bottom: 8px; }
+    .header h1 { font-size: 1.2rem; margin-bottom: 4px; }
+    .header p { display: none; }
+    .status-panel { padding: 8px; border-radius: 10px; }
+    .meta { gap: 6px; font-size: 0.85rem; }
+    .river-view { font-size: 0.8rem; padding: 6px; }
+    .quick-actions { gap: 4px; }
+    .quick-actions button { padding: 4px 6px; font-size: 0.75rem; }
+    .console-panel { padding: 8px; border-radius: 10px; }
+    .tips { display: none; }
+    #messageLog { max-height: 60px; font-size: 0.8rem; }
+}

@@ -24,11 +24,11 @@ const SKILL_DATA = {
 };
 
 const AREAS = [
-    { id: 'village',  name: '加加村',     icon: '🏘️', desc: '宁静的原始部落，适合新手', levelReq: 1,  bgClass: '', enemies: ['小恐龙', '野猪', '毒蛇'] },
-    { id: 'forest',   name: '密林深处',   icon: '🌲', desc: '茂密的原始森林，危机四伏', levelReq: 3,  bgClass: 'area-forest', enemies: ['迅猛龙', '巨蜥', '森林猛犸'] },
-    { id: 'desert',   name: '灼热荒漠',   icon: '🏜️', desc: '广袤的沙漠地带，酷热难耐', levelReq: 6,  bgClass: 'area-desert', enemies: ['沙漠蝎', '骆驼龙', '沙暴巨虫'] },
+    { id: 'village',  name: '加加村',     icon: '🏘️', desc: '宁静的原始部落，适合新手', levelReq: 1,  bgClass: '', enemies: ['小恐龙', '野猪', '毒蛇', '萌萌龟', '精灵鹿'] },
+    { id: 'forest',   name: '密林深处',   icon: '🌲', desc: '茂密的原始森林，危机四伏', levelReq: 3,  bgClass: 'area-forest', enemies: ['迅猛龙', '巨蜥', '森林猛犸', '彩虹鸟', '翼龙宝宝'] },
+    { id: 'desert',   name: '灼热荒漠',   icon: '🏜️', desc: '广袤的沙漠地带，酷热难耐', levelReq: 6,  bgClass: 'area-desert', enemies: ['沙漠蝎', '骆驼龙', '沙暴巨虫', '泡泡鱼'] },
     { id: 'volcano',  name: '烈焰火山',   icon: '🌋', desc: '危险的火山区域，充满岩浆', levelReq: 10, bgClass: 'area-volcano', enemies: ['火蜥蜴', '熔岩龙', '火山暴龙'] },
-    { id: 'ice',      name: '极寒冰原',   icon: '🏔️', desc: '冰封的远古大陆，终极试炼', levelReq: 15, bgClass: 'area-ice', enemies: ['冰霜狼', '猛犸象', '冰龙王'] },
+    { id: 'ice',      name: '极寒冰原',   icon: '🏔️', desc: '冰封的远古大陆，终极试炼', levelReq: 15, bgClass: 'area-ice', enemies: ['冰霜狼', '猛犸象', '冰龙王', '水晶兔'] },
 ];
 
 const ENEMY_DATA = {
@@ -47,6 +47,12 @@ const ENEMY_DATA = {
     '冰霜狼':   { icon: '🐺', hp: 260, atk: 26, def: 16, spd: 14, exp: 120, gold: 80, catchRate: 15, level: 16, skills: ['撕咬', '冰冻吐息'] },
     '猛犸象':   { icon: '🦣', hp: 450, atk: 30, def: 24, spd: 5,  exp: 170, gold: 120, catchRate: 10, level: 18, skills: ['冲撞', '冰冻吐息'] },
     '冰龙王':   { icon: '🐲', hp: 600, atk: 36, def: 28, spd: 10, exp: 250, gold: 180, catchRate: 5,  level: 20, skills: ['冰冻吐息', '雷击', '尾击'] },
+    '萌萌龟':   { icon: '🐢', hp: 70,  atk: 6,  def: 12, spd: 3,  exp: 22,  gold: 12,  catchRate: 42, level: 2,  skills: ['冲撞'] },
+    '精灵鹿':   { icon: '🦌', hp: 55,  atk: 9,  def: 5,  spd: 12, exp: 20,  gold: 14,  catchRate: 35, level: 1,  skills: ['冲撞'] },
+    '彩虹鸟':   { icon: '🐦', hp: 90,  atk: 14, def: 6,  spd: 15, exp: 45,  gold: 32,  catchRate: 30, level: 4,  skills: ['撕咬'] },
+    '翼龙宝宝': { icon: '🦅', hp: 130, atk: 15, def: 9,  spd: 13, exp: 52,  gold: 38,  catchRate: 26, level: 5,  skills: ['撕咬', '尾击'] },
+    '泡泡鱼':   { icon: '🐟', hp: 110, atk: 16, def: 11, spd: 9,  exp: 60,  gold: 42,  catchRate: 28, level: 8,  skills: ['撕咬'] },
+    '水晶兔':   { icon: '🐰', hp: 240, atk: 24, def: 18, spd: 16, exp: 115, gold: 85,  catchRate: 18, level: 17, skills: ['冲撞', '冰冻吐息'] },
 };
 
 const SHOP_ITEMS = [
@@ -150,6 +156,12 @@ const ENEMY_DROPS = {
     '冰霜狼':   [{ id: 'ice_crystal',  chance: 0.50 }, { id: 'leather',      chance: 0.30 }],
     '猛犸象':   [{ id: 'ice_crystal',  chance: 0.45 }, { id: 'bone',         chance: 0.55 }],
     '冰龙王':   [{ id: 'ice_crystal',  chance: 0.80 }, { id: 'fire_stone',   chance: 0.30 }],
+    '萌萌龟':   [{ id: 'bone',         chance: 0.40 }, { id: 'hard_stone',   chance: 0.30 }],
+    '精灵鹿':   [{ id: 'leather',      chance: 0.45 }],
+    '彩虹鸟':   [{ id: 'bone',         chance: 0.35 }],
+    '翼龙宝宝': [{ id: 'bone',         chance: 0.50 }, { id: 'leather',      chance: 0.30 }],
+    '泡泡鱼':   [{ id: 'hard_stone',   chance: 0.35 }, { id: 'poison_gland', chance: 0.25 }],
+    '水晶兔':   [{ id: 'ice_crystal',  chance: 0.55 }, { id: 'leather',      chance: 0.30 }],
 };
 
 // ===== 商店名称 =====

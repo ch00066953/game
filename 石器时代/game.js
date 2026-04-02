@@ -103,6 +103,7 @@ function saveGame() {
 
 // ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', () => {
+    preloadEnemySVGs();
     initTitle();
     initCharCreate();
 });

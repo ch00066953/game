@@ -488,3 +488,49 @@ kbd {
         font-size: 0.9em;
     }
 }
+
+/* 移动端虚拟控制器 */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px 20px;
+    justify-content: center;
+    z-index: 1000;
+    pointer-events: none;
+}
+.mobile-controls .ctrl-btn { pointer-events: auto; }
+.ctrl-dpad { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ctrl-mid-row { display: flex; gap: 4px; }
+.ctrl-btn {
+    width: 60px; height: 60px; border-radius: 14px; border: none;
+    background: rgba(76,175,80,0.6); color: #fff; font-size: 22px; font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); -webkit-user-select: none; user-select: none;
+    touch-action: manipulation; cursor: pointer;
+}
+.ctrl-btn:active { background: rgba(76,175,80,0.9); transform: scale(0.93); }
+
+@media (max-width: 600px), (pointer: coarse) {
+    .mobile-controls { display: flex; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .game-info h1 { font-size: 1.2em; margin-bottom: 8px; }
+    .stage-selector { padding: 8px; margin-bottom: 10px; }
+    .selector-label { font-size: 0.85em; margin-bottom: 6px; }
+    .stage-btn { padding: 6px 8px; min-width: 50px; font-size: 0.7em; }
+    .stage-icon { font-size: 1.2em; }
+    .stage-info { padding: 8px; margin-bottom: 8px; font-size: 0.8em; }
+    .stats { flex-direction: row; gap: 6px; }
+    .stat-item { padding: 6px 10px; min-width: auto; flex: 1; }
+    .stat-label { font-size: 0.75em; margin-bottom: 2px; }
+    .stat-value { font-size: 1.3em; }
+    .instructions { display: none; }
+    .game-board { padding: 4px; margin-bottom: 10px; }
+    .controls { margin-bottom: 10px; }
+    .container { padding: 10px; max-height: 100vh; }
+    .progress-bar { height: 5px; margin-top: 5px; }
+}

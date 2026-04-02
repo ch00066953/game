@@ -490,7 +490,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
 @media (max-width: 600px) {
     .game-title { font-size: 32px; }
     .title-content { padding: 24px 20px; }
-    .resource-bar { flex-wrap: wrap; }
     .class-options { flex-direction: column; }
     .create-body { flex-direction: column; align-items: center; }
     .create-preview { width: 100%; }
@@ -499,6 +498,137 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
     .enemy-sprite { font-size: 70px; }
     .ally-sprite { font-size: 50px; }
     .pet-sprite { font-size: 40px; }
+
+    /* ===== 主游戏界面：紧凑顶栏 ===== */
+    .top-bar {
+        padding: 4px 8px;
+        gap: 6px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .player-info {
+        gap: 4px;
+        flex-shrink: 0;
+    }
+    .player-info #pName {
+        font-size: 13px;
+        max-width: 48px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .level-badge {
+        font-size: 11px;
+        padding: 1px 6px;
+    }
+    .resource-bar {
+        flex: 1;
+        gap: 4px;
+        min-width: 0;
+        flex-wrap: nowrap;
+    }
+    .res-item {
+        flex: 1;
+        min-width: 0;
+        gap: 2px;
+        font-size: 11px;
+    }
+    .res-icon {
+        font-size: 11px;
+    }
+    .bar-wrap {
+        width: auto;
+        flex: 1;
+        min-width: 0;
+        height: 8px;
+    }
+    .res-text {
+        display: none;
+    }
+    .gold-display {
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    /* 底部操作栏紧凑 */
+    .bottom-bar {
+        padding: 4px 6px;
+        gap: 3px;
+    }
+    .action-btn {
+        padding: 8px 8px;
+        font-size: 12px;
+        flex: 1;
+        text-align: center;
+        min-width: 0;
+    }
+
+    /* 地图提示和区域名紧凑 */
+    .area-name {
+        top: 6px;
+        font-size: 12px;
+        padding: 2px 12px;
+    }
+    .map-hint {
+        bottom: 4px;
+        font-size: 10px;
+        padding: 2px 10px;
+    }
+
+    /* 战斗界面紧凑 */
+    .battle-bg {
+        padding: 10px 12px;
+    }
+    .enemy-hp-bar {
+        width: 140px;
+        height: 10px;
+    }
+    .enemy-name {
+        font-size: 15px;
+    }
+    .enemy-sprite {
+        width: 90px;
+        height: 90px;
+    }
+    .ally-info {
+        padding: 4px 8px;
+        min-width: 120px;
+    }
+    .ally-name {
+        font-size: 12px;
+    }
+    .ally-bar-wrap {
+        height: 8px;
+    }
+    .ally-bar-text {
+        font-size: 10px;
+        min-width: 40px;
+    }
+    .battle-log {
+        padding: 6px 10px;
+        max-height: 50px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    .battle-commands {
+        padding: 6px 10px;
+        gap: 4px;
+    }
+    .cmd-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        flex: 1;
+        text-align: center;
+    }
+    .skill-panel, .item-panel, .pet-switch-panel {
+        padding: 8px 10px;
+    }
+    .skill-btn, .use-item-btn, .switch-pet-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
 }
 
 /* ===== 迭代1: 战斗转场闪白 ===== */
@@ -669,3 +799,35 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
 
 /* ===== 商店已有标识 ===== */
 .shop-owned { font-size: 11px; color: #4CAF50; background: #e8f5e9; padding: 0 5px; border-radius: 8px; }
+
+/* ===== 移动端地图虚拟控制器 ===== */
+.mobile-map-controls {
+    display: none;
+    position: absolute;
+    bottom: 52px; left: 0; right: 0;
+    padding: 12px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 20;
+    pointer-events: none;
+}
+.mobile-map-controls .ctrl-btn { pointer-events: auto; }
+.mobile-map-controls .ctrl-dpad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mobile-map-controls .ctrl-mid-row { display: flex; gap: 6px; }
+.mobile-map-controls .ctrl-btn {
+    width: 56px; height: 56px; border-radius: 14px; border: none;
+    background: rgba(255,255,255,0.28); color: #fff; font-size: 22px; font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4); -webkit-user-select: none; user-select: none;
+    touch-action: manipulation; cursor: pointer;
+}
+.mobile-map-controls .ctrl-btn:active { background: rgba(255,255,255,0.55); transform: scale(0.93); }
+.mobile-map-controls .ctrl-actions { display: flex; gap: 14px; align-items: flex-end; }
+.mobile-map-controls .ctrl-interact {
+    width: 68px; height: 68px; border-radius: 50%; font-size: 15px;
+    background: rgba(255,215,0,0.55); font-weight: bold;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+    .mobile-map-controls { display: flex; }
+    .map-hint { display: none; }
+}

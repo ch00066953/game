@@ -216,3 +216,18 @@ canvas {
     justify-content: space-between;
   }
 }
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .app { margin: 8px auto; }
+    .topbar { padding: 8px 10px; border-radius: 10px; }
+    .topbar h1 { font-size: 0.9rem; }
+    .stats { gap: 8px; font-size: 0.8rem; }
+    .controls { padding: 6px 8px; gap: 6px; margin-top: 6px; border-radius: 10px; }
+    .card-btn { min-width: 90px; padding: 6px 8px; font-size: 0.8rem; }
+    .tip { font-size: 0.75rem; display: none; }
+    .picker { padding: 8px; margin-top: 6px; }
+    .picker-list { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 4px; }
+    .pick-item { padding: 4px 6px; font-size: 0.8rem; }
+    .board-wrap { margin-top: 6px; border-radius: 10px; }
+}

@@ -2225,3 +2225,40 @@ function init() {
 }
 
 window.addEventListener('DOMContentLoaded', init);
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    // 方向键: battle.keys[key] = true/false
+    document.querySelectorAll('.ctrl-btn[data-key]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (!battle || battle.finished) return;
+            var k = btn.dataset.key;
+            battle.keys[k] = true;
+        }, { passive: false });
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            if (!battle) return;
+            battle.keys[btn.dataset.key] = false;
+        }, { passive: false });
+        btn.addEventListener('touchcancel', function(e) {
+            e.preventDefault();
+            if (!battle) return;
+            battle.keys[btn.dataset.key] = false;
+        }, { passive: false });
+    });
+    // 动作按钮
+    document.querySelectorAll('.ctrl-btn[data-action]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (!battle || battle.finished) return;
+            var a = btn.dataset.action;
+            if (a === 'attack') hunterAttack();
+            else if (a === 'roll') hunterRoll();
+            else if (a === 'item') useSelectedItem();
+        }, { passive: false });
+    });
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

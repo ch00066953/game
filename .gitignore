@@ -1,0 +1,8 @@
+tmp/
+electron/node_modules/
+electron/dist/
+electron/generate-icon.js
+electron/generate-icon-alt.js
+.playwright-mcp/
+node_modules/
+bash.exe.stackdump

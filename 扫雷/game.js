@@ -466,4 +466,53 @@
   });
 
   applyLevel("beginner");
+
+  // 移动端：标旗模式 + 长按标旗
+  (function initMobileFlag() {
+      var flagMode = false;
+      var flagBtn = document.getElementById('flagModeBtn');
+      if (!flagBtn) return;
+
+      flagBtn.addEventListener('click', function() {
+          flagMode = !flagMode;
+          flagBtn.classList.toggle('active', flagMode);
+          flagBtn.textContent = flagMode ? '🚩 标记中(点击标旗)' : '🚩 标记模式';
+      });
+
+      // 在标旗模式下，点击变为标旗
+      boardEl.addEventListener('click', function(e) {
+          if (!flagMode) return;
+          var btn = e.target.closest('.cell');
+          if (!btn || state.ended) return;
+          e.stopImmediatePropagation();
+          var r = Number(btn.dataset.r);
+          var c = Number(btn.dataset.c);
+          cycleMark(r, c);
+      }, true);
+
+      // 长按触发标旗
+      var longPressTimer = null;
+      var longPressed = false;
+      boardEl.addEventListener('touchstart', function(e) {
+          var btn = e.target.closest('.cell');
+          if (!btn || state.ended) return;
+          longPressed = false;
+          longPressTimer = setTimeout(function() {
+              longPressed = true;
+              var r = Number(btn.dataset.r);
+              var c = Number(btn.dataset.c);
+              cycleMark(r, c);
+          }, 500);
+      }, { passive: true });
+      boardEl.addEventListener('touchend', function(e) {
+          if (longPressTimer) clearTimeout(longPressTimer);
+          if (longPressed) { e.preventDefault(); longPressed = false; }
+      });
+      boardEl.addEventListener('touchmove', function() {
+          if (longPressTimer) clearTimeout(longPressTimer);
+      }, { passive: true });
+      boardEl.addEventListener('touchcancel', function() {
+          if (longPressTimer) clearTimeout(longPressTimer);
+      });
+  })();
 })();

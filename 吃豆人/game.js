@@ -1430,3 +1430,24 @@ function stopBgm() {
 }
 
 init();
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    var DIRS_MAP = { up: {x:0,y:-1}, down: {x:0,y:1}, left: {x:-1,y:0}, right: {x:1,y:0} };
+    document.querySelectorAll('.ctrl-btn[data-dir]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            var d = DIRS_MAP[btn.dataset.dir];
+            if (d && state.running && !state.gameOver) state.pacman.nextDir = d;
+        }, { passive: false });
+    });
+    var mp = document.getElementById('mobilePauseBtn');
+    if (mp) mp.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (state.running && !state.gameOver) togglePause();
+    }, { passive: false });
+
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

@@ -1,0 +1,64 @@
+{
+  "name": "games-collection",
+  "version": "1.0.0",
+  "description": "编程拾光 — 网页游戏合集桌面版",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/canvas": "^0.1.97",
+    "electron": "^35.7.5",
+    "electron-builder": "^26.0.0",
+    "png-to-ico": "^3.0.1"
+  },
+  "build": {
+    "appId": "com.games.collection",
+    "productName": "编程拾光",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "icon.ico",
+      "icon.png"
+    ],
+    "extraResources": [
+      {
+        "from": "..",
+        "to": "app",
+        "filter": [
+          "index.html",
+          "script.js",
+          "styles.css",
+          "24点/**/*",
+          "超级玛丽2/**/*",
+          "吃豆人/**/*",
+          "反恐精英2D/**/*",
+          "根本守不住/**/*",
+          "怪物猎人/**/*",
+          "黄金矿工/**/*",
+          "魂斗罗/**/*",
+          "农户过河/**/*",
+          "扫雷/**/*",
+          "石器时代/**/*",
+          "贪吃蛇/**/*",
+          "我的世界/**/*",
+          "五位一体/**/*",
+          "植物大战僵尸2/**/*",
+          "!**/node_modules",
+          "!**/.playwright-mcp",
+          "!**/tmp"
+        ]
+      }
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "icon.ico"
+    }
+  }
+}

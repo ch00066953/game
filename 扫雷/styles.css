@@ -196,3 +196,48 @@ input {
     padding: 7px 10px;
   }
 }
+
+/* 移动端标旗模式 */
+.mobile-flag-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.flag-mode-btn {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 2px solid #f39c12;
+    background: rgba(243,156,18,0.15);
+    color: #f39c12;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: all 0.2s;
+}
+.flag-mode-btn.active {
+    background: #f39c12;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(243,156,18,0.5);
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+    .mobile-flag-toggle { display: block; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .app { margin: 8px auto; gap: 6px; }
+    .top h1 { font-size: 1.3rem; }
+    .subtitle { display: none; }
+    .panel { padding: 8px; border-radius: 10px; }
+    .controls { gap: 6px; }
+    .difficulty-group, .custom-group, .command-group, .hud { gap: 4px; }
+    button { padding: 6px 8px; font-size: 0.85rem; }
+    .tips { display: none; }
+    :root { --cell-size: 28px; }
+}

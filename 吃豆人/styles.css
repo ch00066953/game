@@ -52,6 +52,8 @@ body {
     position: relative;
     width: min(90vw, 560px);
     height: min(90vw, 560px);
+    max-height: calc(100dvh - 200px);
+    aspect-ratio: 1 / 1;
 }
 
 #gameCanvas {
@@ -162,5 +164,52 @@ body {
     .controls {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+/* 移动端虚拟控制器 */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 18px calc(16px + env(safe-area-inset-bottom, 0px));
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 1000;
+    pointer-events: none;
+}
+.mobile-controls .ctrl-btn { pointer-events: auto; }
+.ctrl-dpad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ctrl-mid-row { display: flex; gap: 6px; }
+.ctrl-btn {
+    width: 60px; height: 60px; border-radius: 16px; border: none;
+    background: rgba(255,255,255,0.22); color: #fff; font-size: 22px; font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); -webkit-user-select: none; user-select: none;
+    touch-action: manipulation; cursor: pointer;
+}
+.ctrl-btn:active { background: rgba(255,255,255,0.45); transform: scale(0.93); }
+.ctrl-pause { width: 66px; height: 66px; border-radius: 50%; font-size: 24px; background: rgba(255,213,79,0.5); }
+.ctrl-actions { display: flex; gap: 14px; align-items: flex-end; }
+
+@media (max-width: 700px), (pointer: coarse) {
+    .mobile-controls { display: flex; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .app { padding: 10px 10px 20px; padding-bottom: 140px; }
+    .hud h1 { font-size: 1.1rem; margin-bottom: 4px; }
+    .stats { gap: 4px; grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 4px 6px; border-radius: 8px; }
+    .card span { font-size: 0.75rem; }
+    .card strong { font-size: 0.9rem; }
+    .controls { display: none; }
+    .game-wrap {
+        margin-top: 6px; border-radius: 8px;
+        width: min(92vw, 560px);
+        height: min(92vw, calc(100dvh - 220px));
+        max-height: none;
     }
 }

@@ -778,3 +778,66 @@ function init() {
 }
 
 init();
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    // 方向键
+    document.querySelectorAll('.ctrl-btn[data-key]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            state.keys.add(btn.dataset.key);
+        }, { passive: false });
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            state.keys.delete(btn.dataset.key);
+        }, { passive: false });
+        btn.addEventListener('touchcancel', function(e) {
+            e.preventDefault();
+            state.keys.delete(btn.dataset.key);
+        }, { passive: false });
+    });
+
+    // 挖掘/放置按钮 - 对当前面朝方向的相邻方块操作
+    document.querySelectorAll('.ctrl-btn[data-action]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (!state.hoverTile) {
+                // 没有 hover tile（移动端无鼠标）则对角色前方方块操作
+                var px = Math.round(state.player.x);
+                var py = Math.round(state.player.y);
+                // 默认操作角色脚下或前方
+                var targets = [[px,py-1],[px+1,py],[px-1,py],[px,py+1],[px,py]];
+                for (var i = 0; i < targets.length; i++) {
+                    var tx = targets[i][0], ty = targets[i][1];
+                    var tile = getTile(tx, ty);
+                    if (!tile) continue;
+                    if (btn.dataset.action === 'mine' && tile.stack.length > 1 && topBlock(tile) !== 'bedrock' && topBlock(tile) !== 'water') {
+                        mineTile(tx, ty);
+                        break;
+                    }
+                    if (btn.dataset.action === 'place' && tile.stack.length < MAX_STACK && topBlock(tile) !== 'water') {
+                        placeTile(tx, ty);
+                        break;
+                    }
+                }
+            } else {
+                if (btn.dataset.action === 'mine') mineTile(state.hoverTile.x, state.hoverTile.y);
+                else placeTile(state.hoverTile.x, state.hoverTile.y);
+            }
+        }, { passive: false });
+    });
+
+    // 触摸画布设置 hoverTile
+    var canvasEl = document.getElementById('gameCanvas');
+    canvasEl.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        var t = e.touches[0];
+        var rect = canvasEl.getBoundingClientRect();
+        var fakeEvent = { clientX: t.clientX, clientY: t.clientY, offsetX: t.clientX - rect.left, offsetY: t.clientY - rect.top };
+        handlePointer(fakeEvent);
+    }, { passive: false });
+
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

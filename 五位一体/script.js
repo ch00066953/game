@@ -717,6 +717,39 @@
     }
 
     window.addEventListener('load', function () {
-        new FiveHeroesGame();
+        window._game = new FiveHeroesGame();
+
+        // 移动端虚拟控制器
+        document.querySelectorAll('.ctrl-btn[data-key]').forEach(function(btn) {
+            btn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                var g = window._game;
+                if (g) g.keys.add(btn.dataset.key);
+            }, { passive: false });
+            btn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                var g = window._game;
+                if (g) g.keys.delete(btn.dataset.key);
+            }, { passive: false });
+            btn.addEventListener('touchcancel', function(e) {
+                e.preventDefault();
+                var g = window._game;
+                if (g) g.keys.delete(btn.dataset.key);
+            }, { passive: false });
+        });
+
+        document.querySelectorAll('.ctrl-btn[data-action]').forEach(function(btn) {
+            btn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                var g = window._game;
+                if (!g) return;
+                if (btn.dataset.action === 'jump') g.jump();
+                else if (btn.dataset.action === 'ability') g.useAbility();
+            }, { passive: false });
+        });
+
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
     });
 }());

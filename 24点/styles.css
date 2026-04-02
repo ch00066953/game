@@ -260,3 +260,16 @@ h1 {
         flex-direction: column;
     }
 }
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 480px) {
+    .game-container { padding: 15px; }
+    h1 { font-size: 1.5em; margin-bottom: 15px; }
+    .score-board { gap: 15px; font-size: 0.9em; }
+    .cards-container { gap: 8px; margin: 15px 0; }
+    .card { width: 60px; height: 85px; font-size: 1.6em; border-radius: 10px; }
+    .message { padding: 10px; margin: 12px 0; font-size: 0.95em; }
+    .controls { gap: 6px; }
+    .btn { padding: 8px 14px; font-size: 0.85em; }
+    .rules { display: none; }
+}

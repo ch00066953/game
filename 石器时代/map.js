@@ -79,6 +79,28 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('keyup', e => { keysDown[e.key] = false; });
 
+// ===== 移动端虚拟方向键 =====
+(function initMobileMapControls() {
+    const DIR_MAP = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
+    document.querySelectorAll('.mobile-map-controls .ctrl-btn[data-dir]').forEach(function(btn) {
+        const key = DIR_MAP[btn.dataset.dir];
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); keysDown[key] = true;
+        });
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault(); keysDown[key] = false;
+        });
+        btn.addEventListener('touchcancel', function() { keysDown[key] = false; });
+    });
+    var interactBtn = document.getElementById('mobileInteractBtn');
+    if (interactBtn) {
+        interactBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (mapActive && nearPoi) interactWithPoi(nearPoi);
+        });
+    }
+})();
+
 function handleMovement() {
     if (moveCD > 0) { moveCD--; return; }
     let dx = 0, dy = 0;
