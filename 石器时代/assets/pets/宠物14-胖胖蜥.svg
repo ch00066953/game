@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 胖胖蜥 - 可爱大肚巨蜥 -->
+  <!-- 尾巴 -->
+  <path d="M50 135 Q32 130 22 140 Q16 148 25 145 Q18 152 28 150" fill="#689F38"/>
+  <!-- 身体（肥肥的） -->
+  <ellipse cx="100" cy="130" rx="45" ry="35" fill="#689F38"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="135" rx="33" ry="27" fill="#AED581"/>
+  <!-- 鳞纹 -->
+  <g fill="#558B2F" opacity="0.2">
+    <circle cx="130" cy="115" r="4"/><circle cx="140" cy="125" r="3.5"/>
+    <circle cx="135" cy="135" r="4"/><circle cx="68" cy="118" r="3.5"/>
+    <circle cx="62" cy="128" r="4"/><circle cx="70" cy="140" r="3"/>
+  </g>
+  <!-- 头 -->
+  <ellipse cx="100" cy="80" rx="30" ry="28" fill="#689F38"/>
+  <ellipse cx="100" cy="84" rx="25" ry="22" fill="#8BC34A"/>
+  <!-- 大眼睛（半睁） -->
+  <ellipse cx="88" cy="74" rx="9" ry="8" fill="white"/>
+  <ellipse cx="112" cy="74" rx="9" ry="8" fill="white"/>
+  <circle cx="90" cy="75" r="5" fill="#FFD54F"/>
+  <circle cx="114" cy="75" r="5" fill="#FFD54F"/>
+  <ellipse cx="90" cy="75" rx="2.5" ry="4" fill="#333"/>
+  <ellipse cx="114" cy="75" rx="2.5" ry="4" fill="#333"/>
+  <circle cx="91" cy="73" r="1.5" fill="white"/>
+  <circle cx="115" cy="73" r="1.5" fill="white"/>
+  <!-- 眼皮（懒洋洋的） -->
+  <path d="M80 70 Q88 67 96 72" stroke="#558B2F" stroke-width="2" fill="none"/>
+  <path d="M104 72 Q112 67 120 70" stroke="#558B2F" stroke-width="2" fill="none"/>
+  <!-- 鼻孔 -->
+  <circle cx="96" cy="85" r="2" fill="#33691E"/>
+  <circle cx="104" cy="85" r="2" fill="#33691E"/>
+  <!-- 舌头 -->
+  <path d="M100 92 Q100 100 96 105 Q94 107 92 105" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 满足的笑 -->
+  <path d="M92 92 Q100 98 108 92" stroke="#33691E" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="84" rx="6" ry="3" fill="#F48FB1" opacity="0.35"/>
+  <ellipse cx="122" cy="84" rx="6" ry="3" fill="#F48FB1" opacity="0.35"/>
+  <!-- 短粗腿 -->
+  <rect x="68" y="155" width="16" height="10" rx="5" fill="#558B2F"/>
+  <rect x="116" y="155" width="16" height="10" rx="5" fill="#558B2F"/>
+  <rect x="82" y="157" width="14" height="10" rx="5" fill="#558B2F"/>
+  <rect x="104" y="157" width="14" height="10" rx="5" fill="#558B2F"/>
+  <!-- 小爪 -->
+  <g fill="#33691E">
+    <circle cx="70" cy="166" r="2.5"/><circle cx="76" cy="167" r="2.5"/><circle cx="82" cy="166" r="2.5"/>
+    <circle cx="118" cy="166" r="2.5"/><circle cx="124" cy="167" r="2.5"/><circle cx="130" cy="166" r="2.5"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#33691E" font-family="sans-serif">胖胖蜥</text>
+</svg>

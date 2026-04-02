@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 水晶兔 - 可爱的水晶小兔子 -->
+  <!-- 草地 -->
+  <ellipse cx="100" cy="168" rx="55" ry="8" fill="#C5E1A5" opacity="0.6"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="130" rx="32" ry="28" fill="#CE93D8"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="135" rx="22" ry="20" fill="#F3E5F5"/>
+  <!-- 耳朵 -->
+  <ellipse cx="80" cy="52" rx="12" ry="30" fill="#CE93D8" transform="rotate(-10 80 52)"/>
+  <ellipse cx="80" cy="52" rx="7" ry="22" fill="#F8BBD0" transform="rotate(-10 80 52)"/>
+  <ellipse cx="120" cy="52" rx="12" ry="30" fill="#CE93D8" transform="rotate(10 120 52)"/>
+  <ellipse cx="120" cy="52" rx="7" ry="22" fill="#F8BBD0" transform="rotate(10 120 52)"/>
+  <!-- 水晶效果装饰在耳朵上 -->
+  <polygon points="78,38 82,28 86,38" fill="#B39DDB" opacity="0.6"/>
+  <polygon points="118,38 122,28 126,38" fill="#B39DDB" opacity="0.6"/>
+  <!-- 头 -->
+  <circle cx="100" cy="82" r="28" fill="#CE93D8"/>
+  <!-- 脸部高光 -->
+  <circle cx="100" cy="82" r="26" fill="#D1A6DB" opacity="0.4"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="78" rx="9" ry="11" fill="white"/>
+  <ellipse cx="112" cy="78" rx="9" ry="11" fill="white"/>
+  <circle cx="90" cy="80" r="6" fill="#4A148C"/>
+  <circle cx="114" cy="80" r="6" fill="#4A148C"/>
+  <!-- 星星瞳孔 -->
+  <polygon points="90,77 91,79 93,79 91.5,80.5 92,83 90,81.5 88,83 88.5,80.5 87,79 89,79" fill="white" opacity="0.8"/>
+  <polygon points="114,77 115,79 117,79 115.5,80.5 116,83 114,81.5 112,83 112.5,80.5 111,79 113,79" fill="white" opacity="0.8"/>
+  <!-- 鼻子 -->
+  <ellipse cx="100" cy="90" rx="3" ry="2" fill="#AD1457"/>
+  <!-- 嘴巴 -->
+  <path d="M96 93 Q100 97 104 93" stroke="#AD1457" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="88" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <ellipse cx="122" cy="88" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <!-- 前爪 -->
+  <ellipse cx="78" cy="140" rx="8" ry="5" fill="#BA68C8"/>
+  <ellipse cx="122" cy="140" rx="8" ry="5" fill="#BA68C8"/>
+  <!-- 后脚 -->
+  <ellipse cx="82" cy="158" rx="12" ry="6" fill="#BA68C8"/>
+  <ellipse cx="118" cy="158" rx="12" ry="6" fill="#BA68C8"/>
+  <!-- 小尾巴 -->
+  <circle cx="55" cy="130" r="8" fill="#E1BEE7"/>
+  <!-- 水晶装饰 -->
+  <g fill="#B39DDB" opacity="0.4">
+    <polygon points="42,60 46,48 50,60"/>
+    <polygon points="148,65 152,55 156,65"/>
+    <polygon points="155,110 158,100 161,110"/>
+    <polygon points="38,105 41,96 44,105"/>
+  </g>
+  <!-- 闪光 -->
+  <g fill="#E1BEE7" opacity="0.6">
+    <circle cx="140" cy="45" r="2"/>
+    <circle cx="55" cy="42" r="1.5"/>
+    <circle cx="160" cy="85" r="1.5"/>
+    <circle cx="35" cy="90" r="2"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#6A1B9A" font-family="sans-serif">水晶兔</text>
+</svg>

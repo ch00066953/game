@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 暴暴龙 - 可爱小暴龙 -->
+  <!-- 尾巴 -->
+  <path d="M50 135 Q30 130 22 142 Q18 150 28 145 Q20 155 30 150" fill="#7B1FA2"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="128" rx="40" ry="32" fill="#7B1FA2"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="133" rx="28" ry="24" fill="#CE93D8"/>
+  <!-- 背刺 -->
+  <g fill="#6A1B9A">
+    <path d="M80 96 L77 85 L83 93Z"/>
+    <path d="M93 93 L90 80 L96 90Z"/>
+    <path d="M106 93 L104 80 L110 90Z"/>
+    <path d="M118 96 L116 85 L122 93Z"/>
+  </g>
+  <!-- 头 - 大头 -->
+  <circle cx="100" cy="75" r="34" fill="#7B1FA2"/>
+  <ellipse cx="100" cy="80" rx="28" ry="26" fill="#9C27B0"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="86" cy="70" rx="10" ry="13" fill="white"/>
+  <ellipse cx="114" cy="70" rx="10" ry="13" fill="white"/>
+  <circle cx="89" cy="72" r="6" fill="#333"/>
+  <circle cx="117" cy="72" r="6" fill="#333"/>
+  <circle cx="91" cy="69" r="2.5" fill="white"/>
+  <circle cx="119" cy="69" r="2.5" fill="white"/>
+  <!-- 怒眉（但还是可爱的） -->
+  <line x1="78" y1="58" x2="90" y2="60" stroke="#4A148C" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="122" y1="58" x2="110" y2="60" stroke="#4A148C" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- 大嘴 -->
+  <path d="M82 90 Q100 108 118 90" fill="#4A148C"/>
+  <path d="M85 90 Q100 104 115 90" fill="#6A1B9A"/>
+  <!-- 小牙齿 -->
+  <g fill="white">
+    <path d="M85 90 L88 96 L91 90Z"/>
+    <path d="M95 90 L98 96 L101 90Z"/>
+    <path d="M105 90 L108 96 L111 90Z"/>
+    <path d="M115 90 L112 96 L109 90Z"/>
+  </g>
+  <!-- 腮红 -->
+  <ellipse cx="74" cy="82" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <ellipse cx="126" cy="82" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <!-- 小短手（T-Rex风格） -->
+  <ellipse cx="65" cy="118" rx="6" ry="5" fill="#7B1FA2" transform="rotate(-25,65,118)"/>
+  <ellipse cx="135" cy="118" rx="6" ry="5" fill="#7B1FA2" transform="rotate(25,135,118)"/>
+  <!-- 粗壮小脚 -->
+  <rect x="74" y="152" width="16" height="14" rx="6" fill="#6A1B9A"/>
+  <rect x="110" y="152" width="16" height="14" rx="6" fill="#6A1B9A"/>
+  <!-- 脚趾 -->
+  <g fill="#4A148C">
+    <circle cx="76" cy="167" r="3"/><circle cx="82" cy="168" r="3"/><circle cx="88" cy="167" r="3"/>
+    <circle cx="112" cy="167" r="3"/><circle cx="118" cy="168" r="3"/><circle cx="124" cy="167" r="3"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#4A148C" font-family="sans-serif">暴暴龙</text>
+</svg>

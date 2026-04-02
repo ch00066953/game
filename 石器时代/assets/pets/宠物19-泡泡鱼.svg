@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 泡泡鱼 - 可爱的远古鱼 -->
+  <!-- 水波背景 -->
+  <path d="M0 160 Q25 150 50 158 Q75 166 100 158 Q125 150 150 158 Q175 166 200 158 L200 200 L0 200Z" fill="#B2EBF2" opacity="0.4"/>
+  <path d="M0 170 Q30 162 60 170 Q90 178 120 170 Q150 162 180 170 Q195 174 200 170 L200 200 L0 200Z" fill="#80DEEA" opacity="0.3"/>
+  <!-- 气泡 -->
+  <circle cx="45" cy="40" r="6" fill="none" stroke="#80DEEA" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="45" cy="40" r="2" fill="white" opacity="0.3" cx="43" cy="38"/>
+  <circle cx="155" cy="55" r="4.5" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.5"/>
+  <circle cx="35" cy="75" r="3" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.4"/>
+  <circle cx="165" cy="35" r="5" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.5"/>
+  <circle cx="50" cy="120" r="3.5" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.4"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="100" rx="45" ry="35" fill="#4DD0E1"/>
+  <!-- 身体光泽 -->
+  <ellipse cx="92" cy="88" rx="30" ry="18" fill="#80DEEA" opacity="0.5"/>
+  <!-- 背鳍 -->
+  <path d="M80 65 Q85 42 100 55 Q105 45 110 58 Q108 65 95 65Z" fill="#00ACC1"/>
+  <!-- 尾鳍 -->
+  <path d="M145 95 Q170 75 168 95 Q172 100 168 105 Q170 125 145 105Z" fill="#26C6DA"/>
+  <path d="M145 95 Q162 80 162 95 Q165 100 162 105 Q162 120 145 105Z" fill="#4DD0E1" opacity="0.5"/>
+  <!-- 胸鳍 -->
+  <path d="M70 115 Q55 130 62 120 Q52 128 65 118" fill="#00ACC1" stroke="#00ACC1" stroke-width="1.5"/>
+  <path d="M120 118 Q130 135 125 120 Q135 130 122 118" fill="#00ACC1" stroke="#00ACC1" stroke-width="1.5"/>
+  <!-- 肚子 -->
+  <ellipse cx="95" cy="108" rx="30" ry="20" fill="#E0F7FA"/>
+  <!-- 鳞片纹理 -->
+  <g fill="#00BCD4" opacity="0.2">
+    <path d="M75 88 Q80 83 85 88 Q80 92 75 88"/>
+    <path d="M88 83 Q93 78 98 83 Q93 87 88 83"/>
+    <path d="M100 90 Q105 85 110 90 Q105 94 100 90"/>
+    <path d="M112 85 Q117 80 122 85 Q117 89 112 85"/>
+    <path d="M80 98 Q85 93 90 98 Q85 102 80 98"/>
+  </g>
+  <!-- 大眼睛 -->
+  <circle cx="78" cy="92" r="12" fill="white"/>
+  <circle cx="78" cy="94" r="7" fill="#006064"/>
+  <circle cx="80" cy="91" r="3" fill="white"/>
+  <!-- 嘴巴 -->
+  <path d="M66 108 Q72 115 78 108" stroke="#006064" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="65" cy="102" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <!-- 嘴巴吐泡泡 -->
+  <circle cx="58" cy="105" r="3.5" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.6"/>
+  <circle cx="48" cy="98" r="2.5" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.5"/>
+  <circle cx="42" cy="90" r="2" fill="none" stroke="#80DEEA" stroke-width="1" opacity="0.4"/>
+  <!-- 星星装饰 -->
+  <g fill="#FFF176" opacity="0.5">
+    <polygon points="150,42 151.5,46 156,46 152.5,48.5 153.5,53 150,50.5 146.5,53 147.5,48.5 144,46 148.5,46"/>
+    <polygon points="40,52 41,55 44,55 42,57 42.8,60 40,58 37.2,60 38,57 36,55 39,55"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#006064" font-family="sans-serif">泡泡鱼</text>
+</svg>

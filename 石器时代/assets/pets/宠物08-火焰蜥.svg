@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 火焰蜥 - 可爱火蜥蜴 -->
+  <!-- 尾巴（带火焰） -->
+  <path d="M45 130 Q25 125 18 140 Q15 150 22 145" fill="#FF5722"/>
+  <!-- 尾巴火焰 -->
+  <path d="M16 138 Q10 128 15 120 Q18 130 20 125 Q22 132 16 138Z" fill="#FF9800"/>
+  <path d="M14 132 Q8 122 12 115 Q14 125 18 120Z" fill="#FFEB3B" opacity="0.7"/>
+  <!-- 身体 -->
+  <ellipse cx="95" cy="125" rx="38" ry="30" fill="#FF5722"/>
+  <!-- 肚子 -->
+  <ellipse cx="95" cy="130" rx="26" ry="22" fill="#FFAB91"/>
+  <!-- 背上的火焰纹 -->
+  <g fill="#FF9800" opacity="0.5">
+    <path d="M75 95 Q78 85 82 95Z"/>
+    <path d="M88 92 Q92 80 96 92Z"/>
+    <path d="M102 95 Q105 85 108 95Z"/>
+    <path d="M115 98 Q117 90 120 98Z"/>
+  </g>
+  <!-- 头 -->
+  <circle cx="105" cy="82" r="28" fill="#FF5722"/>
+  <ellipse cx="105" cy="86" rx="23" ry="20" fill="#FF8A65"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="95" cy="76" rx="8" ry="10" fill="white"/>
+  <ellipse cx="115" cy="76" rx="8" ry="10" fill="white"/>
+  <circle cx="97" cy="77" r="5" fill="#FF6F00"/>
+  <circle cx="117" cy="77" r="5" fill="#FF6F00"/>
+  <circle cx="95" cy="76" r="2.5" fill="#333"/>
+  <circle cx="115" cy="76" r="2.5" fill="#333"/>
+  <circle cx="96" cy="74" r="1.5" fill="white"/>
+  <circle cx="116" cy="74" r="1.5" fill="white"/>
+  <!-- 小鼻子 -->
+  <circle cx="102" cy="88" r="1.5" fill="#BF360C"/>
+  <circle cx="108" cy="88" r="1.5" fill="#BF360C"/>
+  <!-- 大笑 -->
+  <path d="M96 95 Q105 105 114 95" stroke="#BF360C" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="86" cy="90" rx="6" ry="3.5" fill="#FF8A80" opacity="0.5"/>
+  <ellipse cx="124" cy="90" rx="6" ry="3.5" fill="#FF8A80" opacity="0.5"/>
+  <!-- 头顶小火焰 -->
+  <path d="M98 55 Q95 42 100 48 Q102 38 108 48 Q112 42 110 55Z" fill="#FFEB3B"/>
+  <path d="M100 55 Q98 45 103 50 Q105 42 108 52 Q110 46 108 55Z" fill="#FF9800" opacity="0.7"/>
+  <!-- 小手 -->
+  <ellipse cx="62" cy="118" rx="8" ry="6" fill="#FF5722" transform="rotate(-25,62,118)"/>
+  <ellipse cx="135" cy="115" rx="8" ry="6" fill="#FF5722" transform="rotate(25,135,115)"/>
+  <!-- 小脚 -->
+  <path d="M70 150 L64 162 L70 158 L72 164 L76 158 L80 162 L78 150Z" fill="#E64A19"/>
+  <path d="M108 152 L102 164 L108 160 L110 166 L114 160 L118 164 L116 152Z" fill="#E64A19"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#BF360C" font-family="sans-serif">火焰蜥</text>
+</svg>

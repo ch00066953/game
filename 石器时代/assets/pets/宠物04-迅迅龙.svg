@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 迅迅龙 - 可爱迅猛龙 -->
+  <!-- 尾巴 -->
+  <path d="M55 130 Q30 120 20 135 Q15 145 25 142" fill="#26A69A" stroke="none"/>
+  <!-- 身体 -->
+  <ellipse cx="95" cy="125" rx="35" ry="30" fill="#26A69A"/>
+  <!-- 肚子 -->
+  <ellipse cx="95" cy="130" rx="24" ry="20" fill="#80CBC4"/>
+  <!-- 头 -->
+  <ellipse cx="120" cy="78" rx="30" ry="28" fill="#26A69A"/>
+  <ellipse cx="125" cy="83" rx="22" ry="20" fill="#4DB6AC"/>
+  <!-- 嘴巴尖尖 -->
+  <path d="M145 80 Q158 82 155 88 Q150 90 145 88Z" fill="#26A69A"/>
+  <path d="M148 84 Q155 85 153 88 Q150 89 148 87Z" fill="#4DB6AC"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="115" cy="72" rx="9" ry="11" fill="white"/>
+  <ellipse cx="135" cy="74" rx="8" ry="10" fill="white"/>
+  <circle cx="117" cy="73" r="5.5" fill="#E53935"/>
+  <circle cx="137" cy="75" r="5" fill="#E53935"/>
+  <circle cx="119" cy="70" r="2" fill="white"/>
+  <circle cx="139" cy="72" r="2" fill="white"/>
+  <!-- 小牙齿 -->
+  <path d="M150 88 L148 93 L152 93Z" fill="white"/>
+  <path d="M145 89 L143 93 L147 93Z" fill="white"/>
+  <!-- 笑容 -->
+  <path d="M142 90 Q148 95 155 88" stroke="#00796B" stroke-width="1.5" fill="none"/>
+  <!-- 条纹 -->
+  <g stroke="#00897B" stroke-width="2" opacity="0.3">
+    <line x1="108" y1="60" x2="115" y2="55"/>
+    <line x1="118" y1="58" x2="125" y2="53"/>
+    <line x1="128" y1="60" x2="133" y2="56"/>
+  </g>
+  <!-- 腮红 -->
+  <ellipse cx="108" cy="84" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="145" cy="84" rx="4" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小爪子 -->
+  <path d="M70 147 L65 158 L72 155 L68 162 L75 158 L73 165 L80 155Z" fill="#26A69A"/>
+  <path d="M110 150 L105 161 L112 158 L108 165 L115 161 L113 168 L120 158Z" fill="#26A69A"/>
+  <!-- 小手爪 -->
+  <ellipse cx="68" cy="110" rx="7" ry="5" fill="#26A69A" transform="rotate(-30,68,110)"/>
+  <ellipse cx="128" cy="105" rx="6" ry="5" fill="#26A69A" transform="rotate(20,128,105)"/>
+  <!-- 颈部 -->
+  <path d="M100 100 Q110 95 115 90" stroke="#26A69A" stroke-width="15" fill="none"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#00796B" font-family="sans-serif">迅迅龙</text>
+</svg>
