@@ -505,6 +505,13 @@ function finishBattle(won, caught) {
         }
         game.battleCount++;
 
+        // 更新任务进度
+        if (!caught) {
+            updateQuestProgress('kill', e.name);
+        } else {
+            updateQuestProgress('catch', e.name);
+        }
+
         // Material drops
         const drops = ENEMY_DROPS[e.name] || [];
         const droppedMats = [];
@@ -519,6 +526,7 @@ function finishBattle(won, caught) {
                         game.bag.push({ id: drop.id, name: info.name, icon: info.icon, desc: '合成材料', count: 1, effect: { type: 'material' } });
                     }
                     droppedMats.push(info.icon + info.name);
+                    updateQuestProgress('collect', drop.id);
                 }
             }
         });
@@ -569,7 +577,7 @@ function checkLevelUp(callback) {
         p.level++;
         p.maxExp = Math.floor(100 * Math.pow(1.25, p.level - 1));
 
-        const c = CLASS_DATA[p.class];
+        const c = CLASS_DATA[p.class || 'none'];
         const hpGrow = Math.floor(c.baseHp * 0.12 + Math.random() * 5);
         const mpGrow = Math.floor(c.baseMp * 0.1 + Math.random() * 3);
         const atkGrow = Math.floor(1 + Math.random() * 2 + (p.class === 'warrior' ? 1 : 0));

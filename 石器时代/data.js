@@ -4,6 +4,7 @@ const CLASS_DATA = {
     warrior: { name: '战士', icon: '⚔️', baseHp: 120, baseMp: 30, atk: 15, def: 12, spd: 8, skills: ['猛击', '旋风斩'] },
     hunter:  { name: '猎人', icon: '🏹', baseHp: 100, baseMp: 40, atk: 12, def: 8, spd: 14, skills: ['精准射击', '捕兽陷阱'] },
     shaman:  { name: '巫师', icon: '🔮', baseHp: 90,  baseMp: 60, atk: 8,  def: 10, spd: 9, skills: ['火焰术', '治愈之光'] },
+    none:    { name: '普通人', icon: '👤', baseHp: 100, baseMp: 30, atk: 10, def: 8, spd: 10, skills: [] },
 };
 
 const SKILL_DATA = {
@@ -80,11 +81,15 @@ const AREA_MAPS = {
         width: 30, height: 22, playerStart: { x: 15, y: 18 },
         pois: [
             { x: 7,  y: 5,  icon: '🏪', name: '部落商店', type: 'shop' },
-            { x: 15, y: 3,  icon: '⛺', name: '族长帐篷', type: 'heal', msg: '族长为你治疗了伤势！' },
+            { x: 15, y: 3,  icon: '👴', name: '族长', type: 'npc_quest', npcId: 'elder' },
+            { x: 14, y: 4,  icon: '⛺', name: '帐篷', type: 'heal', msg: '你在帐篷中休息，恢复了全部体力！' },
             { x: 23, y: 5,  icon: '🔥', name: '篝火存档', type: 'save' },
             { x: 27, y: 10, icon: '➡️', name: '前往密林', type: 'exit', target: 1 },
             { x: 4,  y: 15, icon: '👴', name: '老猎人',   type: 'npc', msg: '老猎人: 在草丛中行走会遇到野兽！高草丛遇敌率更高。' },
             { x: 15, y: 8,  icon: '🗿', name: '石碑',     type: 'npc', msg: '远古石碑: 驯服恐龙，成为最强的原始人！' },
+            { x: 5,  y: 12, icon: '⚔️', name: '战士教官', type: 'npc_quest', npcId: 'warrior_master' },
+            { x: 20, y: 2,  icon: '🏹', name: '猎人导师', type: 'npc_quest', npcId: 'hunter_master' },
+            { x: 25, y: 12, icon: '🔮', name: '巫师长老', type: 'npc_quest', npcId: 'shaman_master' },
         ],
     },
     forest: {
@@ -348,3 +353,142 @@ function generateAreaTiles(areaId) {
     });
     return tiles;
 }
+
+// ===== NPC 数据 =====
+const NPC_DATA = {
+    elder: { name: '族长', icon: '👴', portrait: 'assets/npc/elder.svg' },
+    warrior_master: { name: '战士教官', icon: '⚔️', portrait: 'assets/npc/warrior_master.svg' },
+    hunter_master: { name: '猎人导师', icon: '🏹', portrait: 'assets/npc/hunter_master.svg' },
+    shaman_master: { name: '巫师长老', icon: '🔮', portrait: 'assets/npc/shaman_master.svg' },
+};
+
+// ===== 任务数据 =====
+const QUEST_DATA = {
+    warrior_job: {
+        id: 'warrior_job',
+        name: '勇者试炼',
+        description: '击败5只小恐龙，证明你的勇气！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'kill', target: '小恐龙', count: 5 }
+        ],
+        rewards: { job: 'warrior', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'warrior_quest_accept',
+        storyOnComplete: 'warrior_quest_complete',
+        turnInNpc: 'warrior_master',
+    },
+    hunter_job: {
+        id: 'hunter_job',
+        name: '猎人之道',
+        description: '捕获1只精灵鹿，展示你的敏捷！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'catch', target: '精灵鹿', count: 1 }
+        ],
+        rewards: { job: 'hunter', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'hunter_quest_accept',
+        storyOnComplete: 'hunter_quest_complete',
+        turnInNpc: 'hunter_master',
+    },
+    shaman_job: {
+        id: 'shaman_job',
+        name: '启灵仪式',
+        description: '收集3个骨头和2个火石，完成神秘仪式！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'collect', target: 'bone', count: 3 },
+            { type: 'collect', target: 'fire_stone', count: 2 }
+        ],
+        rewards: { job: 'shaman', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'shaman_quest_accept',
+        storyOnComplete: 'shaman_quest_complete',
+        turnInNpc: 'shaman_master',
+    },
+};
+
+// ===== 剧情数据 =====
+const STORY_DATA = {
+    elder_intro: {
+        id: 'elder_intro',
+        nodes: [
+            { type: 'dialog', speaker: 'elder', text: '年轻人，欢迎来到加加村！' },
+            { type: 'dialog', speaker: 'elder', text: '这个世界充满了危险的远古巨兽……但也有无穷的机遇。' },
+            { type: 'dialog', speaker: 'elder', text: '在这片土地上，有三种古老的战斗之道：' },
+            { type: 'dialog', speaker: 'elder', text: '⚔️ 战士之道——以力量征服一切，冲锋陷阵！' },
+            { type: 'dialog', speaker: 'elder', text: '🏹 猎人之道——以敏捷追踪猎物，驯服万兽！' },
+            { type: 'dialog', speaker: 'elder', text: '🔮 巫师之道——以智慧驾驭神秘力量，治愈和毁灭！' },
+            { type: 'dialog', speaker: 'elder', text: '你想走哪条路呢？去找村里的导师们谈谈吧。' },
+            { type: 'narration', text: '族长指向了村庄的不同方向……' },
+            { type: 'dialog', speaker: 'elder', text: '⚔️ 战士教官在村子左边的训练场。' },
+            { type: 'dialog', speaker: 'elder', text: '🏹 猎人导师在村子上方的森林边。' },
+            { type: 'dialog', speaker: 'elder', text: '🔮 巫师长老在村子右边的神秘之地。' },
+            { type: 'dialog', speaker: 'elder', text: '选好之后，去找他们吧！' },
+        ],
+    },
+    warrior_quest_accept: {
+        id: 'warrior_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'warrior_master', text: '哦？你想成为战士？' },
+            { type: 'dialog', speaker: 'warrior_master', text: '战士靠的是力量和勇气！不是谁都能承受战斗的痛苦！' },
+            { type: 'dialog', speaker: 'warrior_master', text: '想证明自己？去村子附近击败5只小恐龙给我看看！' },
+            { type: 'narration', text: '战士教官递给你一把训练用的石棍。' },
+            { type: 'action', fn: 'acceptQuest', args: ['warrior_job'] },
+        ],
+    },
+    hunter_quest_accept: {
+        id: 'hunter_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'hunter_master', text: '嗯……你想学猎人之道？' },
+            { type: 'dialog', speaker: 'hunter_master', text: '猎人讲究的是心静如水，一击必中。' },
+            { type: 'dialog', speaker: 'hunter_master', text: '去捕获一只精灵鹿回来，这是你的入门考验。' },
+            { type: 'narration', text: '猎人导师将一张古老的捕兽网交给了你。' },
+            { type: 'action', fn: 'acceptQuest', args: ['hunter_job'] },
+        ],
+    },
+    shaman_quest_accept: {
+        id: 'shaman_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'shaman_master', text: '嗬嗬嗬……你能感受到灵力的召唤吗？' },
+            { type: 'dialog', speaker: 'shaman_master', text: '巫术需要天赋，更需要奉献。' },
+            { type: 'dialog', speaker: 'shaman_master', text: '为我收集3个骨头和2个火石，用于启灵仪式。' },
+            { type: 'narration', text: '巫师长老的眼中闪烁着神秘的光芒。' },
+            { type: 'action', fn: 'acceptQuest', args: ['shaman_job'] },
+        ],
+    },
+    warrior_quest_complete: {
+        id: 'warrior_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'warrior_master', text: '哈哈！干得好！你已经证明了自己的勇气！' },
+            { type: 'dialog', speaker: 'warrior_master', text: '从今天起，你就是一名真正的战士了！' },
+            { type: 'narration', text: '战士教官将一把石剑郑重地交到你手中。' },
+            { type: 'action', fn: 'giveJob', args: ['warrior'] },
+            { type: 'dialog', speaker: 'warrior_master', text: '去吧，用你的剑守护部落！我教你两招看家本领——' },
+            { type: 'narration', text: '你学会了「猛击」和「旋风斩」！' },
+        ],
+    },
+    hunter_quest_complete: {
+        id: 'hunter_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'hunter_master', text: '不错……你有猎人的天赋。' },
+            { type: 'dialog', speaker: 'hunter_master', text: '从今天起，你便是我的门徒，一名真正的猎人。' },
+            { type: 'narration', text: '猎人导师将一把精心制作的石弓递给了你。' },
+            { type: 'action', fn: 'giveJob', args: ['hunter'] },
+            { type: 'dialog', speaker: 'hunter_master', text: '记住，猎人不只是杀戮，更要懂得驯服自然。' },
+            { type: 'narration', text: '你学会了「精准射击」和「捕兽陷阱」！' },
+        ],
+    },
+    shaman_quest_complete: {
+        id: 'shaman_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'shaman_master', text: '嗬嗬嗬……仪式完成了。我感受到了你体内的灵力。' },
+            { type: 'dialog', speaker: 'shaman_master', text: '从今天起，你将掌握火焰和治愈的力量！' },
+            { type: 'narration', text: '巫师长老用骨头和火石完成了启灵仪式，一道光芒笼罩了你。' },
+            { type: 'action', fn: 'giveJob', args: ['shaman'] },
+            { type: 'dialog', speaker: 'shaman_master', text: '去吧，用你的智慧守护这片土地。' },
+            { type: 'narration', text: '你学会了「火焰术」和「治愈之光」！' },
+        ],
+    },
+};

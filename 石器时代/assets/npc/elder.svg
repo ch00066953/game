@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- 背景光环 -->
+  <circle cx="64" cy="64" r="60" fill="rgba(255,200,100,0.08)"/>
+  <!-- 身体/长袍 -->
+  <rect x="32" y="62" width="64" height="66" rx="8" fill="#8B6914"/>
+  <rect x="36" y="62" width="56" height="60" rx="6" fill="#A07828"/>
+  <!-- 兽皮领子 -->
+  <ellipse cx="64" cy="62" rx="30" ry="8" fill="#6B4E1E"/>
+  <!-- 脖子 -->
+  <rect x="54" y="52" width="20" height="14" rx="4" fill="#D4A06A"/>
+  <!-- 头部 -->
+  <rect x="38" y="12" width="52" height="44" rx="14" fill="#D4A06A"/>
+  <!-- 白发 -->
+  <ellipse cx="64" cy="16" rx="28" ry="12" fill="#E8E0D0"/>
+  <rect x="36" y="12" width="8" height="30" rx="4" fill="#E8E0D0"/>
+  <rect x="84" y="12" width="8" height="30" rx="4" fill="#E8E0D0"/>
+  <!-- 羽毛冠 -->
+  <polygon points="52,8 56,0 60,10" fill="#C0392B"/>
+  <polygon points="60,6 64,0 68,8" fill="#E67E22"/>
+  <polygon points="68,8 72,0 76,10" fill="#27AE60"/>
+  <!-- 眉毛 (浓密白色) -->
+  <rect x="44" y="28" width="14" height="3" rx="1" fill="#E8E0D0"/>
+  <rect x="70" y="28" width="14" height="3" rx="1" fill="#E8E0D0"/>
+  <!-- 眼睛 -->
+  <ellipse cx="51" cy="34" rx="5" ry="4" fill="#FFF"/>
+  <circle cx="52" cy="34" r="3" fill="#5D4037"/>
+  <circle cx="53" cy="33" r="1" fill="#FFF"/>
+  <ellipse cx="77" cy="34" rx="5" ry="4" fill="#FFF"/>
+  <circle cx="76" cy="34" r="3" fill="#5D4037"/>
+  <circle cx="77" cy="33" r="1" fill="#FFF"/>
+  <!-- 鼻子 -->
+  <polygon points="62,38 66,38 64,42" fill="#C4915A"/>
+  <!-- 白胡子 -->
+  <rect x="48" y="44" width="32" height="16" rx="8" fill="#E8E0D0"/>
+  <rect x="52" y="50" width="24" height="14" rx="6" fill="#D8D0C0"/>
+  <!-- 骨项链 -->
+  <circle cx="48" cy="64" r="3" fill="#F5F0E0"/>
+  <circle cx="56" cy="66" r="3" fill="#F5F0E0"/>
+  <circle cx="64" cy="67" r="3" fill="#F5F0E0"/>
+  <circle cx="72" cy="66" r="3" fill="#F5F0E0"/>
+  <circle cx="80" cy="64" r="3" fill="#F5F0E0"/>
+  <!-- 木杖 (左手) -->
+  <rect x="24" y="50" width="6" height="70" rx="3" fill="#8B6914"/>
+  <circle cx="27" cy="50" r="6" fill="#D4A06A"/>
+  <circle cx="27" cy="50" r="4" fill="#A07828"/>
+</svg>

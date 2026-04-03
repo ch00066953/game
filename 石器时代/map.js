@@ -55,6 +55,11 @@ function loadAreaMap(areaIdx, fromExit) {
     $('areaName').textContent = area.name;
     updateTopBar();
     toast(`来到了 ${area.name}`);
+
+    // 首次进入加加村触发族长引导
+    if (areaIdx === 0 && game.quests && !game.quests.completed.includes('elder_intro_done')) {
+        setTimeout(() => handleQuestNpc('elder'), 500);
+    }
 }
 
 function startMapLoop() {
@@ -185,6 +190,7 @@ function interactWithPoi(poi) {
             break;
         }
         case 'npc': toast(poi.msg || '……'); break;
+        case 'npc_quest': handleQuestNpc(poi.npcId); break;
     }
 }
 
@@ -267,7 +273,7 @@ function renderMap(tick) {
     // 角色
     const psx = px * TILE_SIZE - camX, psy = py * TILE_SIZE - camY;
     const bobY = Math.sin(tick * 0.1) * 2;
-    drawPixelChar(ctx, psx, psy - 4 + bobY, TILE_SIZE, game.player.class, playerFacing, keysDown['ArrowUp'] || keysDown['ArrowDown'] || keysDown['ArrowLeft'] || keysDown['ArrowRight'] || keysDown['w'] || keysDown['s'] || keysDown['a'] || keysDown['d'] ? tick : 0);
+    drawSVGChar(ctx, psx, psy - 4 + bobY, TILE_SIZE, game.player.class, playerFacing, keysDown['ArrowUp'] || keysDown['ArrowDown'] || keysDown['ArrowLeft'] || keysDown['ArrowRight'] || keysDown['w'] || keysDown['s'] || keysDown['a'] || keysDown['d'] ? tick : 0);
 
     // 方向指示
     ctx.fillStyle = 'rgba(255,255,0,0.6)';

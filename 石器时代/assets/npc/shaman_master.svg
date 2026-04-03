@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- 光环 -->
+  <circle cx="64" cy="64" r="58" fill="rgba(100,100,255,0.06)"/>
+  <!-- 身体/布袍 -->
+  <rect x="30" y="58" width="68" height="70" rx="10" fill="#2C3E50"/>
+  <rect x="34" y="58" width="60" height="64" rx="8" fill="#34495E"/>
+  <!-- 符文纹饰 -->
+  <circle cx="50" cy="80" r="4" fill="none" stroke="#9B59B6" stroke-width="1.5"/>
+  <circle cx="78" cy="80" r="4" fill="none" stroke="#9B59B6" stroke-width="1.5"/>
+  <circle cx="64" cy="74" r="3" fill="none" stroke="#E74C3C" stroke-width="1.5"/>
+  <!-- 兽皮披肩 -->
+  <path d="M30,60 Q64,72 98,60 L98,68 Q64,78 30,68 Z" fill="#5D4037"/>
+  <!-- 脖子 -->
+  <rect x="52" y="48" width="24" height="14" rx="5" fill="#C4915A"/>
+  <!-- 头部 -->
+  <rect x="38" y="8" width="52" height="44" rx="14" fill="#C4915A"/>
+  <!-- 稀疏灰发 -->
+  <ellipse cx="64" cy="12" rx="24" ry="8" fill="#9E9E9E"/>
+  <rect x="36" y="8" width="6" height="24" rx="3" fill="#9E9E9E"/>
+  <rect x="86" y="8" width="6" height="24" rx="3" fill="#9E9E9E"/>
+  <!-- 蓝色眼妆 -->
+  <rect x="42" y="26" width="16" height="6" rx="2" fill="rgba(52,152,219,0.4)"/>
+  <rect x="70" y="26" width="16" height="6" rx="2" fill="rgba(52,152,219,0.4)"/>
+  <!-- 眼睛(深邃) -->
+  <ellipse cx="50" cy="30" rx="6" ry="5" fill="#FFF"/>
+  <circle cx="50" cy="30" r="4" fill="#1A237E"/>
+  <circle cx="50" cy="30" r="2" fill="#E8F5E9"/>
+  <ellipse cx="78" cy="30" rx="6" ry="5" fill="#FFF"/>
+  <circle cx="78" cy="30" r="4" fill="#1A237E"/>
+  <circle cx="78" cy="30" r="2" fill="#E8F5E9"/>
+  <!-- 鼻子 -->
+  <polygon points="62,34 66,34 64,40" fill="#A5723A"/>
+  <!-- 嘴 -->
+  <rect x="56" y="42" width="16" height="2" rx="1" fill="#8B6A50"/>
+  <!-- 骨项链 -->
+  <circle cx="44" cy="58" r="4" fill="#F5F0E0" stroke="#D4C5A0" stroke-width="1"/>
+  <circle cx="54" cy="62" r="3" fill="#F5F0E0" stroke="#D4C5A0" stroke-width="1"/>
+  <circle cx="64" cy="63" r="4" fill="#F5F0E0" stroke="#D4C5A0" stroke-width="1"/>
+  <circle cx="74" cy="62" r="3" fill="#F5F0E0" stroke="#D4C5A0" stroke-width="1"/>
+  <circle cx="84" cy="58" r="4" fill="#F5F0E0" stroke="#D4C5A0" stroke-width="1"/>
+  <!-- 中心宝石 -->
+  <circle cx="64" cy="63" r="3" fill="#9B59B6"/>
+  <!-- 骨杖(右手) -->
+  <rect x="98" y="40" width="6" height="60" rx="3" fill="#F5F0E0"/>
+  <circle cx="101" cy="40" r="7" fill="none" stroke="#F5F0E0" stroke-width="3"/>
+  <circle cx="101" cy="40" r="4" fill="#E74C3C"/>
+  <!-- 手臂 -->
+  <rect x="22" y="60" width="12" height="36" rx="5" fill="#C4915A"/>
+  <rect x="94" y="60" width="12" height="36" rx="5" fill="#C4915A"/>
+</svg>
