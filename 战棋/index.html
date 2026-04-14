@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>战棋</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <h1>⚔️ 战棋</h1>
+      <p class="subtitle">网格战术 · 行动点 · 回合制</p>
+    </header>
+
+    <div class="panel hud">
+      <span>回合 <b id="turnNum">1</b></span>
+      <span>当前: <b id="curSide">我方</b></span>
+      <span id="unitInfo" class="unit-info"></span>
+      <button id="endTurnBtn">结束回合</button>
+      <button id="restartBtn">重新开始</button>
+    </div>
+
+    <div class="board-wrap">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <section class="panel tips">
+      <h2>操作说明</h2>
+      <ul>
+        <li>点击己方单位选中，蓝色 = 可移动，红色 = 可攻击</li>
+        <li>点击蓝色格移动，点击红色格中的敌人攻击</li>
+        <li>每单位每回合可移动+攻击各一次</li>
+        <li>消灭所有敌方单位即胜利</li>
+      </ul>
+    </section>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

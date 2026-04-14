@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>打砖块</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>打砖块</h1>
+      <p class="subtitle">操控挡板反弹小球，击碎所有砖块即可过关。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>分数：<span id="score">0</span></div>
+      <div>生命：<span id="lives">3</span></div>
+      <div>关卡：<span id="level">1</span></div>
+      <div class="status" id="statusText">点击开始</div>
+      <button id="restartBtn">重玩</button>
+    </section>
+
+    <section class="panel canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <section class="panel touch-controls" id="touchControls">
+      <button class="touch-btn" id="btnLeft">◀</button>
+      <button class="touch-btn" id="btnLaunch">发射</button>
+      <button class="touch-btn" id="btnRight">▶</button>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>← → 方向键 / A D 键：移动挡板</li>
+        <li>空格：发射小球 / 暂停</li>
+        <li>移动端：底部按钮控制，或触摸左右半屏移动</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

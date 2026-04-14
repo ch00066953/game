@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>卡牌地牢</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" id="app">
+    <!-- 顶部信息 -->
+    <header class="top">
+      <h1>卡牌地牢</h1>
+      <p class="subtitle">打出卡牌击败敌人，层层深入地牢。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>层数：<span id="floor">1</span></div>
+      <div>HP：<span id="hp">50</span> / <span id="maxHp">50</span></div>
+      <div>能量：<span id="energy">3</span> / 3</div>
+      <div>护盾：<span id="block">0</span></div>
+      <button id="endTurnBtn">结束回合</button>
+      <button id="restartBtn">重新开始</button>
+    </section>
+
+    <!-- 战斗区 -->
+    <section class="panel battle-area">
+      <div class="enemy-zone" id="enemyZone"></div>
+      <div class="status-msg" id="statusMsg">选择卡牌出战</div>
+    </section>
+
+    <!-- 手牌区 -->
+    <section class="panel hand-area" id="handArea"></section>
+
+    <!-- 奖励选择（战后） -->
+    <section class="panel reward-area hidden" id="rewardArea">
+      <h2>战斗胜利！选择奖励</h2>
+      <div class="reward-choices" id="rewardChoices"></div>
+    </section>
+
+    <section class="panel tips">
+      <h2>玩法说明</h2>
+      <ul>
+        <li>每回合获得 3 点能量，抽 5 张牌</li>
+        <li>打出攻击牌造成伤害，防御牌获得护盾</li>
+        <li>护盾在你的回合开始时清零</li>
+        <li>击败所有敌人后选择奖励卡牌</li>
+        <li>HP 归零则游戏结束</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

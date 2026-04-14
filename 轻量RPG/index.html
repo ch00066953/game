@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>轻量RPG</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <h1>🛡️ 轻量RPG</h1>
+      <p class="subtitle">角色成长 · 背包 · 任务 · 存档</p>
+    </header>
+
+    <div class="panel hud">
+      <span>Lv.<b id="level">1</b></span>
+      <span>❤️ <b id="hp">50</b>/<b id="maxHp">50</b></span>
+      <span>⚔️ <b id="atk">5</b></span>
+      <span>🛡️ <b id="def">2</b></span>
+      <span>EXP <b id="exp">0</b>/<b id="expMax">20</b></span>
+      <span>💰 <b id="gold">0</b></span>
+    </div>
+
+    <div class="main-area">
+      <!-- 区域显示 -->
+      <div class="panel area-panel">
+        <h2 id="areaName">新手村</h2>
+        <p id="areaDesc">宁静的村庄，周围是青翠的田野。</p>
+        <div id="areaActions" class="area-actions"></div>
+      </div>
+
+      <!-- 战斗面板 -->
+      <div id="battlePanel" class="panel battle-panel hidden">
+        <div class="enemy-info">
+          <span id="enemyEmoji" class="enemy-emoji"></span>
+          <span id="enemyName"></span>
+          <span id="enemyHp"></span>
+        </div>
+        <div id="battleLog" class="battle-log"></div>
+        <div class="battle-btns">
+          <button id="btnAttack">⚔️ 攻击</button>
+          <button id="btnDefend">🛡️ 防御</button>
+          <button id="btnHeal">💊 使用药水</button>
+          <button id="btnFlee">🏃 逃跑</button>
+        </div>
+      </div>
+
+      <!-- 商店面板 -->
+      <div id="shopPanel" class="panel hidden">
+        <h3>商店</h3>
+        <div id="shopItems" class="shop-items"></div>
+        <button id="btnLeaveShop">离开商店</button>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button id="btnInventory">🎒 背包</button>
+      <button id="btnQuests">📜 任务</button>
+      <button id="btnSave">💾 存档</button>
+      <button id="btnLoad">📂 读档</button>
+    </div>
+
+    <!-- 背包弹窗 -->
+    <div id="inventoryModal" class="modal hidden">
+      <div class="modal-content panel">
+        <h3>🎒 背包</h3>
+        <div id="inventoryList" class="list"></div>
+        <button id="btnCloseInv">关闭</button>
+      </div>
+    </div>
+
+    <!-- 任务弹窗 -->
+    <div id="questModal" class="modal hidden">
+      <div class="modal-content panel">
+        <h3>📜 任务</h3>
+        <div id="questList" class="list"></div>
+        <button id="btnCloseQuest">关闭</button>
+      </div>
+    </div>
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <section class="panel tips">
+      <h2>操作说明</h2>
+      <ul>
+        <li>在区域中探索、战斗、购物</li>
+        <li>击败敌人获得经验和金币</li>
+        <li>升级增强属性，完成任务获得奖励</li>
+        <li>使用存档/读档保存进度</li>
+      </ul>
+    </section>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

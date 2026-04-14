@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>塔防</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>塔防</h1>
+      <p class="subtitle">建造防御塔，消灭入侵的敌人。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>金币：<span id="gold">100</span></div>
+      <div>生命：<span id="lives">20</span></div>
+      <div>波次：<span id="wave">0</span> / <span id="totalWaves">10</span></div>
+      <div class="status" id="statusText">选择防御塔放置</div>
+      <button id="startWaveBtn">开始波次</button>
+      <button id="restartBtn">重玩</button>
+    </section>
+
+    <section class="panel tower-shop">
+      <button class="tower-btn selected" data-tower="arrow">
+        <span class="tower-icon">🏹</span>
+        <span class="tower-name">箭塔 (20g)</span>
+      </button>
+      <button class="tower-btn" data-tower="cannon">
+        <span class="tower-icon">💣</span>
+        <span class="tower-name">炮塔 (40g)</span>
+      </button>
+    </section>
+
+    <section class="panel canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>点击选择防御塔类型，再点击地图空地放置</li>
+        <li>箭塔：便宜快速，伤害低</li>
+        <li>炮塔：昂贵缓慢，范围伤害</li>
+        <li>敌人沿路径行进，到达终点损失生命</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

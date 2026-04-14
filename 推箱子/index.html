@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>推箱子</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>推箱子</h1>
+      <p class="subtitle">把所有箱子推到目标位置，动脑过关。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>关卡：<span id="levelNum">1</span> / <span id="totalLevels">10</span></div>
+      <div>步数：<span id="steps">0</span></div>
+      <div class="status" id="statusText">方向键移动</div>
+      <button id="undoBtn">撤销</button>
+      <button id="resetBtn">重置</button>
+      <div class="level-nav">
+        <button id="prevBtn">◀ 上一关</button>
+        <button id="nextBtn">下一关 ▶</button>
+      </div>
+    </section>
+
+    <section class="panel board-wrap">
+      <div class="board" id="board"></div>
+    </section>
+
+    <section class="panel touch-controls" id="touchControls">
+      <div class="dpad">
+        <button class="dpad-btn up" data-dir="up">▲</button>
+        <button class="dpad-btn left" data-dir="left">◀</button>
+        <button class="dpad-btn center">●</button>
+        <button class="dpad-btn right" data-dir="right">▶</button>
+        <button class="dpad-btn down" data-dir="down">▼</button>
+      </div>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>方向键 / WASD：移动角色</li>
+        <li>Z / Ctrl+Z：撤销一步</li>
+        <li>R：重置当前关卡</li>
+        <li>移动端：使用虚拟方向键或滑动操作</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

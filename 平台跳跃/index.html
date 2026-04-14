@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>平台跳跃</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>平台跳跃</h1>
+      <p class="subtitle">跑跳冲刺，避开陷阱到达终点。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>关卡：<span id="level">1</span></div>
+      <div>金币：<span id="coins">0</span></div>
+      <div>生命：<span id="lives">3</span></div>
+      <div class="status" id="statusText">方向键移动，空格跳跃</div>
+      <button id="restartBtn">重玩</button>
+    </section>
+
+    <section class="panel canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <section class="panel touch-controls" id="touchControls">
+      <div class="touch-row">
+        <button class="touch-btn" id="btnLeft">◀</button>
+        <button class="touch-btn" id="btnRight">▶</button>
+        <button class="touch-btn jump-btn" id="btnJump">跳</button>
+      </div>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>← → / A D：移动</li>
+        <li>空格 / ↑ / W：跳跃</li>
+        <li>到达旗子即过关</li>
+        <li>掉入深渊或碰到尖刺会失去生命</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

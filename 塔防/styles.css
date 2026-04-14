@@ -1,0 +1,89 @@
+:root {
+  --bg: #1a2332;
+  --panel: rgba(255,255,255,0.07);
+  --text: #d4d8de;
+  --accent: #f0c040;
+  --danger: #e74c3c;
+  --safe: #2ecc71;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a2332, #0d1620);
+  overflow-x: hidden;
+}
+
+.app {
+  width: min(800px, 96vw);
+  margin: 10px auto 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.top h1 {
+  font-size: clamp(24px, 4vw, 38px);
+  text-align: center;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+
+.subtitle { text-align: center; color: #7a8a9a; font-size: 14px; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  backdrop-filter: blur(4px);
+}
+
+.hud {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.hud span { font-weight: bold; color: var(--accent); }
+.status { color: #fbbf24; font-weight: bold; }
+
+button {
+  padding: 5px 14px; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px; background: rgba(255,255,255,0.06);
+  color: var(--text); cursor: pointer; font-size: 13px;
+}
+button:hover { background: rgba(255,255,255,0.15); }
+
+#startWaveBtn {
+  border-color: var(--safe); color: var(--safe);
+}
+
+.tower-shop {
+  display: flex; gap: 10px; justify-content: center;
+}
+
+.tower-btn {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 8px 16px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 10px; background: rgba(255,255,255,0.04);
+  transition: border-color 0.2s;
+}
+.tower-btn.selected { border-color: var(--accent); }
+.tower-icon { font-size: 28px; }
+.tower-name { font-size: 12px; color: #aaa; }
+
+.canvas-wrap { display: flex; justify-content: center; padding: 4px; }
+
+#gameCanvas {
+  display: block; width: 100%; max-width: 720px;
+  border-radius: 8px; background: #0f1a0f;
+  touch-action: none;
+}
+
+.tips { font-size: 13px; color: #7a8a9a; }
+.tips h2 { font-size: 15px; margin-bottom: 6px; color: #aab; }
+.tips ul { padding-left: 18px; }
+.tips li { margin-bottom: 3px; }

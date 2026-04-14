@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>2048</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>2048</h1>
+      <p class="subtitle">滑动合并数字，挑战最高分。</p>
+    </header>
+
+    <section class="panel hud">
+      <div class="score-box">
+        <span class="score-label">分数</span>
+        <span class="score-value" id="score">0</span>
+      </div>
+      <div class="score-box">
+        <span class="score-label">最高分</span>
+        <span class="score-value" id="best">0</span>
+      </div>
+      <div class="status" id="statusText"></div>
+      <button id="restartBtn">新游戏</button>
+    </section>
+
+    <section class="panel board-wrap">
+      <div class="board" id="board"></div>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>PC：方向键 ↑ ↓ ← → 或 WASD</li>
+        <li>移动端：触摸滑动</li>
+        <li>相同数字碰撞会合并为它们的总和</li>
+        <li>合出 2048 即为胜利，可继续挑战更高分</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

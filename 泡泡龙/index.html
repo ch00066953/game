@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>泡泡龙</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>泡泡龙</h1>
+      <p class="subtitle">瞄准发射，三个同色泡泡即可消除。</p>
+    </header>
+
+    <section class="panel hud">
+      <div>分数：<span id="score">0</span></div>
+      <div>关卡：<span id="level">1</span></div>
+      <div class="status" id="statusText">瞄准发射</div>
+      <button id="restartBtn">重玩</button>
+    </section>
+
+    <section class="panel canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <section class="panel tips">
+      <h2>操作提示</h2>
+      <ul>
+        <li>PC：鼠标移动瞄准，点击发射</li>
+        <li>键盘：← → 瞄准，空格 / ↑ 发射</li>
+        <li>移动端：触摸拖动瞄准，松手发射</li>
+        <li>3 个及以上相连同色泡泡会被消除</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

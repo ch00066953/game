@@ -1,0 +1,135 @@
+:root {
+  --bg: #1a0f2e;
+  --panel: rgba(255,255,255,0.06);
+  --text: #ddd;
+  --accent: #ff6b35;
+  --attack: #e74c3c;
+  --defend: #3498db;
+  --energy: #f1c40f;
+  --heal: #2ecc71;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a0f2e 0%, #0d0a1a 100%);
+  overflow-x: hidden;
+}
+
+.app {
+  width: min(800px, 96vw);
+  margin: 10px auto 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.top h1 {
+  font-size: clamp(24px, 4vw, 36px);
+  text-align: center;
+  background: linear-gradient(90deg, #ff6b35, #e74c3c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle { text-align: center; color: #777; font-size: 14px; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.hud {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.hud span { font-weight: bold; color: var(--accent); }
+
+button {
+  padding: 6px 16px; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px; background: rgba(255,255,255,0.06);
+  color: var(--text); cursor: pointer; font-size: 13px;
+}
+button:hover { background: rgba(255,255,255,0.15); }
+
+#endTurnBtn { border-color: var(--energy); color: var(--energy); }
+
+.battle-area { min-height: 140px; text-align: center; }
+
+.enemy-zone {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+
+.enemy-card {
+  background: rgba(200,50,50,0.15);
+  border: 2px solid rgba(200,50,50,0.4);
+  border-radius: 10px; padding: 10px 16px;
+  text-align: center; min-width: 100px;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.enemy-card:hover { border-color: var(--attack); }
+.enemy-card.targeted { border-color: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+.enemy-name { font-weight: bold; font-size: 14px; color: #f88; }
+.enemy-emoji { font-size: 36px; margin: 4px 0; }
+.enemy-hp { font-size: 13px; }
+.enemy-intent { font-size: 12px; color: #ffa; margin-top: 4px; }
+.enemy-block { font-size: 12px; color: #6bf; }
+
+.status-msg { color: #fbbf24; font-size: 14px; font-weight: bold; }
+
+.hand-area {
+  display: flex; gap: 8px; justify-content: center;
+  flex-wrap: wrap; min-height: 120px; padding: 12px;
+}
+
+.card {
+  width: 110px; border-radius: 10px; padding: 8px;
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  text-align: center; user-select: none;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+.card.disabled { opacity: 0.4; pointer-events: none; }
+
+.card-attack { background: linear-gradient(135deg, #4a1a1a, #2a0a0a); border-color: var(--attack); }
+.card-defend { background: linear-gradient(135deg, #1a2a4a, #0a1a3a); border-color: var(--defend); }
+.card-skill { background: linear-gradient(135deg, #2a1a3a, #1a0a2a); border-color: #a855f7; }
+
+.card-cost {
+  display: inline-block; width: 24px; height: 24px;
+  border-radius: 50%; background: var(--energy);
+  color: #000; font-weight: bold; font-size: 14px;
+  line-height: 24px; margin-bottom: 4px;
+}
+
+.card-name { font-weight: bold; font-size: 13px; margin: 4px 0; }
+.card-desc { font-size: 11px; color: #aaa; }
+
+.reward-area { text-align: center; }
+.reward-area h2 { color: var(--energy); margin-bottom: 10px; }
+.reward-choices { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.reward-card { cursor: pointer; }
+.reward-card:hover { transform: translateY(-8px); box-shadow: 0 6px 16px rgba(0,0,0,0.5); }
+
+.hidden { display: none !important; }
+
+.hp-bar {
+  width: 80px; height: 6px; background: #333;
+  border-radius: 3px; margin: 4px auto;
+}
+.hp-bar-fill {
+  height: 100%; background: var(--attack);
+  border-radius: 3px; transition: width 0.3s;
+}
+
+.tips { font-size: 13px; color: #777; }
+.tips h2 { font-size: 15px; margin-bottom: 6px; color: #aaa; }
+.tips ul { padding-left: 18px; }
+.tips li { margin-bottom: 3px; }
