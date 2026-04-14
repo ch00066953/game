@@ -1259,5 +1259,26 @@ class Game {
 
 // ===================== 初始化 =====================
 window.addEventListener('DOMContentLoaded', () => {
-  new Game();
+  var g = new Game();
+
+  // 移动端虚拟控制器
+  document.querySelectorAll('.ctrl-btn[data-key]').forEach(function(btn) {
+      btn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          var k = btn.dataset.key;
+          if (!g.input.keys[k]) g.input.justPressed[k] = true;
+          g.input.keys[k] = true;
+      }, { passive: false });
+      btn.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          g.input.keys[btn.dataset.key] = false;
+      }, { passive: false });
+      btn.addEventListener('touchcancel', function(e) {
+          e.preventDefault();
+          g.input.keys[btn.dataset.key] = false;
+      }, { passive: false });
+  });
+  document.addEventListener('touchstart', function(e) {
+      if (e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
 });

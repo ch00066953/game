@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 沙虫虫 - 可爱沙暴巨虫 -->
+  <!-- 身体（虫身弯曲） -->
+  <path d="M60 155 Q55 140 65 130 Q75 120 80 110 Q85 100 95 95" stroke="#F9A825" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <path d="M60 155 Q55 140 65 130 Q75 120 80 110 Q85 100 95 95" stroke="#FDD835" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <!-- 体节环纹 -->
+  <g stroke="#F57F17" stroke-width="1.5" opacity="0.3">
+    <path d="M50 150 Q58 145 68 150" fill="none"/>
+    <path d="M55 138 Q65 133 72 138" fill="none"/>
+    <path d="M62 126 Q70 122 78 126" fill="none"/>
+    <path d="M70 115 Q77 111 84 115" fill="none"/>
+    <path d="M78 105 Q84 101 90 105" fill="none"/>
+  </g>
+  <!-- 尾巴尖 -->
+  <ellipse cx="58" cy="160" rx="8" ry="6" fill="#F9A825"/>
+  <!-- 头 -->
+  <circle cx="105" cy="80" r="30" fill="#F9A825"/>
+  <ellipse cx="105" cy="84" rx="25" ry="22" fill="#FDD835"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="95" cy="74" rx="9" ry="11" fill="white"/>
+  <ellipse cx="115" cy="74" rx="9" ry="11" fill="white"/>
+  <circle cx="97" cy="75" r="5.5" fill="#E53935"/>
+  <circle cx="117" cy="75" r="5.5" fill="#E53935"/>
+  <circle cx="95" cy="75" r="2.5" fill="#333"/>
+  <circle cx="115" cy="75" r="2.5" fill="#333"/>
+  <circle cx="96" cy="72" r="1.8" fill="white"/>
+  <circle cx="116" cy="72" r="1.8" fill="white"/>
+  <!-- 触角 -->
+  <path d="M88 55 Q82 35 78 40" stroke="#F9A825" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="77" cy="39" r="4" fill="#FDD835"/>
+  <path d="M118 55 Q124 35 128 40" stroke="#F9A825" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="129" cy="39" r="4" fill="#FDD835"/>
+  <!-- 嘴巴圆形 -->
+  <circle cx="105" cy="92" r="8" fill="#F57F17"/>
+  <circle cx="105" cy="92" r="5.5" fill="#FF8F00"/>
+  <!-- 小牙齿 -->
+  <g fill="white">
+    <path d="M100 85 L102 88 L104 85Z"/>
+    <path d="M106 85 L108 88 L110 85Z"/>
+    <path d="M100 99 L102 96 L104 99Z"/>
+    <path d="M106 99 L108 96 L110 99Z"/>
+  </g>
+  <!-- 腮红 -->
+  <ellipse cx="84" cy="85" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="126" cy="85" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小手 -->
+  <ellipse cx="80" cy="96" rx="6" ry="5" fill="#F9A825" transform="rotate(-30,80,96)"/>
+  <ellipse cx="130" cy="96" rx="6" ry="5" fill="#F9A825" transform="rotate(30,130,96)"/>
+  <!-- 沙粒效果 -->
+  <g fill="#FFE082" opacity="0.3">
+    <circle cx="40" cy="170" r="2"/><circle cx="55" cy="175" r="1.5"/>
+    <circle cx="70" cy="172" r="1.8"/><circle cx="150" cy="130" r="1.5"/>
+    <circle cx="140" cy="140" r="2"/><circle cx="155" cy="145" r="1"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#F57F17" font-family="sans-serif">沙虫虫</text>
+</svg>

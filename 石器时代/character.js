@@ -1007,7 +1007,7 @@ function drawHairPreview(ctx, style, color, skinColor) {
 
 // ===== 角色创建 =====
 function initCharCreate() {
-    let selectedClass = 'warrior';
+    let selectedClass = null;
     let customAppear = {
         gender: 'male',
         bodyType: 'normal',
@@ -1234,7 +1234,7 @@ function initCharCreate() {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawPixelChar(ctx, 16, 10, 96, selectedClass, 'right', previewTick, customAppear);
+        drawSVGChar(ctx, 16, 10, 96, selectedClass, 'right', previewTick, customAppear);
         previewTick++;
         previewAnimId = requestAnimationFrame(previewLoop);
     }
@@ -1249,10 +1249,207 @@ function initCharCreate() {
     });
     $('btnCreate').onclick = () => {
         const name = $('charName').value.trim() || '原始人';
-        game = newGameState(name, selectedClass, customAppear);
+        game = newGameState(name, null, customAppear);
         if (previewAnimId) cancelAnimationFrame(previewAnimId);
         showScreen('main');
         initMainUI();
         toast(`${name}踏上了冒险之旅！`);
     };
+}
+
+// ==================== SVG 可组合角色渲染引擎 ====================
+
+const CHAR_SVG_PARTS = {
+    body:   ['male-lean','male-normal','male-strong','male-burly','female-slim','female-normal','female-curvy','female-athletic'],
+    hair:   ['bald','short','wild','tied','wolftail','braided','samurai','medium','longstraight','curly','updo','shoulder','ponytail','twintails','braidedF','hime'],
+    bottom: ['long','shorts','skirt','skirt_long','loincloth'],
+    top:    ['tunic','vest','wrap','poncho','crop','armor','armor_heavy','robe','shawl'],
+    weapon: ['warrior','hunter','shaman'],
+    deco:   ['hemp','bone','fang','stone','fur','totem','chief','ritual','shaman','fine','noble','king','bark','feather','queen'],
+    material: ['metal','leather','silk','beast'],
+    detail: ['bone_necklace','fang_pendant','arm_ring','bone_buckle','shoulder_guard','wrist_guard','leg_guard','tattoo','war_paint','feather_deco','flower_crown','shell_necklace','bracelet','rope_belt','shoulder_deco','anklet','earring','tribal_paint','fur_scarf'],
+};
+
+// 走路帧名称后缀
+const WALK_FRAMES = ['walk1', 'walk2'];
+
+const _charSvgTextCache = {};   // path → raw SVG text
+const _charSvgImageCache = {};  // cacheKey → Image
+let _charSvgReady = false;
+
+async function preloadCharSVGs() {
+    const promises = [];
+    for (const [cat, parts] of Object.entries(CHAR_SVG_PARTS)) {
+        for (const p of parts) {
+            // 加载 idle 帧
+            const path = `assets/char/${cat}/${p}.svg`;
+            if (!_charSvgTextCache[path]) {
+                promises.push(
+                    fetch(path).then(r => r.text()).then(t => { _charSvgTextCache[path] = t; })
+                        .catch(e => console.warn('SVG char part load failed:', path, e))
+                );
+            }
+            // body 和 bottom 额外加载走路帧
+            if (cat === 'body' || cat === 'bottom') {
+                for (const wf of WALK_FRAMES) {
+                    const wpath = `assets/char/${cat}/${p}-${wf}.svg`;
+                    if (!_charSvgTextCache[wpath]) {
+                        promises.push(
+                            fetch(wpath).then(r => r.text()).then(t => { _charSvgTextCache[wpath] = t; })
+                                .catch(e => console.warn('SVG walk frame load failed:', wpath, e))
+                        );
+                    }
+                }
+            }
+        }
+    }
+    await Promise.all(promises);
+    _charSvgReady = true;
+}
+
+function _replaceClass(svg, cls, color) {
+    const re = new RegExp('\\.' + cls + '\\s*\\{[^}]*fill:\\s*[^;\\}]+', 'g');
+    return svg.replace(re, '.' + cls + ' { fill: ' + color);
+}
+
+function getCharSVGImage(path, colors) {
+    const vals = [];
+    for (const k of ['skin','primary','secondary','hairFill']) vals.push(colors[k] || '');
+    const cacheKey = path + '|' + vals.join(',');
+    if (_charSvgImageCache[cacheKey]) return _charSvgImageCache[cacheKey];
+    const raw = _charSvgTextCache[path];
+    if (!raw) return null;
+    let svg = raw;
+    if (colors.skin)      svg = _replaceClass(svg, 'skin', colors.skin);
+    if (colors.primary)   svg = _replaceClass(svg, 'primary', colors.primary);
+    if (colors.secondary) svg = _replaceClass(svg, 'secondary', colors.secondary);
+    if (colors.hairFill)  svg = _replaceClass(svg, 'hair-fill', colors.hairFill);
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => URL.revokeObjectURL(url);
+    img.src = url;
+    _charSvgImageCache[cacheKey] = img;
+    return img;
+}
+
+function _imgReady(img) {
+    return img && img.complete && img.naturalWidth > 0;
+}
+
+function drawSVGChar(ctx, x, y, size, cls, facing, frame, customAppear) {
+    if (!_charSvgReady) {
+        drawPixelChar(ctx, x, y, size, cls, facing, frame, customAppear);
+        return;
+    }
+    const baseColors = CLASS_COLORS[cls] || CLASS_COLORS.warrior;
+    let appear = customAppear || (typeof game !== 'undefined' && game && game.appearance) || null;
+    appear = normalizeAppearance(appear);
+    const skinColor  = (appear && appear.skinColor) || SKIN_COLOR;
+    const hairColor  = (appear && appear.hairColor) || baseColors.hair;
+    const outfitColor  = (appear && (appear.outfitColor || appear.shirtColor)) || baseColors.shirt;
+    const outfitColor2 = (appear && (appear.outfitColor2 || appear.pantsColor)) || baseColors.pants;
+    const gender    = (appear && appear.gender) || 'male';
+    const bodyType  = (appear && appear.bodyType) || 'normal';
+    const hairStyle = (appear && appear.hairStyle) || (cls === 'shaman' ? 'longstraight' : cls === 'warrior' ? 'wild' : 'short');
+    const clothDef  = appear ? findClothingDef(appear.clothingStyle, gender) : null;
+    const topType    = clothDef ? clothDef.top : 'tunic';
+    const bottomType = clothDef ? clothDef.bottom : 'long';
+    const decoType   = clothDef ? clothDef.deco : null;
+    const material   = (appear && appear.material) || 'cloth';
+    const details    = (appear && appear.details) || [];
+
+    const bodyPath   = `assets/char/body/${gender}-${bodyType}.svg`;
+    const hairPath   = `assets/char/hair/${hairStyle}.svg`;
+    const bottomPath = `assets/char/bottom/${bottomType}.svg`;
+    const topPath    = `assets/char/top/${topType}.svg`;
+    const weaponPath = `assets/char/weapon/${cls}.svg`;
+
+    // 根据行走相位选择动作帧
+    const isWalking = frame > 0;
+    const walkPhase = isWalking ? Math.sin(frame * 0.15) : 0;
+    let walkSuffix = '';
+    if (isWalking) {
+        walkSuffix = walkPhase > 0.25 ? '-walk1' : walkPhase < -0.25 ? '-walk2' : '';
+    }
+    const bodyFramePath   = walkSuffix ? `assets/char/body/${gender}-${bodyType}${walkSuffix}.svg` : bodyPath;
+    const bottomFramePath = walkSuffix ? `assets/char/bottom/${bottomType}${walkSuffix}.svg` : bottomPath;
+
+    const bodyImg   = getCharSVGImage(bodyFramePath,   { skin: skinColor });
+    const hairImg   = getCharSVGImage(hairPath,   { hairFill: hairColor });
+    const bottomImg = getCharSVGImage(bottomFramePath, { primary: outfitColor2 });
+    const topImg    = getCharSVGImage(topPath,    { primary: outfitColor });
+    const weaponImg = getCharSVGImage(weaponPath, {});
+
+    if (!_imgReady(bodyImg) || !_imgReady(hairImg) || !_imgReady(bottomImg) || !_imgReady(topImg)) {
+        drawPixelChar(ctx, x, y, size, cls, facing, frame, customAppear);
+        return;
+    }
+
+    const s = size / 32;
+    const walkBob = isWalking ? Math.sin(frame * 0.15) * 2 * s : 0;
+    const armSwing = isWalking ? Math.sin(frame * 0.15) * 15 : 0; // degrees
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    // 阴影
+    ctx.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx.beginPath();
+    ctx.ellipse(16 * s, 31 * s, 8 * s, 3 * s, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 朝向翻转
+    if (facing === 'left') {
+        ctx.translate(size, 0);
+        ctx.scale(-1, 1);
+    }
+
+    // === 下装：使用动作帧 SVG ===
+    ctx.drawImage(bottomImg, 0, walkBob, size, size);
+
+    // === 身体：使用动作帧 SVG ===
+    ctx.drawImage(bodyImg, 0, walkBob, size, size);
+
+    // === 上装 ===
+    ctx.drawImage(topImg, 0, walkBob, size, size);
+
+    // === 装饰层 (deco)：绘制在上装上方 ===
+    if (decoType) {
+        const decoImg = getCharSVGImage(`assets/char/deco/${decoType}.svg`, {});
+        if (_imgReady(decoImg)) ctx.drawImage(decoImg, 0, walkBob, size, size);
+    }
+
+    // === 材质纹理 (material)：半透明叠加 ===
+    if (material && material !== 'cloth' && material !== 'matte') {
+        const matImg = getCharSVGImage(`assets/char/material/${material}.svg`, {});
+        if (_imgReady(matImg)) ctx.drawImage(matImg, 0, walkBob, size, size);
+    }
+
+    // === 头发：跟随身体移动 ===
+    ctx.drawImage(hairImg, 0, walkBob, size, size);
+
+    // === 配件 (details)：最上层叠加 ===
+    if (details.length > 0) {
+        for (const d of details) {
+            const detImg = getCharSVGImage(`assets/char/detail/${d}.svg`, {});
+            if (_imgReady(detImg)) ctx.drawImage(detImg, 0, walkBob, size, size);
+        }
+    }
+
+    // === 武器：放在手上，跟随手臂摆动 ===
+    if (_imgReady(weaponImg)) {
+        ctx.save();
+        // 武器定位到右手位置 (shirtX + shirtW 附近)
+        const handX = 23 * s;  // 右手 x 位置
+        const handY = 14 * s + walkBob;  // 肩膀 y 位置
+        ctx.translate(handX, handY);
+        ctx.rotate(armSwing * Math.PI / 180);
+        // 武器绘制尺寸缩小到手持比例
+        const wpnSize = size * 0.55;
+        ctx.drawImage(weaponImg, -wpnSize * 0.2, -wpnSize * 0.3, wpnSize, wpnSize);
+        ctx.restore();
+    }
+
+    ctx.restore();
 }

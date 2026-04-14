@@ -16,9 +16,64 @@ const ENEMY_DRAW = {
     '冰霜狼':   { body: '#B0C4DE', eye: '#00BFFF', accent: '#7A9AB8', type: 'wolf',  scale: 1.0 },
     '猛犸象':   { body: '#A0522D', eye: '#222', accent: '#6B3410', type: 'mammoth', scale: 1.5 },
     '冰龙王':   { body: '#4169E1', eye: '#FFD700', accent: '#1E3A8A', type: 'dragon', scale: 1.5 },
+    '萌萌龟':   { body: '#4CAF50', eye: '#333', accent: '#2E7D32', type: 'dino',    scale: 0.7 },
+    '精灵鹿':   { body: '#A1887F', eye: '#33691E', accent: '#6D4C41', type: 'wolf',  scale: 0.8 },
+    '彩虹鸟':   { body: '#FF7043', eye: '#000', accent: '#E53935', type: 'raptor',  scale: 0.7 },
+    '翼龙宝宝': { body: '#4DD0E1', eye: '#333', accent: '#00ACC1', type: 'dragon',  scale: 0.8 },
+    '泡泡鱼':   { body: '#4DD0E1', eye: '#006064', accent: '#00ACC1', type: 'snake', scale: 0.8 },
+    '水晶兔':   { body: '#CE93D8', eye: '#4A148C', accent: '#BA68C8', type: 'wolf',  scale: 0.9 },
 };
 
+// ===== SVG 素材映射与预加载 =====
+const ENEMY_SVG = {
+    '小恐龙':   'assets/pets/宠物01-小绿龙.svg',
+    '野猪':     'assets/pets/宠物02-布朗猪猪.svg',
+    '毒蛇':     'assets/pets/宠物03-翠翠蛇.svg',
+    '迅猛龙':   'assets/pets/宠物04-迅迅龙.svg',
+    '森林猛犸': 'assets/pets/宠物05-小毛象.svg',
+    '猛犸象':   'assets/pets/宠物05-小毛象.svg',
+    '沙漠蝎':   'assets/pets/宠物06-沙沙蝎.svg',
+    '骆驼龙':   'assets/pets/宠物07-驼驼龙.svg',
+    '火蜥蜴':   'assets/pets/宠物08-火焰蜥.svg',
+    '熔岩龙':   'assets/pets/宠物09-熔岩宝宝.svg',
+    '火山暴龙': 'assets/pets/宠物10-暴暴龙.svg',
+    '冰霜狼':   'assets/pets/宠物11-冰冰狼.svg',
+    '冰龙王':   'assets/pets/宠物12-冰龙崽.svg',
+    '沙暴巨虫': 'assets/pets/宠物13-沙虫虫.svg',
+    '巨蜥':     'assets/pets/宠物14-胖胖蜥.svg',
+    '翼龙宝宝': 'assets/pets/宠物15-翼龙宝宝.svg',
+    '萌萌龟':   'assets/pets/宠物16-萌萌龟.svg',
+    '彩虹鸟':   'assets/pets/宠物17-彩虹鸟.svg',
+    '水晶兔':   'assets/pets/宠物18-水晶兔.svg',
+    '泡泡鱼':   'assets/pets/宠物19-泡泡鱼.svg',
+    '精灵鹿':   'assets/pets/宠物20-精灵鹿.svg',
+};
+
+const _svgImageCache = {};
+function preloadEnemySVGs() {
+    for (const [name, path] of Object.entries(ENEMY_SVG)) {
+        if (_svgImageCache[path]) continue;
+        const img = new Image();
+        img.src = path;
+        _svgImageCache[path] = img;
+    }
+}
+
 function drawPixelEnemy(ctx, name, size, frame) {
+    // 优先使用 SVG 可爱素材
+    const svgPath = ENEMY_SVG[name];
+    if (svgPath) {
+        const img = _svgImageCache[svgPath];
+        if (img && img.complete && img.naturalWidth > 0) {
+            const bob = Math.sin((frame || 0) * 0.04) * 3;
+            ctx.save();
+            ctx.translate(0, bob);
+            ctx.drawImage(img, 0, 0, size, size);
+            ctx.restore();
+            return;
+        }
+    }
+    // 回退到像素绘制
     const info = ENEMY_DRAW[name];
     if (!info) return;
     const s = (size / 100) * (info.scale || 1);

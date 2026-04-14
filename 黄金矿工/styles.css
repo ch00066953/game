@@ -235,3 +235,13 @@ kbd {
         font-size: 0.8rem;
     }
 }
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .game-header { margin-bottom: 6px; }
+    .game-header h1 { font-size: 1.3rem; margin-bottom: 4px; }
+    .stats { gap: 8px; }
+    .stat-item { padding: 3px 8px; font-size: 0.75rem; }
+    .game-controls { margin-top: 6px; }
+    .hint { display: none; }
+}

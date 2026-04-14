@@ -4,6 +4,7 @@ const CLASS_DATA = {
     warrior: { name: '战士', icon: '⚔️', baseHp: 120, baseMp: 30, atk: 15, def: 12, spd: 8, skills: ['猛击', '旋风斩'] },
     hunter:  { name: '猎人', icon: '🏹', baseHp: 100, baseMp: 40, atk: 12, def: 8, spd: 14, skills: ['精准射击', '捕兽陷阱'] },
     shaman:  { name: '巫师', icon: '🔮', baseHp: 90,  baseMp: 60, atk: 8,  def: 10, spd: 9, skills: ['火焰术', '治愈之光'] },
+    none:    { name: '普通人', icon: '👤', baseHp: 100, baseMp: 30, atk: 10, def: 8, spd: 10, skills: [] },
 };
 
 const SKILL_DATA = {
@@ -24,11 +25,11 @@ const SKILL_DATA = {
 };
 
 const AREAS = [
-    { id: 'village',  name: '加加村',     icon: '🏘️', desc: '宁静的原始部落，适合新手', levelReq: 1,  bgClass: '', enemies: ['小恐龙', '野猪', '毒蛇'] },
-    { id: 'forest',   name: '密林深处',   icon: '🌲', desc: '茂密的原始森林，危机四伏', levelReq: 3,  bgClass: 'area-forest', enemies: ['迅猛龙', '巨蜥', '森林猛犸'] },
-    { id: 'desert',   name: '灼热荒漠',   icon: '🏜️', desc: '广袤的沙漠地带，酷热难耐', levelReq: 6,  bgClass: 'area-desert', enemies: ['沙漠蝎', '骆驼龙', '沙暴巨虫'] },
+    { id: 'village',  name: '加加村',     icon: '🏘️', desc: '宁静的原始部落，适合新手', levelReq: 1,  bgClass: '', enemies: ['小恐龙', '野猪', '毒蛇', '萌萌龟', '精灵鹿'] },
+    { id: 'forest',   name: '密林深处',   icon: '🌲', desc: '茂密的原始森林，危机四伏', levelReq: 3,  bgClass: 'area-forest', enemies: ['迅猛龙', '巨蜥', '森林猛犸', '彩虹鸟', '翼龙宝宝'] },
+    { id: 'desert',   name: '灼热荒漠',   icon: '🏜️', desc: '广袤的沙漠地带，酷热难耐', levelReq: 6,  bgClass: 'area-desert', enemies: ['沙漠蝎', '骆驼龙', '沙暴巨虫', '泡泡鱼'] },
     { id: 'volcano',  name: '烈焰火山',   icon: '🌋', desc: '危险的火山区域，充满岩浆', levelReq: 10, bgClass: 'area-volcano', enemies: ['火蜥蜴', '熔岩龙', '火山暴龙'] },
-    { id: 'ice',      name: '极寒冰原',   icon: '🏔️', desc: '冰封的远古大陆，终极试炼', levelReq: 15, bgClass: 'area-ice', enemies: ['冰霜狼', '猛犸象', '冰龙王'] },
+    { id: 'ice',      name: '极寒冰原',   icon: '🏔️', desc: '冰封的远古大陆，终极试炼', levelReq: 15, bgClass: 'area-ice', enemies: ['冰霜狼', '猛犸象', '冰龙王', '水晶兔'] },
 ];
 
 const ENEMY_DATA = {
@@ -47,6 +48,12 @@ const ENEMY_DATA = {
     '冰霜狼':   { icon: '🐺', hp: 260, atk: 26, def: 16, spd: 14, exp: 120, gold: 80, catchRate: 15, level: 16, skills: ['撕咬', '冰冻吐息'] },
     '猛犸象':   { icon: '🦣', hp: 450, atk: 30, def: 24, spd: 5,  exp: 170, gold: 120, catchRate: 10, level: 18, skills: ['冲撞', '冰冻吐息'] },
     '冰龙王':   { icon: '🐲', hp: 600, atk: 36, def: 28, spd: 10, exp: 250, gold: 180, catchRate: 5,  level: 20, skills: ['冰冻吐息', '雷击', '尾击'] },
+    '萌萌龟':   { icon: '🐢', hp: 70,  atk: 6,  def: 12, spd: 3,  exp: 22,  gold: 12,  catchRate: 42, level: 2,  skills: ['冲撞'] },
+    '精灵鹿':   { icon: '🦌', hp: 55,  atk: 9,  def: 5,  spd: 12, exp: 20,  gold: 14,  catchRate: 35, level: 1,  skills: ['冲撞'] },
+    '彩虹鸟':   { icon: '🐦', hp: 90,  atk: 14, def: 6,  spd: 15, exp: 45,  gold: 32,  catchRate: 30, level: 4,  skills: ['撕咬'] },
+    '翼龙宝宝': { icon: '🦅', hp: 130, atk: 15, def: 9,  spd: 13, exp: 52,  gold: 38,  catchRate: 26, level: 5,  skills: ['撕咬', '尾击'] },
+    '泡泡鱼':   { icon: '🐟', hp: 110, atk: 16, def: 11, spd: 9,  exp: 60,  gold: 42,  catchRate: 28, level: 8,  skills: ['撕咬'] },
+    '水晶兔':   { icon: '🐰', hp: 240, atk: 24, def: 18, spd: 16, exp: 115, gold: 85,  catchRate: 18, level: 17, skills: ['冲撞', '冰冻吐息'] },
 };
 
 const SHOP_ITEMS = [
@@ -74,11 +81,15 @@ const AREA_MAPS = {
         width: 30, height: 22, playerStart: { x: 15, y: 18 },
         pois: [
             { x: 7,  y: 5,  icon: '🏪', name: '部落商店', type: 'shop' },
-            { x: 15, y: 3,  icon: '⛺', name: '族长帐篷', type: 'heal', msg: '族长为你治疗了伤势！' },
+            { x: 15, y: 3,  icon: '👴', name: '族长', type: 'npc_quest', npcId: 'elder' },
+            { x: 14, y: 4,  icon: '⛺', name: '帐篷', type: 'heal', msg: '你在帐篷中休息，恢复了全部体力！' },
             { x: 23, y: 5,  icon: '🔥', name: '篝火存档', type: 'save' },
             { x: 27, y: 10, icon: '➡️', name: '前往密林', type: 'exit', target: 1 },
             { x: 4,  y: 15, icon: '👴', name: '老猎人',   type: 'npc', msg: '老猎人: 在草丛中行走会遇到野兽！高草丛遇敌率更高。' },
             { x: 15, y: 8,  icon: '🗿', name: '石碑',     type: 'npc', msg: '远古石碑: 驯服恐龙，成为最强的原始人！' },
+            { x: 5,  y: 12, icon: '⚔️', name: '战士教官', type: 'npc_quest', npcId: 'warrior_master' },
+            { x: 20, y: 2,  icon: '🏹', name: '猎人导师', type: 'npc_quest', npcId: 'hunter_master' },
+            { x: 25, y: 12, icon: '🔮', name: '巫师长老', type: 'npc_quest', npcId: 'shaman_master' },
         ],
     },
     forest: {
@@ -122,6 +133,147 @@ const AREA_MAPS = {
         ],
     },
 };
+
+// ===== 材料信息 =====
+const MATERIAL_INFO = {
+    bone:         { name: '骨头',     icon: '🦴' },
+    leather:      { name: '皮革',     icon: '🟫' },
+    hard_stone:   { name: '坚硬石块', icon: '🪨' },
+    fire_stone:   { name: '火焰石',   icon: '🔴' },
+    ice_crystal:  { name: '冰晶',     icon: '💠' },
+    poison_gland: { name: '毒腺',     icon: '💚' },
+};
+
+// ===== 敌人掉落表 =====
+const ENEMY_DROPS = {
+    '小恐龙':   [{ id: 'bone',         chance: 0.50 }],
+    '野猪':     [{ id: 'leather',      chance: 0.40 }, { id: 'bone',         chance: 0.30 }],
+    '毒蛇':     [{ id: 'poison_gland', chance: 0.45 }],
+    '迅猛龙':   [{ id: 'bone',         chance: 0.60 }, { id: 'leather',      chance: 0.35 }],
+    '巨蜥':     [{ id: 'leather',      chance: 0.55 }, { id: 'poison_gland', chance: 0.30 }],
+    '森林猛犸': [{ id: 'leather',      chance: 0.65 }, { id: 'bone',         chance: 0.40 }],
+    '沙漠蝎':   [{ id: 'poison_gland', chance: 0.50 }, { id: 'hard_stone',   chance: 0.25 }],
+    '骆驼龙':   [{ id: 'leather',      chance: 0.40 }, { id: 'hard_stone',   chance: 0.35 }],
+    '沙暴巨虫': [{ id: 'bone',         chance: 0.55 }, { id: 'poison_gland', chance: 0.40 }],
+    '火蜥蜴':   [{ id: 'fire_stone',   chance: 0.50 }, { id: 'bone',         chance: 0.30 }],
+    '熔岩龙':   [{ id: 'fire_stone',   chance: 0.65 }, { id: 'bone',         chance: 0.40 }],
+    '火山暴龙': [{ id: 'fire_stone',   chance: 0.75 }, { id: 'leather',      chance: 0.30 }],
+    '冰霜狼':   [{ id: 'ice_crystal',  chance: 0.50 }, { id: 'leather',      chance: 0.30 }],
+    '猛犸象':   [{ id: 'ice_crystal',  chance: 0.45 }, { id: 'bone',         chance: 0.55 }],
+    '冰龙王':   [{ id: 'ice_crystal',  chance: 0.80 }, { id: 'fire_stone',   chance: 0.30 }],
+    '萌萌龟':   [{ id: 'bone',         chance: 0.40 }, { id: 'hard_stone',   chance: 0.30 }],
+    '精灵鹿':   [{ id: 'leather',      chance: 0.45 }],
+    '彩虹鸟':   [{ id: 'bone',         chance: 0.35 }],
+    '翼龙宝宝': [{ id: 'bone',         chance: 0.50 }, { id: 'leather',      chance: 0.30 }],
+    '泡泡鱼':   [{ id: 'hard_stone',   chance: 0.35 }, { id: 'poison_gland', chance: 0.25 }],
+    '水晶兔':   [{ id: 'ice_crystal',  chance: 0.55 }, { id: 'leather',      chance: 0.30 }],
+};
+
+// ===== 商店名称 =====
+const SHOP_NAMES = {
+    village: '🏘️ 加加村商店',
+    forest:  '🌲 流浪商人',
+    desert:  '🏜️ 沙漠商队',
+    volcano: '🌋 矮人铁匠',
+    ice:     '🏔️ 冰原行商',
+};
+
+// ===== 各村落商店商品 =====
+const VILLAGE_SHOPS = {
+    village: [
+        { id: 'potion',     name: '生命药水',   icon: '💉', desc: '恢复50HP',              price: 30,  effect: { type: 'heal',       value: 50  } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'catchStone', name: '捕兽石',     icon: '💎', desc: '战斗时捕获率+15%',      price: 50,  effect: { type: 'catchBonus', value: 15  } },
+        { id: 'bone',       name: '骨头',       icon: '🦴', desc: '合成材料',              price: 10,  effect: { type: 'material'                } },
+        { id: 'leather',    name: '皮革',       icon: '🟫', desc: '合成材料',              price: 15,  effect: { type: 'material'                } },
+    ],
+    forest: [
+        { id: 'potion',     name: '生命药水',   icon: '💉', desc: '恢复50HP',              price: 30,  effect: { type: 'heal',       value: 50  } },
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'bone',       name: '骨头',       icon: '🦴', desc: '合成材料',              price: 10,  effect: { type: 'material'                } },
+        { id: 'leather',    name: '皮革',       icon: '🟫', desc: '合成材料',              price: 15,  effect: { type: 'material'                } },
+        { id: 'hard_stone', name: '坚硬石块',   icon: '🪨', desc: '合成材料',              price: 20,  effect: { type: 'material'                } },
+    ],
+    desert: [
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'mpPotion',   name: '灵力药水',   icon: '💧', desc: '恢复30MP',              price: 40,  effect: { type: 'healMp',     value: 30  } },
+        { id: 'catchStone', name: '捕兽石',     icon: '💎', desc: '战斗时捕获率+15%',      price: 50,  effect: { type: 'catchBonus', value: 15  } },
+        { id: 'atkCharm',   name: '力量护符',   icon: '💪', desc: '战斗中攻击+5(单次)',    price: 100, effect: { type: 'atkBuff',    value: 5   } },
+        { id: 'hard_stone', name: '坚硬石块',   icon: '🪨', desc: '合成材料',              price: 20,  effect: { type: 'material'                } },
+        { id: 'fire_stone', name: '火焰石',     icon: '🔴', desc: '合成材料',              price: 35,  effect: { type: 'material'                } },
+    ],
+    volcano: [
+        { id: 'hiPotion',   name: '高级药水',   icon: '💊', desc: '恢复150HP',             price: 80,  effect: { type: 'heal',       value: 150 } },
+        { id: 'fullPotion', name: '满血药水',   icon: '🧬', desc: '完全恢复HP与MP',        price: 200, effect: { type: 'fullHeal'                } },
+        { id: 'petPotion',  name: '宠物药水',   icon: '🍖', desc: '恢复出战宠物50HP',      price: 40,  effect: { type: 'petHeal',    value: 50  } },
+        { id: 'fire_stone', name: '火焰石',     icon: '🔴', desc: '合成材料',              price: 35,  effect: { type: 'material'                } },
+        { id: 'poison_gland', name: '毒腺',     icon: '💚', desc: '合成材料',              price: 30,  effect: { type: 'material'                } },
+    ],
+    ice: [
+        { id: 'fullPotion', name: '满血药水',   icon: '🧬', desc: '完全恢复HP与MP',        price: 200, effect: { type: 'fullHeal'                } },
+        { id: 'superMp',    name: '超级灵力',   icon: '💠', desc: '恢复80MP',              price: 120, effect: { type: 'healMp',     value: 80  } },
+        { id: 'petPotion',  name: '宠物药水',   icon: '🍖', desc: '恢复出战宠物50HP',      price: 40,  effect: { type: 'petHeal',    value: 50  } },
+        { id: 'ice_crystal', name: '冰晶',      icon: '💠', desc: '合成材料',              price: 50,  effect: { type: 'material'                } },
+        { id: 'atkCharm',   name: '力量护符',   icon: '💪', desc: '战斗中攻击+5(单次)',    price: 100, effect: { type: 'atkBuff',    value: 5   } },
+    ],
+};
+
+// ===== 合成配方 =====
+const CRAFT_RECIPES = [
+    // 武器
+    { id: 'stone_axe',    name: '石斧',     icon: '🪓', category: '武器',
+      desc: '原始石制武器，装备后攻击+6',
+      materials: [{ id: 'hard_stone', count: 2 }, { id: 'bone', count: 1 }],
+      result: { id: 'stone_axe',    name: '石斧',     icon: '🪓', count: 1, desc: '装备后攻击+6',   effect: { type: 'equipAtk', value: 6  } } },
+    { id: 'bone_spear',   name: '骨矛',     icon: '🗡️', category: '武器',
+      desc: '以骨头制成的长矛，装备后攻击+10',
+      materials: [{ id: 'bone', count: 3 }, { id: 'leather', count: 1 }],
+      result: { id: 'bone_spear',   name: '骨矛',     icon: '🗡️', count: 1, desc: '装备后攻击+10',  effect: { type: 'equipAtk', value: 10 } } },
+    { id: 'flame_knife',  name: '火焰刀',   icon: '🔥', category: '武器',
+      desc: '蕴含火焰之力，装备后攻击+14',
+      materials: [{ id: 'fire_stone', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'flame_knife',  name: '火焰刀',   icon: '🔥', count: 1, desc: '装备后攻击+14',  effect: { type: 'equipAtk', value: 14 } } },
+    { id: 'ice_bow',      name: '冰霜弓',   icon: '🏹', category: '武器',
+      desc: '凝结冰晶之力，装备后攻击+12',
+      materials: [{ id: 'ice_crystal', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'ice_bow',      name: '冰霜弓',   icon: '🏹', count: 1, desc: '装备后攻击+12',  effect: { type: 'equipAtk', value: 12 } } },
+    { id: 'poison_dagger', name: '毒匕首', icon: '💀', category: '武器',
+      desc: '涂有致命毒素，装备后攻击+9',
+      materials: [{ id: 'poison_gland', count: 2 }, { id: 'bone', count: 2 }],
+      result: { id: 'poison_dagger', name: '毒匕首',  icon: '💀', count: 1, desc: '装备后攻击+9',   effect: { type: 'equipAtk', value: 9  } } },
+    // 防具
+    { id: 'leather_armor', name: '皮甲',   icon: '🛡️', category: '防具',
+      desc: '坚韧的皮革甲，装备后防御+7',
+      materials: [{ id: 'leather', count: 3 }],
+      result: { id: 'leather_armor', name: '皮甲',    icon: '🛡️', count: 1, desc: '装备后防御+7',   effect: { type: 'equipDef', value: 7  } } },
+    { id: 'bone_helmet',  name: '骨盔',    icon: '⛑️', category: '防具',
+      desc: '骨头制成的头盔，装备后防御+4',
+      materials: [{ id: 'bone', count: 2 }, { id: 'leather', count: 1 }],
+      result: { id: 'bone_helmet',  name: '骨盔',     icon: '⛑️', count: 1, desc: '装备后防御+4',   effect: { type: 'equipDef', value: 4  } } },
+    // 饰品
+    { id: 'fire_amulet',  name: '火焰护符', icon: '🔮', category: '饰品',
+      desc: '蕴含火焰生命力，最大HP永久+40',
+      materials: [{ id: 'fire_stone', count: 1 }, { id: 'leather', count: 1 }],
+      result: { id: 'fire_amulet',  name: '火焰护符', icon: '🔮', count: 1, desc: '最大HP永久+40',  effect: { type: 'equipHp',  value: 40 } } },
+    { id: 'ice_totem',    name: '冰霜图腾', icon: '❄️', category: '饰品',
+      desc: '凝聚寒气，最大HP永久+60',
+      materials: [{ id: 'ice_crystal', count: 2 }, { id: 'leather', count: 1 }],
+      result: { id: 'ice_totem',    name: '冰霜图腾', icon: '❄️', count: 1, desc: '最大HP永久+60',  effect: { type: 'equipHp',  value: 60 } } },
+    // 道具
+    { id: 'super_catch',  name: '超级捕兽石', icon: '🟢', category: '道具',
+      desc: '战斗时捕获率+30%',
+      materials: [{ id: 'hard_stone', count: 1 }, { id: 'bone', count: 2 }],
+      result: { id: 'super_catch',  name: '超级捕兽石', icon: '🟢', count: 1, desc: '捕获率+30%',   effect: { type: 'catchBonus', value: 30 } } },
+    { id: 'mega_potion',  name: '超级药水',   icon: '🧪', category: '道具',
+      desc: '恢复300HP的强效药水',
+      materials: [{ id: 'bone', count: 1 }, { id: 'leather', count: 2 }],
+      result: { id: 'mega_potion',  name: '超级药水',   icon: '🧪', count: 1, desc: '恢复300HP',     effect: { type: 'heal',       value: 300 } } },
+    { id: 'power_stone',  name: '力量之石',   icon: '💥', category: '道具',
+      desc: '战斗中攻击力大幅提升+10(单次)',
+      materials: [{ id: 'hard_stone', count: 2 }, { id: 'fire_stone', count: 1 }],
+      result: { id: 'power_stone',  name: '力量之石',   icon: '💥', count: 1, desc: '战斗攻击+10',   effect: { type: 'atkBuff',    value: 10 } } },
+];
 
 // ===== 地图生成 =====
 function generateAreaTiles(areaId) {
@@ -201,3 +353,142 @@ function generateAreaTiles(areaId) {
     });
     return tiles;
 }
+
+// ===== NPC 数据 =====
+const NPC_DATA = {
+    elder: { name: '族长', icon: '👴', portrait: 'assets/npc/elder.svg' },
+    warrior_master: { name: '战士教官', icon: '⚔️', portrait: 'assets/npc/warrior_master.svg' },
+    hunter_master: { name: '猎人导师', icon: '🏹', portrait: 'assets/npc/hunter_master.svg' },
+    shaman_master: { name: '巫师长老', icon: '🔮', portrait: 'assets/npc/shaman_master.svg' },
+};
+
+// ===== 任务数据 =====
+const QUEST_DATA = {
+    warrior_job: {
+        id: 'warrior_job',
+        name: '勇者试炼',
+        description: '击败5只小恐龙，证明你的勇气！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'kill', target: '小恐龙', count: 5 }
+        ],
+        rewards: { job: 'warrior', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'warrior_quest_accept',
+        storyOnComplete: 'warrior_quest_complete',
+        turnInNpc: 'warrior_master',
+    },
+    hunter_job: {
+        id: 'hunter_job',
+        name: '猎人之道',
+        description: '捕获1只精灵鹿，展示你的敏捷！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'catch', target: '精灵鹿', count: 1 }
+        ],
+        rewards: { job: 'hunter', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'hunter_quest_accept',
+        storyOnComplete: 'hunter_quest_complete',
+        turnInNpc: 'hunter_master',
+    },
+    shaman_job: {
+        id: 'shaman_job',
+        name: '启灵仪式',
+        description: '收集3个骨头和2个火石，完成神秘仪式！',
+        type: 'job',
+        prerequisites: [],
+        objectives: [
+            { type: 'collect', target: 'bone', count: 3 },
+            { type: 'collect', target: 'fire_stone', count: 2 }
+        ],
+        rewards: { job: 'shaman', exp: 50, gold: 200, items: [] },
+        storyOnAccept: 'shaman_quest_accept',
+        storyOnComplete: 'shaman_quest_complete',
+        turnInNpc: 'shaman_master',
+    },
+};
+
+// ===== 剧情数据 =====
+const STORY_DATA = {
+    elder_intro: {
+        id: 'elder_intro',
+        nodes: [
+            { type: 'dialog', speaker: 'elder', text: '年轻人，欢迎来到加加村！' },
+            { type: 'dialog', speaker: 'elder', text: '这个世界充满了危险的远古巨兽……但也有无穷的机遇。' },
+            { type: 'dialog', speaker: 'elder', text: '在这片土地上，有三种古老的战斗之道：' },
+            { type: 'dialog', speaker: 'elder', text: '⚔️ 战士之道——以力量征服一切，冲锋陷阵！' },
+            { type: 'dialog', speaker: 'elder', text: '🏹 猎人之道——以敏捷追踪猎物，驯服万兽！' },
+            { type: 'dialog', speaker: 'elder', text: '🔮 巫师之道——以智慧驾驭神秘力量，治愈和毁灭！' },
+            { type: 'dialog', speaker: 'elder', text: '你想走哪条路呢？去找村里的导师们谈谈吧。' },
+            { type: 'narration', text: '族长指向了村庄的不同方向……' },
+            { type: 'dialog', speaker: 'elder', text: '⚔️ 战士教官在村子左边的训练场。' },
+            { type: 'dialog', speaker: 'elder', text: '🏹 猎人导师在村子上方的森林边。' },
+            { type: 'dialog', speaker: 'elder', text: '🔮 巫师长老在村子右边的神秘之地。' },
+            { type: 'dialog', speaker: 'elder', text: '选好之后，去找他们吧！' },
+        ],
+    },
+    warrior_quest_accept: {
+        id: 'warrior_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'warrior_master', text: '哦？你想成为战士？' },
+            { type: 'dialog', speaker: 'warrior_master', text: '战士靠的是力量和勇气！不是谁都能承受战斗的痛苦！' },
+            { type: 'dialog', speaker: 'warrior_master', text: '想证明自己？去村子附近击败5只小恐龙给我看看！' },
+            { type: 'narration', text: '战士教官递给你一把训练用的石棍。' },
+            { type: 'action', fn: 'acceptQuest', args: ['warrior_job'] },
+        ],
+    },
+    hunter_quest_accept: {
+        id: 'hunter_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'hunter_master', text: '嗯……你想学猎人之道？' },
+            { type: 'dialog', speaker: 'hunter_master', text: '猎人讲究的是心静如水，一击必中。' },
+            { type: 'dialog', speaker: 'hunter_master', text: '去捕获一只精灵鹿回来，这是你的入门考验。' },
+            { type: 'narration', text: '猎人导师将一张古老的捕兽网交给了你。' },
+            { type: 'action', fn: 'acceptQuest', args: ['hunter_job'] },
+        ],
+    },
+    shaman_quest_accept: {
+        id: 'shaman_quest_accept',
+        nodes: [
+            { type: 'dialog', speaker: 'shaman_master', text: '嗬嗬嗬……你能感受到灵力的召唤吗？' },
+            { type: 'dialog', speaker: 'shaman_master', text: '巫术需要天赋，更需要奉献。' },
+            { type: 'dialog', speaker: 'shaman_master', text: '为我收集3个骨头和2个火石，用于启灵仪式。' },
+            { type: 'narration', text: '巫师长老的眼中闪烁着神秘的光芒。' },
+            { type: 'action', fn: 'acceptQuest', args: ['shaman_job'] },
+        ],
+    },
+    warrior_quest_complete: {
+        id: 'warrior_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'warrior_master', text: '哈哈！干得好！你已经证明了自己的勇气！' },
+            { type: 'dialog', speaker: 'warrior_master', text: '从今天起，你就是一名真正的战士了！' },
+            { type: 'narration', text: '战士教官将一把石剑郑重地交到你手中。' },
+            { type: 'action', fn: 'giveJob', args: ['warrior'] },
+            { type: 'dialog', speaker: 'warrior_master', text: '去吧，用你的剑守护部落！我教你两招看家本领——' },
+            { type: 'narration', text: '你学会了「猛击」和「旋风斩」！' },
+        ],
+    },
+    hunter_quest_complete: {
+        id: 'hunter_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'hunter_master', text: '不错……你有猎人的天赋。' },
+            { type: 'dialog', speaker: 'hunter_master', text: '从今天起，你便是我的门徒，一名真正的猎人。' },
+            { type: 'narration', text: '猎人导师将一把精心制作的石弓递给了你。' },
+            { type: 'action', fn: 'giveJob', args: ['hunter'] },
+            { type: 'dialog', speaker: 'hunter_master', text: '记住，猎人不只是杀戮，更要懂得驯服自然。' },
+            { type: 'narration', text: '你学会了「精准射击」和「捕兽陷阱」！' },
+        ],
+    },
+    shaman_quest_complete: {
+        id: 'shaman_quest_complete',
+        nodes: [
+            { type: 'dialog', speaker: 'shaman_master', text: '嗬嗬嗬……仪式完成了。我感受到了你体内的灵力。' },
+            { type: 'dialog', speaker: 'shaman_master', text: '从今天起，你将掌握火焰和治愈的力量！' },
+            { type: 'narration', text: '巫师长老用骨头和火石完成了启灵仪式，一道光芒笼罩了你。' },
+            { type: 'action', fn: 'giveJob', args: ['shaman'] },
+            { type: 'dialog', speaker: 'shaman_master', text: '去吧，用你的智慧守护这片土地。' },
+            { type: 'narration', text: '你学会了「火焰术」和「治愈之光」！' },
+        ],
+    },
+};

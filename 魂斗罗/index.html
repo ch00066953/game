@@ -53,6 +53,21 @@
             <button id="pauseBtn" class="btn" disabled>暂停</button>
             <p>A/D 或 ←/→ 移动，W/↑/空格 跳跃，J 射击，P 暂停</p>
         </footer>
+
+        <!-- 移动端虚拟控制器 -->
+        <div class="mobile-controls" id="mobileControls">
+            <div class="ctrl-dpad">
+                <button class="ctrl-btn ctrl-up" data-key="ArrowUp">▲</button>
+                <div class="ctrl-mid-row">
+                    <button class="ctrl-btn ctrl-left" data-key="ArrowLeft">◀</button>
+                    <button class="ctrl-btn ctrl-right" data-key="ArrowRight">▶</button>
+                </div>
+            </div>
+            <div class="ctrl-actions">
+                <button class="ctrl-btn ctrl-jump" data-key="Space">跳</button>
+                <button class="ctrl-btn ctrl-shoot" data-key="KeyJ">射</button>
+            </div>
+        </div>
     </div>
 
     <script src="game.js"></script>

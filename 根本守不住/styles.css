@@ -408,3 +408,23 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .app { padding: 8px; }
+    .topbar { padding: 8px 10px; border-radius: 14px; }
+    .topbar h1 { font-size: 18px; }
+    .subtitle { display: none; }
+    .status-row { gap: 6px; font-size: 0.8rem; }
+    .base-stat { padding: 4px 8px; border-radius: 8px; }
+    .progress-wrap { margin-top: 4px; }
+    .hud { padding: 8px; border-radius: 14px; }
+    .mode-selector { margin-bottom: 6px; }
+    .mode-buttons { gap: 4px; }
+    .mode-btn { padding: 4px 8px; font-size: 0.75rem; border-radius: 6px; }
+    .energy-box { margin-bottom: 6px; }
+    .card-row, .hero-row { gap: 4px; }
+    .action-row { gap: 6px; }
+    .action-row .btn { padding: 6px 12px; font-size: 0.8rem; }
+    .hint { font-size: 0.75rem; }
+}

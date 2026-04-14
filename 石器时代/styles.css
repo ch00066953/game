@@ -490,7 +490,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
 @media (max-width: 600px) {
     .game-title { font-size: 32px; }
     .title-content { padding: 24px 20px; }
-    .resource-bar { flex-wrap: wrap; }
     .class-options { flex-direction: column; }
     .create-body { flex-direction: column; align-items: center; }
     .create-preview { width: 100%; }
@@ -499,6 +498,137 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
     .enemy-sprite { font-size: 70px; }
     .ally-sprite { font-size: 50px; }
     .pet-sprite { font-size: 40px; }
+
+    /* ===== 主游戏界面：紧凑顶栏 ===== */
+    .top-bar {
+        padding: 4px 8px;
+        gap: 6px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .player-info {
+        gap: 4px;
+        flex-shrink: 0;
+    }
+    .player-info #pName {
+        font-size: 13px;
+        max-width: 48px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .level-badge {
+        font-size: 11px;
+        padding: 1px 6px;
+    }
+    .resource-bar {
+        flex: 1;
+        gap: 4px;
+        min-width: 0;
+        flex-wrap: nowrap;
+    }
+    .res-item {
+        flex: 1;
+        min-width: 0;
+        gap: 2px;
+        font-size: 11px;
+    }
+    .res-icon {
+        font-size: 11px;
+    }
+    .bar-wrap {
+        width: auto;
+        flex: 1;
+        min-width: 0;
+        height: 8px;
+    }
+    .res-text {
+        display: none;
+    }
+    .gold-display {
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    /* 底部操作栏紧凑 */
+    .bottom-bar {
+        padding: 4px 6px;
+        gap: 3px;
+    }
+    .action-btn {
+        padding: 8px 8px;
+        font-size: 12px;
+        flex: 1;
+        text-align: center;
+        min-width: 0;
+    }
+
+    /* 地图提示和区域名紧凑 */
+    .area-name {
+        top: 6px;
+        font-size: 12px;
+        padding: 2px 12px;
+    }
+    .map-hint {
+        bottom: 4px;
+        font-size: 10px;
+        padding: 2px 10px;
+    }
+
+    /* 战斗界面紧凑 */
+    .battle-bg {
+        padding: 10px 12px;
+    }
+    .enemy-hp-bar {
+        width: 140px;
+        height: 10px;
+    }
+    .enemy-name {
+        font-size: 15px;
+    }
+    .enemy-sprite {
+        width: 90px;
+        height: 90px;
+    }
+    .ally-info {
+        padding: 4px 8px;
+        min-width: 120px;
+    }
+    .ally-name {
+        font-size: 12px;
+    }
+    .ally-bar-wrap {
+        height: 8px;
+    }
+    .ally-bar-text {
+        font-size: 10px;
+        min-width: 40px;
+    }
+    .battle-log {
+        padding: 6px 10px;
+        max-height: 50px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    .battle-commands {
+        padding: 6px 10px;
+        gap: 4px;
+    }
+    .cmd-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        flex: 1;
+        text-align: center;
+    }
+    .skill-panel, .item-panel, .pet-switch-panel {
+        padding: 8px 10px;
+    }
+    .skill-btn, .use-item-btn, .switch-pet-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
 }
 
 /* ===== 迭代1: 战斗转场闪白 ===== */
@@ -573,3 +703,270 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI
     height: 100%; background: linear-gradient(90deg, #f39c12, #fdcb6e);
     border-radius: 3px; transition: width 0.4s;
 }
+
+/* ===== 合成系统 ===== */
+.craft-modal { max-width: 560px; }
+.craft-mat-summary {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    background: #f0f4f8; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+}
+.mat-summary-item {
+    display: flex; align-items: center; gap: 3px; font-size: 16px;
+    padding: 4px 10px; border-radius: 20px; background: #e8ecf0;
+    border: 1px solid #d0d8e0;
+}
+.mat-summary-item.mat-have { background: #e8f5e9; border-color: #81c784; color: #2e7d32; }
+.mat-summary-item.mat-none { opacity: 0.5; }
+.mat-sum-count { font-size: 13px; font-weight: bold; }
+
+.craft-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.craft-tab-btn {
+    padding: 5px 14px; border: 2px solid #ddd; border-radius: 20px;
+    background: #f5f5f5; font-size: 13px; cursor: pointer; font-weight: bold;
+    transition: all 0.15s; color: #666;
+}
+.craft-tab-btn:hover { border-color: #FF6B35; color: #FF6B35; }
+.craft-tab-btn.active { background: #FF6B35; border-color: #FF6B35; color: #fff; }
+
+.craft-list { display: flex; flex-direction: column; gap: 10px; max-height: 50vh; overflow-y: auto; }
+.craft-item {
+    display: flex; align-items: center; gap: 12px; padding: 12px;
+    background: #f8f9fa; border-radius: 10px; border: 2px solid #e8e8e8;
+    transition: all 0.15s;
+}
+.craft-item.craftable { border-color: #a8d8a8; background: #f0faf0; }
+.craft-item-icon { font-size: 32px; flex-shrink: 0; }
+.craft-item-info { flex: 1; min-width: 0; }
+.craft-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.craft-item-name { font-weight: bold; color: #333; font-size: 15px; }
+.craft-item-cat {
+    font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: bold;
+}
+.cat-武器 { background: #ffebee; color: #c62828; }
+.cat-防具 { background: #e3f2fd; color: #1565c0; }
+.cat-饰品 { background: #f3e5f5; color: #6a1b9a; }
+.cat-道具 { background: #fff8e1; color: #e65100; }
+.craft-item-desc { font-size: 12px; color: #888; margin-bottom: 6px; }
+.craft-mats { display: flex; flex-wrap: wrap; gap: 6px; }
+.craft-mat {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 12px; padding: 2px 8px; border-radius: 10px;
+    border: 1px solid #ddd; background: #fff;
+}
+.craft-mat.mat-ok { border-color: #81c784; background: #e8f5e9; color: #2e7d32; }
+.craft-mat.mat-lack { border-color: #ef9a9a; background: #ffebee; color: #c62828; }
+.mat-count { font-weight: bold; margin-left: 2px; }
+.craft-btn {
+    padding: 10px 14px; background: linear-gradient(135deg, #FF6B35, #F7C948);
+    color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    font-size: 13px; font-weight: bold; white-space: nowrap; transition: all 0.15s;
+}
+.craft-btn:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(255,107,53,0.4); }
+.craft-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ===== 背包分类 ===== */
+.bag-cat-header {
+    font-size: 13px; font-weight: bold; color: #888; padding: 4px 8px;
+    border-bottom: 1px solid #eee; margin-top: 4px;
+}
+.bag-item-right { display: flex; align-items: center; gap: 8px; }
+.bag-use-btn {
+    padding: 4px 10px; font-size: 12px; background: #4CAF50; color: #fff;
+    border: none; border-radius: 6px; cursor: pointer; font-weight: bold; white-space: nowrap;
+}
+.bag-use-btn:hover { background: #388E3C; }
+
+/* ===== 世界地图 ===== */
+.map-modal { max-width: 600px; }
+.map-area-list { display: flex; flex-direction: column; gap: 6px; }
+.map-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa;
+    transition: background 0.15s;
+}
+.map-row-current { border-color: #4ECDC4; background: #E0FFF8; font-weight: bold; }
+.map-row-locked { opacity: 0.5; }
+.map-row-icon { font-size: 22px; }
+.map-row-name { font-weight: bold; color: #333; min-width: 80px; }
+.map-row-lv { font-size: 11px; color: #FF6B35; font-weight: bold; min-width: 46px; }
+.map-row-desc { flex: 1; font-size: 12px; color: #888; }
+.map-row-lock { font-size: 16px; }
+.map-goto-btn {
+    padding: 5px 12px; background: #FF6B35; color: #fff; border: none;
+    border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; white-space: nowrap;
+}
+.map-goto-btn:hover { background: #e55a25; }
+
+/* ===== 商店已有标识 ===== */
+.shop-owned { font-size: 11px; color: #4CAF50; background: #e8f5e9; padding: 0 5px; border-radius: 8px; }
+
+/* ===== 移动端地图虚拟控制器 ===== */
+.mobile-map-controls {
+    display: none;
+    position: absolute;
+    bottom: 52px; left: 0; right: 0;
+    padding: 12px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 20;
+    pointer-events: none;
+}
+.mobile-map-controls .ctrl-btn { pointer-events: auto; }
+.mobile-map-controls .ctrl-dpad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mobile-map-controls .ctrl-mid-row { display: flex; gap: 6px; }
+.mobile-map-controls .ctrl-btn {
+    width: 56px; height: 56px; border-radius: 14px; border: none;
+    background: rgba(255,255,255,0.28); color: #fff; font-size: 22px; font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4); -webkit-user-select: none; user-select: none;
+    touch-action: manipulation; cursor: pointer;
+}
+.mobile-map-controls .ctrl-btn:active { background: rgba(255,255,255,0.55); transform: scale(0.93); }
+.mobile-map-controls .ctrl-actions { display: flex; gap: 14px; align-items: flex-end; }
+.mobile-map-controls .ctrl-interact {
+    width: 68px; height: 68px; border-radius: 50%; font-size: 15px;
+    background: rgba(255,215,0,0.55); font-weight: bold;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+    .mobile-map-controls { display: flex; }
+    .map-hint { display: none; }
+}
+
+/* ===== 剧情演出 ===== */
+.story-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.story-dialog-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(0,0,0,0.85);
+    border-top: 2px solid rgba(255,200,100,0.3);
+    min-height: 100px;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.story-portrait {
+    width: 96px;
+    height: 96px;
+    min-width: 96px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid rgba(255,200,100,0.4);
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.05);
+}
+
+.story-dialog-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.story-dialog-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f0c040;
+}
+
+.story-dialog-text {
+    font-size: 16px;
+    color: #e8e0d0;
+    line-height: 1.6;
+    min-height: 48px;
+}
+
+.story-dialog-text.narration {
+    font-style: italic;
+    color: #aaa;
+    text-align: center;
+}
+
+.story-choice-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(0,0,0,0.7);
+}
+
+.story-choice-btn {
+    padding: 10px 16px;
+    background: rgba(255,200,100,0.15);
+    border: 1px solid rgba(255,200,100,0.3);
+    border-radius: 6px;
+    color: #f0c040;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+.story-choice-btn:hover {
+    background: rgba(255,200,100,0.3);
+    border-color: rgba(255,200,100,0.6);
+}
+
+.story-fade-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #000;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* ===== 任务 HUD ===== */
+.quest-hud {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,200,100,0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    max-width: 200px;
+    z-index: 10;
+}
+
+.quest-hud-item { margin-bottom: 4px; }
+.quest-hud-name { color: #f0c040; font-size: 12px; font-weight: bold; }
+.quest-hud-obj { color: #ccc; font-size: 11px; padding-left: 8px; }
+.quest-hud-obj.done { color: #4caf50; text-decoration: line-through; }
+
+/* ===== 任务面板 ===== */
+.quest-modal-content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.quest-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.03);
+}
+
+.quest-item.completed { opacity: 0.6; }
+
+.quest-name { font-size: 14px; font-weight: bold; color: #f0c040; margin-bottom: 4px; }
+.quest-desc { font-size: 12px; color: #aaa; margin-bottom: 6px; }
+.quest-objectives { padding-left: 4px; }
+.quest-obj { font-size: 12px; color: #ccc; margin-bottom: 2px; }
+.quest-obj.done { color: #4caf50; }
+.quest-empty { text-align: center; color: #666; }

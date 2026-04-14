@@ -51,6 +51,21 @@
             <button id="muteBtn" class="btn">🔊 音效</button>
             <p class="tips">提示：吃掉四角能量豆可让幽灵进入 frightened 模式。</p>
         </footer>
+
+        <!-- 移动端虚拟控制器 -->
+        <div class="mobile-controls" id="mobileControls">
+            <div class="ctrl-dpad">
+                <button class="ctrl-btn ctrl-up" data-dir="up">▲</button>
+                <div class="ctrl-mid-row">
+                    <button class="ctrl-btn ctrl-left" data-dir="left">◀</button>
+                    <button class="ctrl-btn ctrl-right" data-dir="right">▶</button>
+                </div>
+                <button class="ctrl-btn ctrl-down" data-dir="down">▼</button>
+            </div>
+            <div class="ctrl-actions">
+                <button class="ctrl-btn ctrl-pause" id="mobilePauseBtn">⏸</button>
+            </div>
+        </div>
     </div>
 
     <script src="game.js"></script>

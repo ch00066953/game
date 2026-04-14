@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 彩虹鸟 - 可爱始祖鸟 -->
+  <!-- 尾羽 -->
+  <path d="M48 130 Q28 120 22 130 Q18 138 25 135" fill="#FF7043"/>
+  <path d="M45 135 Q25 128 20 138 Q17 145 24 142" fill="#FDD835"/>
+  <path d="M48 140 Q30 138 25 148 Q23 155 30 150" fill="#66BB6A"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="125" rx="38" ry="30" fill="#FF7043"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="130" rx="26" ry="22" fill="#FFCC80"/>
+  <!-- 翅膀（左） -->
+  <path d="M60 115 Q40 100 45 115 Q35 105 42 120 Q42 125 58 122Z" fill="#FDD835"/>
+  <!-- 翅膀（右） -->
+  <path d="M140 115 Q160 100 155 115 Q165 105 158 120 Q158 125 142 122Z" fill="#FDD835"/>
+  <!-- 头 -->
+  <circle cx="100" cy="75" r="30" fill="#FF7043"/>
+  <ellipse cx="100" cy="78" rx="25" ry="22" fill="#FF8A65"/>
+  <!-- 头羽 -->
+  <path d="M95 48 Q90 28 95 38 Q92 22 100 35 Q105 20 108 38 Q110 28 105 48" fill="#E53935"/>
+  <path d="M96 45 Q93 32 98 38 Q97 25 102 38 Q105 30 103 45" fill="#FF5722"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="70" rx="10" ry="12" fill="white"/>
+  <ellipse cx="112" cy="70" rx="10" ry="12" fill="white"/>
+  <circle cx="90" cy="72" r="6" fill="#333"/>
+  <circle cx="114" cy="72" r="6" fill="#333"/>
+  <circle cx="92" cy="69" r="2.5" fill="white"/>
+  <circle cx="116" cy="69" r="2.5" fill="white"/>
+  <!-- 鸟喙 -->
+  <path d="M96 84 L100 94 L104 84Z" fill="#FF6F00"/>
+  <path d="M97 84 L100 91 L103 84Z" fill="#FFB300"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="80" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <ellipse cx="122" cy="80" rx="6" ry="3.5" fill="#F48FB1" opacity="0.5"/>
+  <!-- 小脚 -->
+  <g stroke="#FF6F00" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <line x1="88" y1="153" x2="88" y2="165"/>
+    <line x1="84" y1="165" x2="92" y2="165"/>
+    <line x1="112" y1="153" x2="112" y2="165"/>
+    <line x1="108" y1="165" x2="116" y2="165"/>
+  </g>
+  <!-- 音符装饰（唱歌的鸟） -->
+  <g fill="#E91E63" opacity="0.5">
+    <circle cx="145" cy="55" r="3"/>
+    <line x1="148" y1="55" x2="148" y2="42" stroke="#E91E63" stroke-width="1.5"/>
+    <path d="M148 42 Q155 40 152 45" fill="#E91E63"/>
+    <circle cx="155" cy="62" r="2.5"/>
+    <line x1="157.5" y1="62" x2="157.5" y2="50" stroke="#E91E63" stroke-width="1.2"/>
+    <path d="M157.5 50 Q163 48 161 53" fill="#E91E63"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#BF360C" font-family="sans-serif">彩虹鸟</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 萌萌龟 - 可爱小水龟 -->
+  <!-- 尾巴 -->
+  <path d="M48 140 Q38 138 35 145 Q33 150 38 148" fill="#66BB6A"/>
+  <!-- 龟壳 -->
+  <ellipse cx="100" cy="118" rx="45" ry="35" fill="#43A047"/>
+  <!-- 壳纹理 -->
+  <path d="M100 85 L75 105 L65 135 L85 150 L100 153 L115 150 L135 135 L125 105Z" fill="#388E3C" opacity="0.5"/>
+  <g stroke="#2E7D32" stroke-width="1.2" opacity="0.4" fill="none">
+    <path d="M100 85 L100 153"/>
+    <path d="M75 105 L125 105"/>
+    <path d="M65 135 L135 135"/>
+    <path d="M85 150 L75 105"/>
+    <path d="M115 150 L125 105"/>
+    <path d="M65 135 L100 85"/>
+    <path d="M135 135 L100 85"/>
+  </g>
+  <!-- 壳高光 -->
+  <ellipse cx="90" cy="105" rx="10" ry="8" fill="#66BB6A" opacity="0.3"/>
+  <!-- 头 -->
+  <circle cx="100" cy="68" r="25" fill="#81C784"/>
+  <ellipse cx="100" cy="72" rx="20" ry="18" fill="#A5D6A7"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="91" cy="64" rx="8" ry="10" fill="white"/>
+  <ellipse cx="109" cy="64" rx="8" ry="10" fill="white"/>
+  <circle cx="93" cy="65" r="5" fill="#333"/>
+  <circle cx="111" cy="65" r="5" fill="#333"/>
+  <circle cx="94" cy="62" r="2" fill="white"/>
+  <circle cx="112" cy="62" r="2" fill="white"/>
+  <!-- 嘴巴 -->
+  <path d="M94 80 Q100 86 106 80" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="82" cy="74" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="118" cy="74" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小手（从壳下伸出） -->
+  <ellipse cx="55" cy="120" rx="10" ry="7" fill="#81C784" transform="rotate(-10,55,120)"/>
+  <ellipse cx="145" cy="120" rx="10" ry="7" fill="#81C784" transform="rotate(10,145,120)"/>
+  <!-- 小脚 -->
+  <ellipse cx="70" cy="150" rx="10" ry="7" fill="#81C784" transform="rotate(-5,70,150)"/>
+  <ellipse cx="130" cy="150" rx="10" ry="7" fill="#81C784" transform="rotate(5,130,150)"/>
+  <!-- 花朵装饰（头上） -->
+  <g transform="translate(118,48)">
+    <circle cx="0" cy="-5" r="4" fill="#FFEB3B"/>
+    <circle cx="5" cy="0" r="4" fill="#FFEB3B"/>
+    <circle cx="0" cy="5" r="4" fill="#FFEB3B"/>
+    <circle cx="-5" cy="0" r="4" fill="#FFEB3B"/>
+    <circle cx="0" cy="0" r="3" fill="#FF9800"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#2E7D32" font-family="sans-serif">萌萌龟</text>
+</svg>

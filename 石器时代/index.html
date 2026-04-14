@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>石器时代</title>
-    <link rel="stylesheet" href="styles.css?v=20260616">
+    <link rel="stylesheet" href="styles.css?v=20260703">
 </head>
 <body>
     <div id="app">
@@ -41,7 +41,7 @@
                             <label>角色名</label>
                             <input type="text" id="charName" maxlength="8" placeholder="请输入名字">
                         </div>
-                        <div class="class-select">
+                        <div class="class-select" style="display:none">
                             <h3>选择职业</h3>
                             <div class="class-options">
                                 <div class="class-card selected" data-class="warrior">
@@ -150,6 +150,7 @@
                 <canvas id="mapCanvas"></canvas>
                 <div class="area-name" id="areaName">加加村</div>
                 <div class="map-hint" id="mapHint">方向键/WASD 移动 · 靠近地标按空格交互</div>
+                <div id="questHUD" class="quest-hud" style="display:none"></div>
                 <div class="interact-prompt" id="interactPrompt" style="display:none">按 空格/Enter 交互</div>
             </div>
 
@@ -157,7 +158,25 @@
             <div class="bottom-bar">
                 <button class="action-btn" id="btnPets">🦕 宠物</button>
                 <button class="action-btn" id="btnBag">🎒 背包</button>
+                <button class="action-btn" id="btnWorldMap">🗺️ 地图</button>
+                <button class="action-btn" id="btnCraft">⚒️ 合成</button>
+                <button class="action-btn" id="btnQuest">📜 任务</button>
                 <button class="action-btn" id="btnSave">💾 存档</button>
+            </div>
+
+            <!-- 移动端虚拟摇杆 -->
+            <div class="mobile-map-controls" id="mobileMapControls">
+                <div class="ctrl-dpad">
+                    <button class="ctrl-btn ctrl-up" data-dir="up">▲</button>
+                    <div class="ctrl-mid-row">
+                        <button class="ctrl-btn ctrl-left" data-dir="left">◀</button>
+                        <button class="ctrl-btn ctrl-right" data-dir="right">▶</button>
+                    </div>
+                    <button class="ctrl-btn ctrl-down" data-dir="down">▼</button>
+                </div>
+                <div class="ctrl-actions">
+                    <button class="ctrl-btn ctrl-interact" id="mobileInteractBtn">交互</button>
+                </div>
             </div>
         </div>
 
@@ -256,6 +275,26 @@
             </div>
         </div>
 
+        <!-- 任务面板 -->
+        <div id="questModal" class="modal">
+            <div class="modal-content">
+                <h2>📜 任务</h2>
+                <div id="questContent" class="quest-modal-content"></div>
+                <button class="btn-primary" id="btnQuestClose">关闭</button>
+            </div>
+        </div>
+
+        <!-- 合成工坊 -->
+        <div id="craftModal" class="modal">
+            <div class="modal-content craft-modal">
+                <h2>⚒️ 合成工坊</h2>
+                <div class="craft-mat-summary" id="craftMatSummary"></div>
+                <div class="craft-tabs" id="craftTabs"></div>
+                <div class="craft-list" id="craftList"></div>
+                <button class="btn-close" id="btnCraftClose">关闭</button>
+            </div>
+        </div>
+
         <!-- 地图选择面板 -->
         <div id="mapModal" class="modal">
             <div class="modal-content map-modal">
@@ -283,15 +322,31 @@
             </div>
         </div>
 
+        <!-- 剧情演出层 -->
+        <div id="storyOverlay" class="story-overlay" style="display:none">
+            <div id="storyDialogBox" class="story-dialog-box" style="display:none">
+                <div id="storyPortrait" class="story-portrait"></div>
+                <div class="story-dialog-content">
+                    <div id="storyDialogName" class="story-dialog-name"></div>
+                    <div id="storyDialogText" class="story-dialog-text"></div>
+                </div>
+            </div>
+            <div id="storyChoiceArea" class="story-choice-area" style="display:none"></div>
+        </div>
+        <div id="storyFadeOverlay" class="story-fade-overlay" style="display:none"></div>
+
         <!-- 消息提示 -->
         <div class="toast" id="toast"></div>
     </div>
 
-    <script src="data.js?v=20260615"></script>
-    <script src="game.js?v=20260615"></script>
-    <script src="character.js?v=20260616"></script>
-    <script src="enemies.js?v=20260615"></script>
-    <script src="map.js?v=20260615"></script>
-    <script src="battle.js?v=20260615"></script>
+    <script src="data.js?v=20260403"></script>
+    <script src="game.js?v=20260403"></script>
+    <script src="character.js?v=20260403"></script>
+    <script src="enemies.js?v=20260403"></script>
+    <script src="map.js?v=20260403"></script>
+    <script src="battle.js?v=20260403"></script>
+    <script src="story.js?v=20260403"></script>
+    <script src="quest.js?v=20260403"></script>
+    <script src="craft.js?v=20260403"></script>
 </body>
 </html>

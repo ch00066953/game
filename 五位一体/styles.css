@@ -243,3 +243,77 @@ body {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* 移动端虚拟控制器 */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 0 18px;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+}
+.mobile-controls .ctrl-btn {
+    pointer-events: auto;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.5);
+    background: rgba(0,0,0,.35);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+.mobile-controls .ctrl-btn:active {
+    background: rgba(255,255,255,.35);
+}
+.ctrl-dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.ctrl-dpad .ctrl-row {
+    display: flex;
+    gap: 40px;
+}
+.ctrl-actions {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+.ctrl-jump {
+    background: rgba(46,204,113,.4) !important;
+    border-color: rgba(46,204,113,.7) !important;
+}
+.ctrl-ability {
+    background: rgba(155,89,182,.4) !important;
+    border-color: rgba(155,89,182,.7) !important;
+}
+@media (max-width: 960px), (pointer: coarse) {
+    .mobile-controls { display: flex; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .hud-left { display: none; }
+    .hud-right { display: none; }
+    .hud-top { padding: 6px; }
+    .hud-bottom { padding: 6px; }
+    .role-bar { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; padding: 6px; }
+    .role-button { padding: 6px 4px; font-size: 12px; border-radius: 10px; }
+    .message { font-size: 13px; padding: 8px 12px; }
+    .endcard { padding: 18px; }
+    .endcard h2 { font-size: 24px; }
+    .restart-button { min-width: 140px; padding: 10px 12px; }
+}

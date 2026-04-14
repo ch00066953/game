@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 驼驼龙 - 可爱骆驼龙 -->
+  <!-- 身体 -->
+  <ellipse cx="100" cy="125" rx="40" ry="30" fill="#D2B48C"/>
+  <!-- 驼峰 -->
+  <ellipse cx="85" cy="98" rx="15" ry="12" fill="#C9A96E"/>
+  <ellipse cx="115" cy="98" rx="15" ry="12" fill="#C9A96E"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="132" rx="28" ry="20" fill="#EFDFCF"/>
+  <!-- 脖子 -->
+  <path d="M65 115 Q55 90 60 70" stroke="#D2B48C" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M65 115 Q55 90 60 70" stroke="#EFDFCF" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- 头 -->
+  <ellipse cx="58" cy="60" rx="22" ry="20" fill="#D2B48C"/>
+  <ellipse cx="58" cy="63" rx="18" ry="16" fill="#EFDFCF"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="50" cy="55" rx="7" ry="9" fill="white"/>
+  <ellipse cx="66" cy="55" rx="7" ry="9" fill="white"/>
+  <circle cx="52" cy="56" r="4.5" fill="#333"/>
+  <circle cx="68" cy="56" r="4.5" fill="#333"/>
+  <circle cx="53" cy="54" r="1.8" fill="white"/>
+  <circle cx="69" cy="54" r="1.8" fill="white"/>
+  <!-- 长睫毛 -->
+  <line x1="45" y1="48" x2="43" y2="44" stroke="#333" stroke-width="1" stroke-linecap="round"/>
+  <line x1="48" y1="47" x2="47" y2="43" stroke="#333" stroke-width="1" stroke-linecap="round"/>
+  <line x1="62" y1="48" x2="61" y2="44" stroke="#333" stroke-width="1" stroke-linecap="round"/>
+  <line x1="65" y1="47" x2="64" y2="43" stroke="#333" stroke-width="1" stroke-linecap="round"/>
+  <!-- 小嘴 -->
+  <ellipse cx="58" cy="70" rx="8" ry="5" fill="#C9A96E"/>
+  <path d="M52 70 Q58 75 64 70" stroke="#8D6E63" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- 小鼻孔 -->
+  <circle cx="55" cy="68" r="1.5" fill="#8D6E63"/>
+  <circle cx="61" cy="68" r="1.5" fill="#8D6E63"/>
+  <!-- 腮红 -->
+  <ellipse cx="42" cy="64" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="74" cy="64" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小耳朵 -->
+  <ellipse cx="42" cy="46" rx="6" ry="8" fill="#D2B48C" transform="rotate(-15,42,46)"/>
+  <ellipse cx="44" cy="47" rx="4" ry="5" fill="#EFDFCF" transform="rotate(-15,44,47)"/>
+  <ellipse cx="74" cy="46" rx="6" ry="8" fill="#D2B48C" transform="rotate(15,74,46)"/>
+  <ellipse cx="72" cy="47" rx="4" ry="5" fill="#EFDFCF" transform="rotate(15,72,47)"/>
+  <!-- 四条小腿 -->
+  <rect x="72" y="148" width="10" height="18" rx="5" fill="#C9A96E"/>
+  <rect x="88" y="150" width="10" height="16" rx="5" fill="#C9A96E"/>
+  <rect x="108" y="150" width="10" height="16" rx="5" fill="#C9A96E"/>
+  <rect x="122" y="148" width="10" height="18" rx="5" fill="#C9A96E"/>
+  <!-- 小蹄子 -->
+  <ellipse cx="77" cy="167" rx="6" ry="3" fill="#8D6E63"/>
+  <ellipse cx="93" cy="167" rx="6" ry="3" fill="#8D6E63"/>
+  <ellipse cx="113" cy="167" rx="6" ry="3" fill="#8D6E63"/>
+  <ellipse cx="127" cy="167" rx="6" ry="3" fill="#8D6E63"/>
+  <!-- 尾巴 -->
+  <path d="M140 120 Q155 115 158 125 Q160 132 155 128" stroke="#C9A96E" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#8D6E63" font-family="sans-serif">驼驼龙</text>
+</svg>

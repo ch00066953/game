@@ -350,3 +350,51 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+/* 移动端虚拟控制器 */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px 20px;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 1000;
+    pointer-events: none;
+}
+.mobile-controls .ctrl-btn { pointer-events: auto; }
+.ctrl-dpad { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ctrl-mid-row { display: flex; gap: 4px; }
+.ctrl-btn {
+    width: 56px; height: 56px; border-radius: 14px; border: none;
+    background: rgba(255,255,255,0.25); color: #fff; font-size: 20px; font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); -webkit-user-select: none; user-select: none;
+    touch-action: manipulation; cursor: pointer;
+}
+.ctrl-btn:active { background: rgba(255,255,255,0.5); transform: scale(0.93); }
+.ctrl-mine { width: 64px; height: 64px; border-radius: 50%; font-size: 24px; background: rgba(139,90,43,0.7); }
+.ctrl-place { width: 64px; height: 64px; border-radius: 50%; font-size: 24px; background: rgba(76,175,80,0.6); }
+.ctrl-actions { display: flex; gap: 12px; align-items: flex-end; }
+
+@media (max-width: 760px), (pointer: coarse) {
+    .mobile-controls { display: flex; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .page-shell { padding: 8px; }
+    .topbar { margin-bottom: 10px; gap: 8px; }
+    h1 { font-size: 1.3rem !important; }
+    .subtitle { display: none; }
+    .eyebrow { display: none; }
+    .hud-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-bottom: 8px; }
+    .hud-item { padding: 6px 8px; border-radius: 10px; }
+    .hud-label { font-size: 0.65rem; margin-bottom: 2px; }
+    .hud-item strong { font-size: 0.95rem; }
+    .sidebar { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    .viewport-card { padding: 8px; border-radius: 14px; }
+    .actions .btn { padding: 8px 12px; font-size: 0.8rem; min-width: auto; }
+}

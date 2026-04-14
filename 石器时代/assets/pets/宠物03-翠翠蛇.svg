@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 翠翠蛇 - 可爱小蛇 -->
+  <!-- 蛇身盘绕 -->
+  <path d="M120 155 Q155 155 155 130 Q155 105 130 105 Q105 105 105 125 Q105 142 120 145 Q135 148 135 135" stroke="#43A047" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- 蛇身花纹 -->
+  <path d="M120 155 Q155 155 155 130 Q155 105 130 105 Q105 105 105 125 Q105 142 120 145 Q135 148 135 135" stroke="#66BB6A" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- 菱形花纹 -->
+  <g fill="#2E7D32" opacity="0.4">
+    <path d="M152 125 L148 120 L144 125 L148 130Z"/>
+    <path d="M132 108 L128 103 L124 108 L128 113Z"/>
+    <path d="M108 118 L104 113 L100 118 L104 123Z"/>
+    <path d="M115 142 L111 137 L107 142 L111 147Z"/>
+    <path d="M132 148 L128 143 L124 148 L128 153Z"/>
+  </g>
+  <!-- 头 -->
+  <ellipse cx="100" cy="80" rx="28" ry="25" fill="#43A047"/>
+  <ellipse cx="100" cy="85" rx="23" ry="20" fill="#66BB6A"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="76" rx="9" ry="11" fill="white"/>
+  <ellipse cx="112" cy="76" rx="9" ry="11" fill="white"/>
+  <ellipse cx="90" cy="77" rx="5" ry="7" fill="#333"/>
+  <ellipse cx="114" cy="77" rx="5" ry="7" fill="#333"/>
+  <circle cx="91" cy="74" r="2" fill="white"/>
+  <circle cx="115" cy="74" r="2" fill="white"/>
+  <!-- 小舌头（分叉） -->
+  <path d="M100 98 L100 110 L95 115" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M100 110 L105 115" stroke="#E53935" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 微笑 -->
+  <path d="M90 93 Q100 100 110 93" stroke="#2E7D32" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="88" rx="6" ry="4" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="122" cy="88" rx="6" ry="4" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小花冠 -->
+  <circle cx="90" cy="58" r="5" fill="#FFEB3B"/>
+  <circle cx="100" cy="55" r="5" fill="#FF7043"/>
+  <circle cx="110" cy="58" r="5" fill="#FFEB3B"/>
+  <circle cx="90" cy="58" r="2" fill="#FF9800"/>
+  <circle cx="100" cy="55" r="2" fill="white"/>
+  <circle cx="110" cy="58" r="2" fill="#FF9800"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#2E7D32" font-family="sans-serif">翠翠蛇</text>
+</svg>

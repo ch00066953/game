@@ -55,6 +55,11 @@ function loadAreaMap(areaIdx, fromExit) {
     $('areaName').textContent = area.name;
     updateTopBar();
     toast(`来到了 ${area.name}`);
+
+    // 首次进入加加村触发族长引导
+    if (areaIdx === 0 && game.quests && !game.quests.completed.includes('elder_intro_done')) {
+        setTimeout(() => handleQuestNpc('elder'), 500);
+    }
 }
 
 function startMapLoop() {
@@ -78,6 +83,28 @@ document.addEventListener('keydown', e => {
     }
 });
 document.addEventListener('keyup', e => { keysDown[e.key] = false; });
+
+// ===== 移动端虚拟方向键 =====
+(function initMobileMapControls() {
+    const DIR_MAP = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
+    document.querySelectorAll('.mobile-map-controls .ctrl-btn[data-dir]').forEach(function(btn) {
+        const key = DIR_MAP[btn.dataset.dir];
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); keysDown[key] = true;
+        });
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault(); keysDown[key] = false;
+        });
+        btn.addEventListener('touchcancel', function() { keysDown[key] = false; });
+    });
+    var interactBtn = document.getElementById('mobileInteractBtn');
+    if (interactBtn) {
+        interactBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (mapActive && nearPoi) interactWithPoi(nearPoi);
+        });
+    }
+})();
 
 function handleMovement() {
     if (moveCD > 0) { moveCD--; return; }
@@ -150,7 +177,7 @@ function detectNearPoi() {
 
 function interactWithPoi(poi) {
     switch (poi.type) {
-        case 'shop': renderShopModal(); showModal('shop'); break;
+        case 'shop': renderShopModal(AREAS[game.currentArea].id); showModal('shop'); break;
         case 'heal':
             game.player.hp = game.player.maxHp; game.player.mp = game.player.maxMp;
             game.pets.forEach(p => { p.hp = p.maxHp; p.mp = p.maxMp; });
@@ -163,6 +190,7 @@ function interactWithPoi(poi) {
             break;
         }
         case 'npc': toast(poi.msg || '……'); break;
+        case 'npc_quest': handleQuestNpc(poi.npcId); break;
     }
 }
 
@@ -245,7 +273,7 @@ function renderMap(tick) {
     // 角色
     const psx = px * TILE_SIZE - camX, psy = py * TILE_SIZE - camY;
     const bobY = Math.sin(tick * 0.1) * 2;
-    drawPixelChar(ctx, psx, psy - 4 + bobY, TILE_SIZE, game.player.class, playerFacing, keysDown['ArrowUp'] || keysDown['ArrowDown'] || keysDown['ArrowLeft'] || keysDown['ArrowRight'] || keysDown['w'] || keysDown['s'] || keysDown['a'] || keysDown['d'] ? tick : 0);
+    drawSVGChar(ctx, psx, psy - 4 + bobY, TILE_SIZE, game.player.class, playerFacing, keysDown['ArrowUp'] || keysDown['ArrowDown'] || keysDown['ArrowLeft'] || keysDown['ArrowRight'] || keysDown['w'] || keysDown['s'] || keysDown['a'] || keysDown['d'] ? tick : 0);
 
     // 方向指示
     ctx.fillStyle = 'rgba(255,255,0,0.6)';

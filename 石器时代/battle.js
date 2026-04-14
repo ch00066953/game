@@ -295,7 +295,7 @@ function showBattleItemPanel() {
     $('itemPanel').style.display = '';
     const list = $('battleItemList');
     list.innerHTML = '';
-    const usable = game.bag.filter(it => it.count > 0);
+    const usable = game.bag.filter(it => it.count > 0 && (!it.effect || it.effect.type !== 'material'));
     if (usable.length === 0) {
         list.innerHTML = '<p style="color:#aaa;text-align:center">背包空空如也</p>';
         return;
@@ -332,6 +332,21 @@ function useBattleItem(item) {
             addLog('没有出战宠物！', 'log-info');
             return;
         }
+    } else if (eff.type === 'fullHeal') {
+        game.player.hp = game.player.maxHp;
+        game.player.mp = game.player.maxMp;
+        addLog(`使用 ${item.name}，完全恢复了HP与MP！`, 'log-heal');
+        showDmgText(`+FULL`, 100, 250, 'heal');
+    } else if (eff.type === 'equipAtk') {
+        game.player.atk += eff.value;
+        addLog(`装备 ${item.name}，攻击力永久+${eff.value}！`, 'log-info');
+    } else if (eff.type === 'equipDef') {
+        game.player.def += eff.value;
+        addLog(`装备 ${item.name}，防御力永久+${eff.value}！`, 'log-info');
+    } else if (eff.type === 'equipHp') {
+        game.player.maxHp += eff.value;
+        game.player.hp += eff.value;
+        addLog(`装备 ${item.name}，最大HP永久+${eff.value}！`, 'log-info');
     }
     item.count--;
     if (item.count <= 0) {
@@ -490,12 +505,39 @@ function finishBattle(won, caught) {
         }
         game.battleCount++;
 
+        // 更新任务进度
+        if (!caught) {
+            updateQuestProgress('kill', e.name);
+        } else {
+            updateQuestProgress('catch', e.name);
+        }
+
+        // Material drops
+        const drops = ENEMY_DROPS[e.name] || [];
+        const droppedMats = [];
+        drops.forEach(drop => {
+            if (Math.random() < drop.chance) {
+                const info = MATERIAL_INFO[drop.id];
+                if (info) {
+                    const existing = game.bag.find(b => b.id === drop.id);
+                    if (existing) {
+                        existing.count++;
+                    } else {
+                        game.bag.push({ id: drop.id, name: info.name, icon: info.icon, desc: '合成材料', count: 1, effect: { type: 'material' } });
+                    }
+                    droppedMats.push(info.icon + info.name);
+                    updateQuestProgress('collect', drop.id);
+                }
+            }
+        });
+
         $('resultTitle').textContent = caught ? '🎊 捕获成功！' : '🏆 战斗胜利！';
         $('resultContent').innerHTML = `
             <div class="result-rewards">
                 <p>⭐ 经验值 +${expGain}</p>
                 <p>💰 金币 +${goldGain}</p>
                 ${caught ? `<p>🦕 获得宠物: ${e.name}</p>` : ''}
+                ${droppedMats.length > 0 ? `<p>📦 获得材料: ${droppedMats.join(' ')}</p>` : ''}
             </div>`;
         showModal('result');
         $('btnResultOk').onclick = () => {
@@ -535,7 +577,7 @@ function checkLevelUp(callback) {
         p.level++;
         p.maxExp = Math.floor(100 * Math.pow(1.25, p.level - 1));
 
-        const c = CLASS_DATA[p.class];
+        const c = CLASS_DATA[p.class || 'none'];
         const hpGrow = Math.floor(c.baseHp * 0.12 + Math.random() * 5);
         const mpGrow = Math.floor(c.baseMp * 0.1 + Math.random() * 3);
         const atkGrow = Math.floor(1 + Math.random() * 2 + (p.class === 'warrior' ? 1 : 0));
@@ -648,26 +690,70 @@ function renderBagModal() {
         return;
     }
     list.innerHTML = '';
-    items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'bag-item';
-        div.innerHTML = `
-            <div class="bag-item-icon">${item.icon}</div>
-            <div class="bag-item-info">
-                <div class="bag-item-name">${item.name}</div>
-                <div class="bag-item-desc">${item.desc}</div>
-            </div>
-            <div class="bag-item-count">x${item.count}</div>`;
-        list.appendChild(div);
+    const categories = [
+        { label: '⚔️ 武器装备', types: ['equipAtk', 'equipDef', 'equipHp'] },
+        { label: '🧪 消耗道具', types: ['heal', 'fullHeal', 'healMp', 'petHeal', 'atkBuff', 'catchBonus'] },
+        { label: '📦 合成材料', types: ['material'] },
+    ];
+    const battlOnlyTypes = ['catchBonus', 'atkBuff'];
+    let hasAny = false;
+    categories.forEach(cat => {
+        const catItems = items.filter(it => it.effect && cat.types.includes(it.effect.type));
+        if (catItems.length === 0) return;
+        hasAny = true;
+        const hdr = document.createElement('div');
+        hdr.className = 'bag-cat-header';
+        hdr.textContent = cat.label;
+        list.appendChild(hdr);
+        catItems.forEach(item => {
+            const canUse = item.effect && !battlOnlyTypes.includes(item.effect.type) && item.effect.type !== 'material';
+            const div = document.createElement('div');
+            div.className = 'bag-item';
+            div.innerHTML = `
+                <div class="bag-item-icon">${item.icon}</div>
+                <div class="bag-item-info">
+                    <div class="bag-item-name">${item.name}</div>
+                    <div class="bag-item-desc">${item.desc}</div>
+                </div>
+                <div class="bag-item-right">
+                    <span class="bag-item-count">×${item.count}</span>
+                    ${canUse ? '<button class="bag-use-btn">使用</button>' : ''}
+                </div>`;
+            if (canUse) div.querySelector('.bag-use-btn').addEventListener('click', () => useItemFromBag(item));
+            list.appendChild(div);
+        });
     });
+    // Any items not in categories
+    const otherItems = items.filter(it => !it.effect || !['equipAtk','equipDef','equipHp','heal','fullHeal','healMp','petHeal','atkBuff','catchBonus','material'].includes(it.effect.type));
+    if (otherItems.length > 0) {
+        const hdr = document.createElement('div');
+        hdr.className = 'bag-cat-header';
+        hdr.textContent = '❓ 其他';
+        list.appendChild(hdr);
+        otherItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'bag-item';
+            div.innerHTML = `
+                <div class="bag-item-icon">${item.icon}</div>
+                <div class="bag-item-info"><div class="bag-item-name">${item.name}</div><div class="bag-item-desc">${item.desc}</div></div>
+                <span class="bag-item-count">×${item.count}</span>`;
+            list.appendChild(div);
+        });
+    }
+    if (!hasAny && otherItems.length === 0) {
+        list.innerHTML = '<p style="text-align:center;color:#888;padding:20px">背包空空如也</p>';
+    }
 }
 
-// ===== 商店面板 =====
-function renderShopModal() {
+function renderShopModal(areaId) {
+    const id = areaId || AREAS[game.currentArea].id;
+    const titleEl = document.querySelector('#shopModal h2');
+    if (titleEl) titleEl.textContent = SHOP_NAMES[id] || '🏪 部落商店';
     $('shopGold').textContent = game.player.gold;
     const list = $('shopList');
     list.innerHTML = '';
-    SHOP_ITEMS.forEach(item => {
+    const items = VILLAGE_SHOPS[id] || SHOP_ITEMS;
+    items.forEach(item => {
         const div = document.createElement('div');
         div.className = 'shop-item';
         const canBuy = game.player.gold >= item.price;
@@ -690,7 +776,7 @@ function renderShopModal() {
                 game.bag.push({ ...item, count: 1 });
             }
             updateTopBar();
-            renderShopModal();
+            renderShopModal(id);
             toast(`购买了 ${item.name}！`);
         };
         list.appendChild(div);
@@ -699,27 +785,136 @@ function renderShopModal() {
 
 // ===== 地图面板 =====
 function renderMapModal() {
-    const map = $('worldMap');
-    map.innerHTML = '';
-    AREAS.forEach((area, i) => {
-        const btn = document.createElement('div');
+    const container = $('worldMap');
+    container.innerHTML = '';
+
+    // === Canvas visual world map ===
+    const canvas = document.createElement('canvas');
+    const CW = 560, CH = 240;
+    canvas.width = CW; canvas.height = CH;
+    canvas.style.cssText = 'max-width:100%;display:block;margin:0 auto 12px;border-radius:10px;cursor:pointer;border:2px solid rgba(255,215,0,0.3);';
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    // Area node positions (zigzag layout)
+    const nodePos = [
+        { x: 60,  y: 140 },  // 加加村
+        { x: 168, y: 80  },  // 密林
+        { x: 280, y: 140 },  // 荒漠
+        { x: 392, y: 80  },  // 火山
+        { x: 500, y: 140 },  // 冰原
+    ];
+
+    // Terrain background gradient
+    const bgGrad = ctx.createLinearGradient(0, 0, CW, 0);
+    bgGrad.addColorStop(0,   '#3a6e3a');
+    bgGrad.addColorStop(0.22,'#2a5a20');
+    bgGrad.addColorStop(0.44,'#c4924b');
+    bgGrad.addColorStop(0.66,'#6b1a00');
+    bgGrad.addColorStop(1.0, '#8bafc0');
+    ctx.fillStyle = bgGrad;
+    ctx.beginPath(); ctx.roundRect(0, 0, CW, CH, 10); ctx.fill();
+
+    // Terrain deco
+    const deco = [
+        { x: 20, y: 160, t: '🌳' }, { x: 36, y: 145, t: '🌲' }, { x: 10, y: 100, t: '🌿' },
+        { x: 110, y: 55,  t: '🌲' }, { x: 140, y: 170, t: '🌳' },
+        { x: 240, y: 165, t: '🪨' }, { x: 260, y: 185, t: '🌵' }, { x: 310, y: 175, t: '🪨' },
+        { x: 350, y: 55,  t: '🔥' }, { x: 430, y: 165, t: '🌋' }, { x: 370, y: 170, t: '🔥' },
+        { x: 450, y: 55,  t: '❄️' }, { x: 520, y: 85,  t: '🏔️' }, { x: 540, y: 165, t: '❄️' },
+    ];
+    ctx.font = '16px serif';
+    deco.forEach(d => ctx.fillText(d.t, d.x, d.y));
+
+    // Connecting path
+    ctx.beginPath();
+    ctx.moveTo(nodePos[0].x, nodePos[0].y);
+    nodePos.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.strokeStyle = 'rgba(255,215,0,0.65)';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([10, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw nodes
+    const R = 26;
+    nodePos.forEach((pos, i) => {
+        const area = AREAS[i];
         const locked = game.player.level < area.levelReq;
         const isCurrent = game.currentArea === i;
-        btn.className = 'map-area-btn' + (locked ? ' locked' : '') + (isCurrent ? ' current' : '');
-        btn.innerHTML = `
-            <div class="map-area-icon">${area.icon}</div>
-            <div class="map-area-info">
-                <div class="map-area-name">${area.name} ${isCurrent ? '(当前)' : ''}</div>
-                <div class="map-area-desc">${area.desc}</div>
-                <div class="map-area-level">推荐等级: Lv.${area.levelReq}+</div>
-            </div>
-            ${locked ? '<div class="map-lock-icon">🔒</div>' : ''}`;
-        if (!locked) {
-            btn.onclick = () => {
+
+        // Shadow
+        ctx.beginPath(); ctx.arc(pos.x + 2, pos.y + 2, R, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fill();
+
+        // Circle
+        ctx.beginPath(); ctx.arc(pos.x, pos.y, R, 0, Math.PI * 2);
+        ctx.fillStyle = locked ? 'rgba(40,40,40,0.75)' : isCurrent ? 'rgba(255,215,0,0.95)' : 'rgba(255,255,255,0.88)';
+        ctx.fill();
+        ctx.strokeStyle = isCurrent ? '#FF6B35' : locked ? '#555' : '#bbb';
+        ctx.lineWidth = isCurrent ? 3 : 2; ctx.stroke();
+
+        // Icon
+        ctx.font = '20px serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.globalAlpha = locked ? 0.35 : 1;
+        ctx.fillText(area.icon, pos.x, pos.y);
+        ctx.globalAlpha = 1;
+        if (locked) { ctx.font = '12px serif'; ctx.fillText('🔒', pos.x + 14, pos.y - 14); }
+
+        // Current indicator arrow
+        if (isCurrent) {
+            ctx.font = '14px serif';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillText('▼', pos.x, pos.y - R - 4);
+        }
+
+        // Name
+        ctx.font = 'bold 11px "Microsoft YaHei", sans-serif';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = locked ? 'rgba(180,180,180,0.7)' : '#fff';
+        ctx.shadowColor = '#000'; ctx.shadowBlur = 4;
+        ctx.fillText(area.name, pos.x, pos.y + R + 16);
+        ctx.font = '10px sans-serif';
+        ctx.fillStyle = locked ? 'rgba(140,140,140,0.7)' : '#FFD700';
+        ctx.fillText('Lv.' + area.levelReq + '+', pos.x, pos.y + R + 28);
+        ctx.shadowBlur = 0;
+    });
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+
+    // Canvas click handler
+    canvas.addEventListener('click', e => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = CW / rect.width;
+        const mx = (e.clientX - rect.left) * scaleX;
+        const my = (e.clientY - rect.top) * scaleX;
+        nodePos.forEach((pos, i) => {
+            if ((mx - pos.x) ** 2 + (my - pos.y) ** 2 <= R * R) {
+                const locked = game.player.level < AREAS[i].levelReq;
+                if (locked) { toast(`需要 Lv.${AREAS[i].levelReq} 才能前往 ${AREAS[i].name}！`); return; }
+                if (i === game.currentArea) { toast(`你已在 ${AREAS[i].name}`); return; }
                 hideModal('map');
                 loadAreaMap(i);
-            };
-        }
-        map.appendChild(btn);
+            }
+        });
     });
+
+    // === Area list below canvas ===
+    const areaList = document.createElement('div');
+    areaList.className = 'map-area-list';
+    AREAS.forEach((area, i) => {
+        const locked = game.player.level < area.levelReq;
+        const isCurrent = game.currentArea === i;
+        const row = document.createElement('div');
+        row.className = 'map-row' + (locked ? ' map-row-locked' : '') + (isCurrent ? ' map-row-current' : '');
+        row.innerHTML = `
+            <span class="map-row-icon">${area.icon}</span>
+            <span class="map-row-name">${area.name}${isCurrent ? ' ◀ 当前' : ''}</span>
+            <span class="map-row-lv">Lv.${area.levelReq}+</span>
+            <span class="map-row-desc">${area.desc}</span>
+            ${locked ? '<span class="map-row-lock">🔒</span>' : (!isCurrent ? '<button class="map-goto-btn">前往</button>' : '')}`;
+        if (!locked && !isCurrent) row.querySelector('.map-goto-btn').onclick = () => { hideModal('map'); loadAreaMap(i); };
+        areaList.appendChild(row);
+    });
+    container.appendChild(areaList);
 }

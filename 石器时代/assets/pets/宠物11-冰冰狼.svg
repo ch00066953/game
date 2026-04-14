@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 冰冰狼 - 可爱冰霜小狼 -->
+  <!-- 尾巴（大蓬松） -->
+  <path d="M45 130 Q25 118 20 130 Q15 140 25 140 Q18 148 30 145 Q25 152 35 148" fill="#90CAF9"/>
+  <path d="M30 135 Q22 128 25 135 Q20 142 28 140" fill="#BBDEFB" opacity="0.6"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="128" rx="38" ry="30" fill="#64B5F6"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="133" rx="26" ry="22" fill="#E3F2FD"/>
+  <!-- 头 -->
+  <circle cx="100" cy="78" r="32" fill="#64B5F6"/>
+  <ellipse cx="100" cy="83" rx="26" ry="24" fill="#90CAF9"/>
+  <!-- 耳朵 -->
+  <path d="M72 58 L62 30 L82 50Z" fill="#64B5F6"/>
+  <path d="M74 55 L66 35 L82 50Z" fill="#BBDEFB"/>
+  <path d="M128 58 L138 30 L118 50Z" fill="#64B5F6"/>
+  <path d="M126 55 L134 35 L118 50Z" fill="#BBDEFB"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="72" rx="9" ry="11" fill="white"/>
+  <ellipse cx="112" cy="72" rx="9" ry="11" fill="white"/>
+  <circle cx="90" cy="73" r="5.5" fill="#0288D1"/>
+  <circle cx="114" cy="73" r="5.5" fill="#0288D1"/>
+  <circle cx="88" cy="73" r="2.5" fill="#333"/>
+  <circle cx="112" cy="73" r="2.5" fill="#333"/>
+  <circle cx="89" cy="70" r="2" fill="white"/>
+  <circle cx="113" cy="70" r="2" fill="white"/>
+  <!-- 鼻子 -->
+  <ellipse cx="100" cy="87" rx="5" ry="4" fill="#1565C0"/>
+  <ellipse cx="100" cy="86" rx="3" ry="2" fill="#42A5F5" opacity="0.5"/>
+  <!-- 嘴巴 -->
+  <path d="M100 91 L95 96" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 91 L105 96" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M93 97 Q100 102 107 97" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="86" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="122" cy="86" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <!-- 额头花纹 -->
+  <path d="M92 62 L100 55 L108 62" stroke="#42A5F5" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 冰晶装饰 -->
+  <g stroke="#B3E5FC" stroke-width="1" opacity="0.5">
+    <line x1="140" y1="55" x2="140" y2="45"/><line x1="135" y1="50" x2="145" y2="50"/>
+    <line x1="55" y1="50" x2="55" y2="40"/><line x1="50" y1="45" x2="60" y2="45"/>
+  </g>
+  <!-- 小爪子 -->
+  <ellipse cx="68" cy="120" rx="8" ry="6" fill="#64B5F6" transform="rotate(-15,68,120)"/>
+  <ellipse cx="132" cy="120" rx="8" ry="6" fill="#64B5F6" transform="rotate(15,132,120)"/>
+  <!-- 腿和爪子 -->
+  <rect x="76" y="150" width="14" height="12" rx="5" fill="#42A5F5"/>
+  <rect x="110" y="150" width="14" height="12" rx="5" fill="#42A5F5"/>
+  <ellipse cx="83" cy="163" rx="9" ry="4" fill="#1E88E5"/>
+  <ellipse cx="117" cy="163" rx="9" ry="4" fill="#1E88E5"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#1565C0" font-family="sans-serif">冰冰狼</text>
+</svg>

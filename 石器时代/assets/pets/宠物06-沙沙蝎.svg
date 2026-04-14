@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 沙沙蝎 - 可爱小蝎子 -->
+  <!-- 尾巴（高弯弧） -->
+  <path d="M100 110 Q100 70 115 50 Q125 38 130 48" stroke="#F4511E" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- 尾刺 -->
+  <circle cx="132" cy="46" r="5" fill="#E64A19"/>
+  <path d="M132 42 L132 36" stroke="#BF360C" stroke-width="2" stroke-linecap="round"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="120" rx="35" ry="28" fill="#FF7043"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="125" rx="26" ry="20" fill="#FFAB91"/>
+  <!-- 体节纹 -->
+  <g stroke="#E64A19" stroke-width="1" opacity="0.3">
+    <path d="M80 115 Q100 110 120 115"/>
+    <path d="M82 122 Q100 118 118 122"/>
+    <path d="M84 129 Q100 126 116 129"/>
+  </g>
+  <!-- 头 -->
+  <circle cx="100" cy="95" r="22" fill="#FF7043"/>
+  <ellipse cx="100" cy="98" rx="18" ry="16" fill="#FFAB91"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="91" cy="90" rx="8" ry="10" fill="white"/>
+  <ellipse cx="109" cy="90" rx="8" ry="10" fill="white"/>
+  <circle cx="93" cy="91" r="5" fill="#333"/>
+  <circle cx="111" cy="91" r="5" fill="#333"/>
+  <circle cx="94" cy="88" r="2" fill="white"/>
+  <circle cx="112" cy="88" r="2" fill="white"/>
+  <!-- 笑容 -->
+  <path d="M93 103 Q100 110 107 103" stroke="#BF360C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="82" cy="98" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="118" cy="98" rx="5" ry="3" fill="#F48FB1" opacity="0.4"/>
+  <!-- 钳子（左） -->
+  <path d="M60 115 Q45 108 40 115 Q35 122 42 125 Q48 128 50 120" fill="#E64A19"/>
+  <path d="M40 115 Q35 110 30 115 Q28 120 35 122" fill="#E64A19"/>
+  <line x1="65 " y1="118" x2="55" y2="116" stroke="#FF7043" stroke-width="5"/>
+  <!-- 钳子（右） -->
+  <path d="M140 115 Q155 108 160 115 Q165 122 158 125 Q152 128 150 120" fill="#E64A19"/>
+  <path d="M160 115 Q165 110 170 115 Q172 120 165 122" fill="#E64A19"/>
+  <line x1="135" y1="118" x2="145" y2="116" stroke="#FF7043" stroke-width="5"/>
+  <!-- 小脚 -->
+  <g fill="#E64A19">
+    <ellipse cx="72" cy="150" rx="6" ry="4" transform="rotate(-10,72,150)"/>
+    <ellipse cx="82" cy="153" rx="6" ry="4"/>
+    <ellipse cx="118" cy="153" rx="6" ry="4"/>
+    <ellipse cx="128" cy="150" rx="6" ry="4" transform="rotate(10,128,150)"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#BF360C" font-family="sans-serif">沙沙蝎</text>
+</svg>

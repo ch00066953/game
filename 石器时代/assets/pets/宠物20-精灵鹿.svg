@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 精灵鹿 - 可爱的远古小鹿 -->
+  <!-- 草地 -->
+  <ellipse cx="100" cy="172" rx="60" ry="6" fill="#A5D6A7" opacity="0.5"/>
+  <!-- 小草 -->
+  <g stroke="#66BB6A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4">
+    <path d="M40 175 Q38 168 42 170"/>
+    <path d="M45 173 Q44 165 48 167"/>
+    <path d="M150 174 Q152 166 155 168"/>
+    <path d="M158 175 Q156 168 160 170"/>
+  </g>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="128" rx="30" ry="24" fill="#A1887F"/>
+  <!-- 肚子斑点 -->
+  <ellipse cx="100" cy="132" rx="20" ry="18" fill="#D7CCC8"/>
+  <!-- 斑点 -->
+  <g fill="#EFEBE9" opacity="0.6">
+    <circle cx="88" cy="122" r="3"/>
+    <circle cx="105" cy="118" r="2.5"/>
+    <circle cx="95" cy="130" r="2"/>
+    <circle cx="112" cy="128" r="3"/>
+    <circle cx="82" cy="132" r="2.5"/>
+  </g>
+  <!-- 尾巴 -->
+  <ellipse cx="135" cy="120" rx="6" ry="4" fill="#BCAAA4" transform="rotate(-20 135 120)"/>
+  <!-- 后腿 -->
+  <rect x="82" y="148" width="7" height="18" rx="3" fill="#8D6E63"/>
+  <rect x="110" y="148" width="7" height="18" rx="3" fill="#8D6E63"/>
+  <!-- 前腿 -->
+  <rect x="78" y="145" width="6" height="20" rx="3" fill="#A1887F"/>
+  <rect x="115" y="145" width="6" height="20" rx="3" fill="#A1887F"/>
+  <!-- 蹄子 -->
+  <g fill="#5D4037">
+    <ellipse cx="81" cy="166" rx="4" ry="2.5"/>
+    <ellipse cx="118" cy="166" rx="4" ry="2.5"/>
+    <ellipse cx="85.5" cy="167" rx="4.5" ry="2.5"/>
+    <ellipse cx="113.5" cy="167" rx="4.5" ry="2.5"/>
+  </g>
+  <!-- 头 -->
+  <circle cx="100" cy="75" r="26" fill="#A1887F"/>
+  <circle cx="100" cy="78" r="22" fill="#BCAAA4" opacity="0.3"/>
+  <!-- 鹿角 -->
+  <g stroke="#6D4C41" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 58 L72 38 L65 32"/>
+    <path d="M72 38 L78 30"/>
+    <path d="M120 58 L128 38 L135 32"/>
+    <path d="M128 38 L122 30"/>
+  </g>
+  <!-- 鹿角上发光 -->
+  <g fill="#FFF176" opacity="0.6">
+    <circle cx="65" cy="30" r="3"/>
+    <circle cx="78" cy="28" r="2.5"/>
+    <circle cx="135" cy="30" r="3"/>
+    <circle cx="122" cy="28" r="2.5"/>
+  </g>
+  <!-- 耳朵 -->
+  <ellipse cx="76" cy="60" rx="8" ry="12" fill="#A1887F" transform="rotate(-15 76 60)"/>
+  <ellipse cx="76" cy="60" rx="5" ry="8" fill="#FFAB91" transform="rotate(-15 76 60)"/>
+  <ellipse cx="124" cy="60" rx="8" ry="12" fill="#A1887F" transform="rotate(15 124 60)"/>
+  <ellipse cx="124" cy="60" rx="5" ry="8" fill="#FFAB91" transform="rotate(15 124 60)"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="72" rx="9" ry="11" fill="white"/>
+  <ellipse cx="112" cy="72" rx="9" ry="11" fill="white"/>
+  <circle cx="90" cy="74" r="6" fill="#33691E"/>
+  <circle cx="114" cy="74" r="6" fill="#33691E"/>
+  <circle cx="92" cy="71" r="2.5" fill="white"/>
+  <circle cx="116" cy="71" r="2.5" fill="white"/>
+  <!-- 鼻子 -->
+  <ellipse cx="100" cy="86" rx="4" ry="3" fill="#5D4037"/>
+  <ellipse cx="99" cy="85" rx="1.5" ry="1" fill="#8D6E63"/>
+  <!-- 微笑 -->
+  <path d="M95 90 Q100 95 105 90" stroke="#5D4037" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="76" cy="82" rx="5.5" ry="3" fill="#F48FB1" opacity="0.45"/>
+  <ellipse cx="124" cy="82" rx="5.5" ry="3" fill="#F48FB1" opacity="0.45"/>
+  <!-- 小叶子装饰 -->
+  <g opacity="0.4">
+    <ellipse cx="150" cy="50" rx="5" ry="3" fill="#81C784" transform="rotate(30 150 50)"/>
+    <ellipse cx="148" cy="52" rx="5" ry="3" fill="#81C784" transform="rotate(-20 148 52)"/>
+    <ellipse cx="48" cy="100" rx="4" ry="2.5" fill="#81C784" transform="rotate(-25 48 100)"/>
+    <ellipse cx="46" cy="102" rx="4" ry="2.5" fill="#81C784" transform="rotate(35 46 102)"/>
+  </g>
+  <text x="100" y="192" text-anchor="middle" font-size="12" fill="#33691E" font-family="sans-serif">精灵鹿</text>
+</svg>

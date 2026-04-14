@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 冰龙崽 - 可爱冰蓝龙宝宝 -->
+  <!-- 翅膀 -->
+  <path d="M50 90 Q30 65 35 85 Q20 70 30 95 Q25 85 40 100 Q45 105 55 98Z" fill="#7986CB" opacity="0.6"/>
+  <path d="M150 90 Q170 65 165 85 Q180 70 170 95 Q175 85 160 100 Q155 105 145 98Z" fill="#7986CB" opacity="0.6"/>
+  <!-- 尾巴 -->
+  <path d="M50 135 Q30 128 22 140 Q18 148 28 144" fill="#5C6BC0"/>
+  <!-- 冰尾尖 -->
+  <path d="M20 140 L14 132 L18 140 L12 140 L20 145Z" fill="#B3E5FC" opacity="0.7"/>
+  <!-- 身体 -->
+  <ellipse cx="100" cy="128" rx="40" ry="32" fill="#5C6BC0"/>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="133" rx="28" ry="24" fill="#C5CAE9"/>
+  <!-- 头 -->
+  <circle cx="100" cy="75" r="33" fill="#5C6BC0"/>
+  <ellipse cx="100" cy="80" rx="27" ry="24" fill="#7986CB"/>
+  <!-- 冰角 -->
+  <path d="M78 50 Q72 30 82 42" fill="#B3E5FC"/>
+  <path d="M122 50 Q128 30 118 42" fill="#B3E5FC"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="70" rx="10" ry="12" fill="white"/>
+  <ellipse cx="112" cy="70" rx="10" ry="12" fill="white"/>
+  <circle cx="90" cy="72" r="6" fill="#FFD54F"/>
+  <circle cx="114" cy="72" r="6" fill="#FFD54F"/>
+  <circle cx="88" cy="72" r="3" fill="#333"/>
+  <circle cx="112" cy="72" r="3" fill="#333"/>
+  <circle cx="89" cy="69" r="2" fill="white"/>
+  <circle cx="113" cy="69" r="2" fill="white"/>
+  <!-- 鼻子 -->
+  <circle cx="96" cy="85" r="2" fill="#3949AB"/>
+  <circle cx="104" cy="85" r="2" fill="#3949AB"/>
+  <!-- 冰息(嘴里冒冰晶) -->
+  <g fill="#B3E5FC" opacity="0.5">
+    <path d="M96 92 L94 88 L98 90Z"/>
+    <path d="M104 92 L102 88 L106 90Z"/>
+  </g>
+  <!-- 微笑 -->
+  <path d="M92 93 Q100 102 108 93" stroke="#283593" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="78" cy="84" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="122" cy="84" rx="6" ry="3.5" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小手 -->
+  <ellipse cx="62" cy="118" rx="8" ry="6" fill="#5C6BC0" transform="rotate(-20,62,118)"/>
+  <ellipse cx="138" cy="118" rx="8" ry="6" fill="#5C6BC0" transform="rotate(20,138,118)"/>
+  <!-- 小脚 -->
+  <ellipse cx="80" cy="160" rx="12" ry="7" fill="#3F51B5"/>
+  <ellipse cx="120" cy="160" rx="12" ry="7" fill="#3F51B5"/>
+  <!-- 冰晶围绕 -->
+  <g opacity="0.3">
+    <path d="M155 60 L158 50 L161 60 L155 57 L161 57Z" fill="#B3E5FC"/>
+    <path d="M40 60 L43 50 L46 60 L40 57 L46 57Z" fill="#B3E5FC"/>
+    <path d="M160 120 L163 112 L166 120 L160 117 L166 117Z" fill="#B3E5FC"/>
+  </g>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#283593" font-family="sans-serif">冰龙崽</text>
+</svg>

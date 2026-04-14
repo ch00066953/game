@@ -154,3 +154,92 @@ canvas {
         font-size: 13px;
     }
 }
+
+/* 移动端虚拟控制器 */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px 20px;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.mobile-controls .ctrl-btn {
+    pointer-events: auto;
+}
+
+.ctrl-dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.ctrl-mid-row {
+    display: flex;
+    gap: 4px;
+}
+
+.ctrl-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255,255,255,0.75);
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+.ctrl-btn:active {
+    background: rgba(255,255,255,0.95);
+    transform: scale(0.93);
+}
+
+.ctrl-jump {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    font-size: 18px;
+    background: rgba(241,90,36,0.8);
+    color: #fff;
+}
+
+.ctrl-jump:active {
+    background: rgba(241,90,36,1);
+}
+
+.ctrl-actions {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+    .mobile-controls { display: flex; }
+    .legend { display: none; }
+}
+
+/* === 移动端紧凑布局 === */
+@media (max-width: 600px) {
+    .page-shell { padding: 10px; }
+    .topbar { margin-bottom: 8px; }
+    h1 { font-size: 1.1rem !important; margin: 0; }
+    .eyebrow { display: none; }
+    .hud { gap: 6px; margin-bottom: 8px; }
+    .hud-card { padding: 6px 8px; border-radius: 8px; }
+    .hud-card span { font-size: 0.7rem; }
+    .hud-card strong { font-size: 1rem; }
+    .game-panel { padding: 8px; border-radius: 10px; }
+    .restart-btn { padding: 8px 12px; font-size: 0.85rem; }
+}

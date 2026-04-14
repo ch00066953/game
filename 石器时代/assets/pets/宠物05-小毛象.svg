@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 小毛象 - 可爱迷你猛犸象 -->
+  <!-- 身体 -->
+  <ellipse cx="100" cy="120" rx="42" ry="38" fill="#8D6E63"/>
+  <!-- 毛毛 -->
+  <g fill="#A1887F">
+    <path d="M58 115 Q55 105 62 110 Q58 100 65 108 Q62 95 68 105Z"/>
+    <path d="M142 115 Q145 105 138 110 Q142 100 135 108 Q138 95 132 105Z"/>
+    <path d="M70 145 Q65 140 72 140 Q68 135 75 138Z"/>
+    <path d="M130 145 Q135 140 128 140 Q132 135 125 138Z"/>
+  </g>
+  <!-- 肚子 -->
+  <ellipse cx="100" cy="128" rx="30" ry="26" fill="#BCAAA4"/>
+  <!-- 头 -->
+  <circle cx="100" cy="70" r="35" fill="#8D6E63"/>
+  <!-- 额毛 -->
+  <path d="M75 48 Q78 35 85 45 Q88 32 95 42 Q98 30 105 42 Q108 32 115 45 Q118 35 125 48" fill="#A1887F"/>
+  <!-- 脸 -->
+  <ellipse cx="100" cy="75" rx="28" ry="25" fill="#A1887F"/>
+  <!-- 大眼睛 -->
+  <ellipse cx="88" cy="68" rx="9" ry="11" fill="white"/>
+  <ellipse cx="112" cy="68" rx="9" ry="11" fill="white"/>
+  <circle cx="90" cy="69" r="6" fill="#333"/>
+  <circle cx="114" cy="69" r="6" fill="#333"/>
+  <circle cx="92" cy="66" r="2.5" fill="white"/>
+  <circle cx="116" cy="66" r="2.5" fill="white"/>
+  <!-- 象鼻 -->
+  <path d="M100 82 Q100 100 95 110 Q92 116 88 112" stroke="#8D6E63" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M100 82 Q100 100 95 110 Q92 116 88 112" stroke="#A1887F" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- 鼻孔 -->
+  <circle cx="87" cy="112" r="2.5" fill="#5D4037"/>
+  <!-- 腮红 -->
+  <ellipse cx="76" cy="82" rx="7" ry="4" fill="#F48FB1" opacity="0.4"/>
+  <ellipse cx="124" cy="82" rx="7" ry="4" fill="#F48FB1" opacity="0.4"/>
+  <!-- 小象牙 -->
+  <path d="M80 85 Q72 92 75 100" stroke="#FFF8E1" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M120 85 Q128 92 125 100" stroke="#FFF8E1" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- 小耳朵 -->
+  <ellipse cx="62" cy="68" rx="14" ry="18" fill="#8D6E63"/>
+  <ellipse cx="64" cy="70" rx="10" ry="14" fill="#EF9A9A" opacity="0.4"/>
+  <ellipse cx="138" cy="68" rx="14" ry="18" fill="#8D6E63"/>
+  <ellipse cx="136" cy="70" rx="10" ry="14" fill="#EF9A9A" opacity="0.4"/>
+  <!-- 小脚 -->
+  <ellipse cx="75" cy="158" rx="12" ry="7" fill="#795548"/>
+  <ellipse cx="95" cy="160" rx="11" ry="6" fill="#795548"/>
+  <ellipse cx="105" cy="160" rx="11" ry="6" fill="#795548"/>
+  <ellipse cx="125" cy="158" rx="12" ry="7" fill="#795548"/>
+  <!-- 短尾巴 -->
+  <path d="M142 115 Q152 108 155 115" stroke="#8D6E63" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="100" y="190" text-anchor="middle" font-size="12" fill="#5D4037" font-family="sans-serif">小毛象</text>
+</svg>

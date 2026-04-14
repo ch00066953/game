@@ -530,6 +530,12 @@ canvas.addEventListener("click", (event) => {
   if (!cell) {
     return;
   }
+
+  // 移动端：点击卡牌选中后，点击格子直接种植
+  if (state.selectedPlant && PLANT_CONFIG[state.selectedPlant]) {
+    placePlant(cell, state.selectedPlant);
+    return;
+  }
 });
 
 canvas.addEventListener("dragover", (event) => {

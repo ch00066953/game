@@ -4,10 +4,10 @@
 let game = null;
 
 function newGameState(name, cls, appearance) {
-    const c = CLASS_DATA[cls];
+    const c = CLASS_DATA[cls || 'none'];
     return {
         player: {
-            name, class: cls, className: c.name, icon: c.icon,
+            name, class: cls || null, className: c.name, icon: c.icon,
             level: 1, exp: 0, maxExp: 100,
             hp: c.baseHp, maxHp: c.baseHp,
             mp: c.baseMp, maxMp: c.baseMp,
@@ -23,13 +23,14 @@ function newGameState(name, cls, appearance) {
         currentArea: 0,
         playerPos: { x: 15, y: 18 },
         battleCount: 0,
+        quests: { active: [], completed: [] },
     };
 }
 
 // ===== DOM引用 =====
 const $ = id => document.getElementById(id);
 const screens = { title: $('titleScreen'), create: $('charCreate'), main: $('gameMain'), battle: $('battleScreen') };
-const modals = { pet: $('petModal'), bag: $('bagModal'), shop: $('shopModal'), map: $('mapModal'), result: $('resultModal'), levelUp: $('levelUpModal') };
+const modals = { pet: $('petModal'), bag: $('bagModal'), shop: $('shopModal'), map: $('mapModal'), result: $('resultModal'), levelUp: $('levelUpModal'), craft: $('craftModal'), quest: $('questModal') };
 
 // ===== 屏幕切换 =====
 let mapActive = false;
@@ -61,6 +62,7 @@ function initTitle() {
         try {
             game = JSON.parse(localStorage.getItem('stoneage_save'));
             if (!game.playerPos) game.playerPos = { ...AREA_MAPS[AREAS[game.currentArea].id].playerStart };
+            if (!game.quests) game.quests = { active: [], completed: [] };
             showScreen('main');
             initMainUI();
         } catch { toast('存档损坏'); }
@@ -86,10 +88,15 @@ function bindMainButtons() {
     $('btnPets').onclick = () => { renderPetModal(); showModal('pet'); };
     $('btnBag').onclick = () => { renderBagModal(); showModal('bag'); };
     $('btnSave').onclick = saveGame;
+    $('btnWorldMap').onclick = () => { renderMapModal(); showModal('map'); };
+    $('btnCraft').onclick = () => { _craftFilter = 'all'; renderCraftModal(); showModal('craft'); };
+    $('btnQuest').onclick = () => { renderQuestModal(); showModal('quest'); };
+    $('btnQuestClose').onclick = () => hideModal('quest');
     $('btnPetClose').onclick = () => hideModal('pet');
     $('btnBagClose').onclick = () => hideModal('bag');
     $('btnShopClose').onclick = () => hideModal('shop');
     $('btnMapClose').onclick = () => hideModal('map');
+    $('btnCraftClose').onclick = () => hideModal('craft');
 }
 
 // ===== 保存/读取 =====
@@ -100,6 +107,9 @@ function saveGame() {
 
 // ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', () => {
+    preloadEnemySVGs();
+    preloadCharSVGs();
     initTitle();
     initCharCreate();
+    initStory();
 });

@@ -14,7 +14,7 @@ const STAGES = {
         icon: '🔥',
         description: '出现了一些障碍物，要小心不要撞到',
         targetScore: 15,
-        speed: 100,
+        speed: 115,
         obstacles: [
             { x: 5, y: 5 }, { x: 14, y: 5 },
             { x: 5, y: 14 }, { x: 14, y: 14 }
@@ -26,7 +26,7 @@ const STAGES = {
         icon: '⚡',
         description: '更多的障碍物和更快的速度',
         targetScore: 20,
-        speed: 95,
+        speed: 105,
         obstacles: [
             { x: 4, y: 3 }, { x: 15, y: 3 },
             { x: 4, y: 7 }, { x: 15, y: 7 },
@@ -40,7 +40,7 @@ const STAGES = {
         icon: '💀',
         description: '极限挑战！四面楚歌，你能通关吗？',
         targetScore: 25,
-        speed: 85,
+        speed: 95,
         obstacles: [
             // 上障碍带
             { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 }, { x: 5, y: 2 }, { x: 6, y: 2 },
@@ -63,7 +63,7 @@ const STAGES = {
         icon: '🎲',
         description: '无限模式：无通关分数限制，每吃一个食物，障碍会在已有障碍旁扩张',
         targetScore: null,
-        speed: 95,
+        speed: 100,
         obstacles: [],
         background: 'stage-5'
     }
@@ -732,3 +732,22 @@ function handleKeyPress(e) {
             break;
     }
 }
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    var DIR_MAP = { up: {x:0,y:-1}, down: {x:0,y:1}, left: {x:-1,y:0}, right: {x:1,y:0} };
+    var ANTI = { up: 'y', down: 'y', left: 'x', right: 'x' };
+    document.querySelectorAll('.ctrl-btn[data-dir]').forEach(function(btn) {
+        btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (!gameState.isRunning && !gameState.isPaused) return;
+            var d = btn.dataset.dir;
+            var nd = DIR_MAP[d];
+            if (ANTI[d] === 'y' && direction.y === 0) nextDirection = nd;
+            if (ANTI[d] === 'x' && direction.x === 0) nextDirection = nd;
+        }, { passive: false });
+    });
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

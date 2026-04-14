@@ -578,3 +578,31 @@ loop();
 window.addEventListener('beforeunload', () => {
     cancelAnimationFrame(animationFrameId);
 });
+
+// 移动端虚拟控制器
+(function initMobileControls() {
+    const btns = document.querySelectorAll('.ctrl-btn[data-key]');
+    if (!btns.length) return;
+
+    function handleTouch(e) {
+        e.preventDefault();
+        const key = e.currentTarget.dataset.key;
+        if (key) keys.add(key);
+    }
+    function handleRelease(e) {
+        e.preventDefault();
+        const key = e.currentTarget.dataset.key;
+        if (key) keys.delete(key);
+    }
+
+    btns.forEach(btn => {
+        btn.addEventListener('touchstart', handleTouch, { passive: false });
+        btn.addEventListener('touchend', handleRelease, { passive: false });
+        btn.addEventListener('touchcancel', handleRelease, { passive: false });
+    });
+
+    // 阻止移动端双击缩放
+    document.addEventListener('touchstart', e => {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+})();

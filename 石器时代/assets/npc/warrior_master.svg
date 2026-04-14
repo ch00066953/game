@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+<defs>
+  <radialGradient id="ws" cx=".5" cy=".38" r=".55"><stop offset="0" stop-color="#D4985C"/><stop offset="1" stop-color="#A06830"/></radialGradient>
+  <linearGradient id="wa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#795548"/><stop offset="1" stop-color="#4E342E"/></linearGradient>
+  <linearGradient id="wb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5F0E0"/><stop offset="1" stop-color="#D4C5A0"/></linearGradient>
+  <linearGradient id="ww" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9E9E9E"/><stop offset="1" stop-color="#616161"/></linearGradient>
+</defs>
+<!-- Body / Hide armor -->
+<path d="M22,66 Q20,90 20,128 L108,128 Q108,90 106,66 Q86,76 64,78 Q42,76 22,66Z" fill="url(#wa)"/>
+<!-- Chest texture stitching -->
+<path d="M50,78 L54,95 M78,78 L74,95 M54,82 L74,82 M52,90 L76,90" stroke="rgba(0,0,0,0.15)" stroke-width="1" fill="none"/>
+<!-- Crossed leather straps -->
+<path d="M38,68 L90,110" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+<path d="M90,68 L38,110" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+<path d="M38,68 L90,110" stroke="#5D4037" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M90,68 L38,110" stroke="#5D4037" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="89" r="4" fill="#5D4037" stroke="#3E2723" stroke-width="1.5"/>
+<!-- Bone shoulder armor left -->
+<path d="M14,58 Q22,50 34,56 Q36,64 28,68 Q18,66 14,58Z" fill="url(#wb)"/>
+<path d="M18,58 L28,56 M20,62 L30,60" stroke="#C4B590" stroke-width="0.8" fill="none"/>
+<path d="M16,60 Q24,54 32,58" stroke="#B8A880" stroke-width="0.7" fill="none"/>
+<!-- Bone shoulder armor right -->
+<path d="M114,58 Q106,50 94,56 Q92,64 100,68 Q110,66 114,58Z" fill="url(#wb)"/>
+<path d="M110,58 L100,56 M108,62 L98,60" stroke="#C4B590" stroke-width="0.8" fill="none"/>
+<path d="M112,60 Q104,54 96,58" stroke="#B8A880" stroke-width="0.7" fill="none"/>
+<!-- Thick neck -->
+<path d="M46,50 Q46,62 48,68 L80,68 Q82,62 82,50Z" fill="url(#ws)"/>
+<path d="M48,56 L80,56" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" fill="none"/>
+<!-- Head (broad) -->
+<path d="M36,48 Q32,30 38,16 Q46,6 64,4 Q82,6 90,16 Q96,30 92,48 Q88,56 64,58 Q40,56 36,48Z" fill="url(#ws)"/>
+<path d="M38,44 Q64,52 90,44 Q88,50 64,56 Q40,50 38,44Z" fill="rgba(0,0,0,0.05)"/>
+<!-- Short dark hair -->
+<path d="M38,28 Q34,16 40,8 Q50,0 64,0 Q78,0 88,8 Q94,16 90,28 Q86,14 64,10 Q42,14 38,28Z" fill="#3E2723"/>
+<path d="M36,24 Q34,14 40,8 L38,20Z" fill="#3E2723"/>
+<path d="M92,24 Q94,14 88,8 L90,20Z" fill="#3E2723"/>
+<path d="M52,4 Q58,2 66,4" stroke="rgba(100,80,60,0.3)" stroke-width="0.8" fill="none"/>
+<!-- Strong brow ridge -->
+<path d="M42,26 Q48,22 56,24" stroke="#3E2723" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<path d="M72,24 Q80,22 86,26" stroke="#3E2723" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<!-- Eyes (fierce, slightly squinted) -->
+<ellipse cx="50" cy="32" rx="5.5" ry="3.5" fill="#FFFDF6"/>
+<circle cx="51" cy="32" r="3" fill="#4A2800"/>
+<circle cx="51" cy="32" r="1.6" fill="#1A0F00"/>
+<circle cx="52.2" cy="31" r="1" fill="rgba(255,255,255,0.8)"/>
+<path d="M44,30 L56,30" stroke="url(#ws)" stroke-width="0.5"/>
+<ellipse cx="78" cy="32" rx="5.5" ry="3.5" fill="#FFFDF6"/>
+<circle cx="77" cy="32" r="3" fill="#4A2800"/>
+<circle cx="77" cy="32" r="1.6" fill="#1A0F00"/>
+<circle cx="78.2" cy="31" r="1" fill="rgba(255,255,255,0.8)"/>
+<path d="M72,30 L84,30" stroke="url(#ws)" stroke-width="0.5"/>
+<!-- Battle scar on right cheek -->
+<path d="M80,28 Q84,34 86,42" stroke="#A0522D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<path d="M80,28 Q84,34 86,42" stroke="rgba(200,120,80,0.4)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+<!-- Broad nose -->
+<path d="M60,34 Q62,42 58,44" stroke="#A5723A" stroke-width="1.5" fill="none"/>
+<path d="M68,34 Q66,42 70,44" stroke="#A5723A" stroke-width="1.5" fill="none"/>
+<path d="M58,44 Q64,47 70,44" stroke="#A5723A" stroke-width="1.2" fill="none"/>
+<!-- Tight-lipped mouth -->
+<path d="M54,48 Q64,50 74,48" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<path d="M56,50 Q64,51.5 72,50" stroke="rgba(0,0,0,0.1)" stroke-width="0.8" fill="none"/>
+<!-- Stone sword (right side) -->
+<path d="M108,34 L110,90" stroke="#616161" stroke-width="6" stroke-linecap="round"/>
+<path d="M108,34 L110,90" stroke="url(#ww)" stroke-width="4"/>
+<path d="M109,34 L109,38" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+<path d="M104,88 L116,88 L114,94 L106,94 Z" fill="#5D4037" stroke="#3E2723" stroke-width="1"/>
+</svg>
