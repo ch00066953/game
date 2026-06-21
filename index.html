@@ -39,382 +39,41 @@
     </div>
   </section>
 
+  <!-- 实时统计区 -->
+  <section class="live-stats">
+    <div class="container live-stats-inner">
+      <div class="live-stat-item">
+        <span class="live-stat-num" id="stat-today-uv">-</span>
+        <span class="live-stat-label">今日访问人数</span>
+      </div>
+      <div class="live-stat-divider"></div>
+      <div class="live-stat-item">
+        <span class="live-stat-num" id="stat-total-uv">-</span>
+        <span class="live-stat-label">累计访问人数</span>
+      </div>
+      <div class="live-stat-divider"></div>
+      <div class="live-stat-item">
+        <span class="live-stat-num" id="stat-today-play">-</span>
+        <span class="live-stat-label">今日游玩人数</span>
+      </div>
+      <div class="live-stat-divider"></div>
+      <div class="live-stat-item">
+        <span class="live-stat-num" id="stat-total-play">-</span>
+        <span class="live-stat-label">累计游玩人数</span>
+      </div>
+    </div>
+  </section>
+
   <!-- 作品展示区 -->
   <section class="works" id="works">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">作品集</h2>
-        <p class="section-desc">共 <strong>22</strong> 款游戏，均使用原生前端技术实现，无任何框架依赖</p>
+        <p class="section-desc">共 <strong id="game-count">-</strong> 款游戏，均使用原生前端技术实现，无任何框架依赖</p>
       </div>
 
-      <div class="game-grid">
-
-        <!-- 贪吃蛇 -->
-        <article class="game-card">
-          <div class="card-cover card-snake">
-            <div class="card-emoji">🐍</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-keyboard">键盘操控</span>
-            </div>
-            <h3 class="card-title">贪吃蛇</h3>
-            <p class="card-desc">方向键 / WASD 操控，吃食物自动升级难度，本地最高分持久化。</p>
-            <a class="card-btn" href="贪吃蛇/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 吃豆人 -->
-        <article class="game-card">
-          <div class="card-cover card-pacman">
-            <div class="card-emoji">👻</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-ai">幽灵AI</span>
-            </div>
-            <h3 class="card-title">吃豆人</h3>
-            <p class="card-desc">21×21 经典迷宫，4 只幽灵独立 AI，炸弹系统、传送门与 8 关递进难度。</p>
-            <a class="card-btn" href="吃豆人/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 扫雷 -->
-        <article class="game-card">
-          <div class="card-cover card-mine">
-            <div class="card-emoji">💣</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-puzzle">益智</span>
-            </div>
-            <h3 class="card-title">扫雷</h3>
-            <p class="card-desc">初 / 中 / 高级难度及自定义配置，首次点击保护，支持命令行控制。</p>
-            <a class="card-btn" href="扫雷/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 24点 -->
-        <article class="game-card">
-          <div class="card-cover card-24">
-            <div class="card-emoji">🔢</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-puzzle">益智</span>
-              <span class="tag tag-math">数学</span>
-            </div>
-            <h3 class="card-title">24 点</h3>
-            <p class="card-desc">经典数学益智游戏，用 4 个随机数字的加减乘除凑出 24，内置提示系统。</p>
-            <a class="card-btn" href="24点/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 魂斗罗 -->
-        <article class="game-card">
-          <div class="card-cover card-contra">
-            <div class="card-emoji">🔫</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-action">动作</span>
-              <span class="tag tag-boss">Boss战</span>
-            </div>
-            <h3 class="card-title">魂斗罗</h3>
-            <p class="card-desc">横版卷轴射击，4 种武器系统，肌肉男 Boss，粒子特效与屏幕震动反馈。</p>
-            <a class="card-btn" href="魂斗罗/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 根本守不住 -->
-        <article class="game-card">
-          <div class="card-cover card-defense">
-            <div class="card-emoji">⚔️</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">策略</span>
-              <span class="tag tag-pvp">对抗</span>
-            </div>
-            <h3 class="card-title">根本守不住</h3>
-            <p class="card-desc">左右对抗策略，10 种兵种 Canvas 渲染，资源管理 + 波次战役系统。</p>
-            <a class="card-btn" href="根本守不住/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 植物大战僵尸2 -->
-        <article class="game-card">
-          <div class="card-cover card-pvz">
-            <div class="card-emoji">🌻</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">策略</span>
-              <span class="tag tag-tower">塔防</span>
-            </div>
-            <h3 class="card-title">植物大战僵尸 2</h3>
-            <p class="card-desc">经典道路防御，3 种植物卡牌对抗 3 型僵尸，阳光拾取与音效系统。</p>
-            <a class="card-btn" href="植物大战僵尸2/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 农户过河 -->
-        <article class="game-card">
-          <div class="card-cover card-river">
-            <div class="card-emoji">🚣</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-puzzle">益智</span>
-              <span class="tag tag-logic">逻辑</span>
-            </div>
-            <h3 class="card-title">农户过河</h3>
-            <p class="card-desc">经典狼羊菜过河谜题，支持按钮与命令行双模式，BFS 算法提供最优解提示。</p>
-            <a class="card-btn" href="农户过河/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 超级玛丽2 -->
-        <article class="game-card">
-          <div class="card-cover card-contra">
-            <div class="card-emoji">🍄</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-action">动作</span>
-              <span class="tag tag-classic">横版闯关</span>
-            </div>
-            <h3 class="card-title">超级玛丽 2</h3>
-            <p class="card-desc">全新独立关卡，支持卷轴镜头、终点旗、金币收集、踩踏敌人与生命重开机制。</p>
-            <a class="card-btn" href="超级玛丽2/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 我的世界 -->
-        <article class="game-card">
-          <div class="card-cover card-craft">
-            <div class="card-emoji">⛏️</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">沙盒</span>
-              <span class="tag tag-keyboard">建造采集</span>
-            </div>
-            <h3 class="card-title">我的世界</h3>
-            <p class="card-desc">等距像素沙盒世界，支持程序地形、方块采集放置、小地图与本地存档。</p>
-            <a class="card-btn" href="我的世界/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-        <!-- 黄金矿工 -->
-        <article class="game-card">
-          <div class="card-cover card-gold">
-            <div class="card-emoji">💰</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-action">休闲</span>
-            </div>
-            <h3 class="card-title">黄金矿工</h3>
-            <p class="card-desc">经典挖矿游戏，操控钩子抓取金块宝石，商店道具系统与关卡递进难度。</p>
-            <a class="card-btn" href="黄金矿工/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-        <!-- 石器时代 -->
-        <article class="game-card">
-          <div class="card-cover card-stoneage">
-            <div class="card-emoji">🦕</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-pvp">回合RPG</span>
-            </div>
-            <h3 class="card-title">石器时代</h3>
-            <p class="card-desc">3 职业、15 种恐龙捕获养成、5 大区域探索、回合制战斗与宠物系统。</p>
-            <a class="card-btn" href="石器时代/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 怪物猎人 -->
-        <article class="game-card">
-          <div class="card-cover card-hunter">
-            <div class="card-emoji">🐉</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-action">动作</span>
-              <span class="tag tag-boss">Boss战</span>
-            </div>
-            <h3 class="card-title">怪物猎人</h3>
-            <p class="card-desc">4 种武器、5 大巨兽狩猎、素材收集与装备锻造、实时动作战斗系统。</p>
-            <a class="card-btn" href="怪物猎人/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 反恐精英2D -->
-        <article class="game-card">
-          <div class="card-cover card-cs">
-            <div class="card-emoji">🔫</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-action">射击</span>
-              <span class="tag tag-pvp">双人合作</span>
-            </div>
-            <h3 class="card-title">反恐精英 2D</h3>
-            <p class="card-desc">俯视角双人射击，3 张地图、3 种武器、AI 敌人波次作战，支持单人与双人合作。</p>
-            <a class="card-btn" href="反恐精英2D/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 打砖块 -->
-        <article class="game-card">
-          <div class="card-cover card-breakout">
-            <div class="card-emoji">🧱</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-classic">经典</span>
-              <span class="tag tag-action">街机</span>
-            </div>
-            <h3 class="card-title">打砖块</h3>
-            <p class="card-desc">操控挡板反弹小球，击碎所有砖块过关，多关卡递进难度与砖块血量系统。</p>
-            <a class="card-btn" href="打砖块/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 2048 -->
-        <article class="game-card">
-          <div class="card-cover card-2048">
-            <div class="card-emoji">🔢</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-puzzle">益智</span>
-              <span class="tag tag-classic">经典</span>
-            </div>
-            <h3 class="card-title">2048</h3>
-            <p class="card-desc">滑动合并相同数字方块，挑战 2048 及更高分数，本地最高分持久化。</p>
-            <a class="card-btn" href="2048/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 推箱子 -->
-        <article class="game-card">
-          <div class="card-cover card-sokoban">
-            <div class="card-emoji">📦</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-puzzle">益智</span>
-              <span class="tag tag-logic">逻辑</span>
-            </div>
-            <h3 class="card-title">推箱子</h3>
-            <p class="card-desc">经典推箱子益智游戏，10 个关卡递进难度，撤销功能与关卡进度本地保存。</p>
-            <a class="card-btn" href="推箱子/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 泡泡龙 -->
-        <article class="game-card">
-          <div class="card-cover card-bubble">
-            <div class="card-emoji">🫧</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-puzzle">益智</span>
-              <span class="tag tag-classic">经典</span>
-            </div>
-            <h3 class="card-title">泡泡龙</h3>
-            <p class="card-desc">经典泡泡龙射击消除，三个同色泡泡相连即可消除，多关叡进难度。</p>
-            <a class="card-btn" href="泡泡龙/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 塔防 -->
-        <article class="game-card">
-          <div class="card-cover card-td">
-            <div class="card-emoji">🏰</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">策略</span>
-              <span class="tag tag-tower">塔防</span>
-            </div>
-            <h3 class="card-title">塔防</h3>
-            <p class="card-desc">经典塔防玩法，2 种防御塔对抗 3 类敌人，10 波递进难度。</p>
-            <a class="card-btn" href="塔防/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 平台跳跃 -->
-        <article class="game-card">
-          <div class="card-cover card-platformer">
-            <div class="card-emoji">🏃</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-action">动作</span>
-              <span class="tag tag-classic">横版闯关</span>
-            </div>
-            <h3 class="card-title">平台跳跃</h3>
-            <p class="card-desc">横版卷轴平台跳跃，金币收集与尖刺陷阱，多关卡递进难度。</p>
-            <a class="card-btn" href="平台跳跃/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 卡牌地牢 -->
-        <article class="game-card">
-          <div class="card-cover card-carddungeon">
-            <div class="card-emoji">🃏</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">策略</span>
-              <span class="tag tag-classic">Roguelike</span>
-            </div>
-            <h3 class="card-title">卡牌地牢</h3>
-            <p class="card-desc">构建牌组击败地牢敌人，回合制卡牌战斗与战后奖励选择。</p>
-            <a class="card-btn" href="卡牌地牢/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 战棋 -->
-        <article class="game-card">
-          <div class="card-cover card-tactics">
-            <div class="card-emoji">⚔️</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">策略</span>
-              <span class="tag tag-classic">战棋</span>
-            </div>
-            <h3 class="card-title">战棋</h3>
-            <p class="card-desc">网格战术回合制，指挥多兵种在复杂地形上战斗。</p>
-            <a class="card-btn" href="战棋/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
-        <!-- 轻量RPG -->
-        <article class="game-card">
-          <div class="card-cover card-rpg">
-            <div class="card-emoji">🛡️</div>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag tag-strategy">角色扮演</span>
-              <span class="tag tag-classic">RPG</span>
-            </div>
-            <h3 class="card-title">轻量RPG</h3>
-            <p class="card-desc">文字冒险 RPG，含角色成长、装备、任务链与存档系统。</p>
-            <a class="card-btn" href="轻量RPG/index.html" target="_blank">开始游戏 →</a>
-          </div>
-        </article>
-
+      <div id="game-grid">
+        <!-- populated by renderGamesSectioned() in games.js -->
       </div>
     </div>
   </section>
@@ -435,7 +94,7 @@
       </div>
       <div class="about-stats">
         <div class="stat-item">
-          <span class="stat-num">22</span>
+          <span class="stat-num" id="about-game-count">25</span>
           <span class="stat-label">款游戏</span>
         </div>
         <div class="stat-item">
@@ -484,6 +143,9 @@
     </div>
   </footer>
 
+  <script src="games.js"></script>
+  <script>renderGamesSectioned('game-grid'); document.getElementById('game-count').textContent = GAMES.length;</script>
   <script src="script.js"></script>
+  <script src="switcher.js"></script>
 </body>
 </html>

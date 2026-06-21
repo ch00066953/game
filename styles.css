@@ -225,6 +225,72 @@ body {
 }
 
 /* ============================
+   实时统计带
+   ============================ */
+.live-stats {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 28px 0;
+}
+
+.live-stats-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.live-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 36px;
+}
+
+.live-stat-num {
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  min-width: 4ch;
+  text-align: center;
+}
+
+.live-stat-label {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.live-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .live-stats-inner {
+    gap: 0;
+  }
+  .live-stat-item {
+    padding: 8px 18px;
+  }
+  .live-stat-divider {
+    height: 30px;
+  }
+  .live-stat-num {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================
    作品区
    ============================ */
 .works {
@@ -324,6 +390,7 @@ body {
 .card-craft  { background: linear-gradient(135deg, #254117, #4f772d); }
 .card-stoneage { background: linear-gradient(135deg, #8B4513, #D2691E); }
 .card-hunter { background: linear-gradient(135deg, #1a1a2e, #e74c3c); }
+.card-bomber { background: linear-gradient(135deg, #1f2933, #b45309 52%, #7f1d1d); }
 
 /* 卡片内容 */
 .card-body {
@@ -604,5 +671,409 @@ body {
 
   .game-grid {
     gap: 16px;
+  }
+}
+
+/* ============================
+   游戏分区布局（renderGamesSectioned）
+   ============================ */
+
+/* Section accent colors (per section class) */
+.gs-featured .gsec-label[data-n="01"] { background: rgba(99,102,241,.2); border-color: rgba(99,102,241,.5); color: #a5b4fc; box-shadow: 0 0 14px rgba(99,102,241,.25); }
+.gs-cats    .gsec-label[data-n="02"] { background: rgba(16,185,129,.15); border-color: rgba(16,185,129,.4); color: #6ee7b7; box-shadow: 0 0 14px rgba(16,185,129,.2); }
+.gs-hot     .gsec-label[data-n="03"] { background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.4); color: #fcd34d; box-shadow: 0 0 14px rgba(245,158,11,.2); }
+
+.gs-featured .gsec-title { color: #c7d2fe; }
+.gs-cats     .gsec-title { color: #a7f3d0; }
+.gs-hot      .gsec-title { color: #fde68a; }
+
+.game-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.game-section {
+  /* wrapper */
+}
+
+/* 区块标题行 */
+.gsec-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+  /* scroll entry animation */
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.gsec-head.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gsec-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.gsec-info {
+  flex: 1;
+}
+
+.gsec-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 3px;
+}
+
+.gsec-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* --- Section 1: 主推区 --- */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.game-card.featured-card {
+  border-color: rgba(99, 102, 241, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow on featured card hover */
+.game-card.featured-card:hover {
+  border-color: rgba(99,102,241,.6);
+  box-shadow: 0 0 28px rgba(99,102,241,.15), var(--shadow-card);
+}
+
+/* "精选" badge */
+.game-card.featured-card::after {
+  content: '✦ 精选';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(99,102,241,.75);
+  backdrop-filter: blur(4px);
+  color: #e0e7ff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
+
+.game-card.featured-card .card-cover {
+  height: 200px;
+}
+
+/* --- Section 2: 游戏分类区 --- */
+.cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Left border color per category */
+.cat-group {
+  border-left: 2px solid transparent;
+  padding-left: 18px;
+  transition: border-color var(--transition);
+}
+.cat-group[data-cat="动作射击"] { border-left-color: rgba(239,68,68,.4); }
+.cat-group[data-cat="经典街机"]  { border-left-color: rgba(234,179,8,.4); }
+.cat-group[data-cat="策略塔防"] { border-left-color: rgba(34,197,94,.4); }
+.cat-group[data-cat="益智解谜"] { border-left-color: rgba(59,130,246,.4); }
+.cat-group[data-cat="RPG探险"]  { border-left-color: rgba(168,85,247,.4); }
+
+.cat-group:hover[data-cat="动作射击"] { border-left-color: rgba(239,68,68,.8); }
+.cat-group:hover[data-cat="经典街机"]  { border-left-color: rgba(234,179,8,.8); }
+.cat-group:hover[data-cat="策略塔防"] { border-left-color: rgba(34,197,94,.8); }
+.cat-group:hover[data-cat="益智解谜"] { border-left-color: rgba(59,130,246,.8); }
+.cat-group:hover[data-cat="RPG探险"]  { border-left-color: rgba(168,85,247,.8); }
+
+.cat-group-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cat-group-icon {
+  font-size: 1.2rem;
+}
+
+.cat-group-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.cat-group-count {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+
+.cat-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.cat-mini-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 16px 10px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), opacity 0.35s ease;
+  cursor: pointer;
+  /* scroll entry animation */
+  opacity: 0;
+}
+
+.cat-mini-card.visible {
+  opacity: 1;
+}
+
+.cat-mini-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.cat-mini-emoji {
+  font-size: 2em;
+  line-height: 1;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.cat-mini-card:hover .cat-mini-emoji {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(99,102,241,.5));
+}
+
+.cat-mini-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.cat-mini-btn {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 6px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 600;
+  transition: background var(--transition);
+}
+
+.cat-mini-btn:hover {
+  background: rgba(99, 102, 241, 0.28);
+}
+
+/* --- Section 3: 热门推荐 --- */
+.hot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* "热" badge on hot section cards */
+.gs-hot .game-card {
+  border-color: rgba(245,158,11,.2);
+  position: relative;
+}
+
+.gs-hot .game-card::after {
+  content: '🔥';
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  font-size: 1.2rem;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(245,158,11,.5));
+}
+
+.gs-hot .game-card:hover {
+  border-color: rgba(245,158,11,.45);
+  box-shadow: 0 0 24px rgba(245,158,11,.1), var(--shadow-card);
+}
+
+/* --- Category Filter Tabs --- */
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.cat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 16px;
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.55);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+  font-family: inherit;
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cat-tab:hover {
+  background: rgba(16,185,129,.1);
+  border-color: rgba(16,185,129,.35);
+  color: #6ee7b7;
+  transform: translateY(-1px);
+}
+
+.cat-tab.active {
+  background: rgba(16,185,129,.18);
+  border-color: rgba(16,185,129,.55);
+  color: #6ee7b7;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(16,185,129,.15);
+}
+
+.cat-group {
+  transition: opacity 0.25s ease;
+}
+
+/* responsive tab wrapping on small screens */
+@media (max-width: 600px) {
+  .cat-tabs {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding-bottom: 2px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .cat-tab {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-tab {
+    font-size: 0.76rem;
+    padding: 5px 12px;
+  }
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .game-sections {
+    gap: 40px;
+  }
+
+  .featured-grid,
+  .hot-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .cat-mini-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gsec-title {
+    font-size: 1rem;
+  }
+
+  .featured-grid,
+  .hot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 2-column mini-card grid: more readable + easier tap target */
+  .cat-mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .cat-mini-card {
+    padding: 14px 8px 12px;
+  }
+
+  .cat-mini-emoji {
+    font-size: 1.8em;
+  }
+
+  .cat-mini-name {
+    font-size: 0.75rem;
+  }
+
+  /* Larger touch target for "玩" button */
+  .cat-mini-btn {
+    padding: 8px 12px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Reduce cat-group indent on small screens */
+  .cat-group[data-cat] {
+    padding-left: 12px;
+  }
+
+  /* Reduce works section vertical padding */
+  .works {
+    padding: 60px 0;
+  }
+
+  /* Bigger card-btn touch target on featured/hot cards */
+  .card-btn {
+    padding: 11px 20px;
+    display: block;
+    text-align: center;
   }
 }

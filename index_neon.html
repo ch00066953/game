@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编程拾光 — 霓虹赛博</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #080812;
+      --surface:  rgba(255,255,255,0.04);
+      --surface2: rgba(255,255,255,0.07);
+      --border:   rgba(139,92,246,0.3);
+      --border-cyan: rgba(34,211,238,0.35);
+      --purple:   #a855f7;
+      --cyan:     #22d3ee;
+      --pink:     #f0abfc;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --container: 1100px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* 动态背景网格 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* 顶部渐变光晕 */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(139,92,246,0.18) 0%,
+        rgba(34,211,238,0.08) 40%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== 玻璃效果工具类 ===== */
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== 发光文字 ===== */
+    .glow-purple {
+      color: var(--purple);
+      text-shadow: 0 0 20px rgba(168,85,247,0.6), 0 0 40px rgba(168,85,247,0.3);
+    }
+    .glow-cyan {
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3);
+    }
+
+    /* ===== 渐变文字 ===== */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== 页头 ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,18,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .site-nav a:hover { color: var(--cyan); }
+
+    /* ===== 霓虹分隔带 ===== */
+    .neon-rule {
+      padding: 14px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .neon-rule-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .neon-rule-inner::before,
+    .neon-rule-inner::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), transparent);
+      display: block;
+    }
+
+    .neon-rule-diamond {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* 浮动光斑 */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.25;
+    }
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: var(--purple);
+      top: 10%; left: 5%;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: var(--cyan);
+      top: 30%; right: 5%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.38em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+
+    .hero-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      padding: 16px 40px;
+      border: 1px solid var(--purple);
+      color: var(--purple);
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(34,211,238,0.15));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .hero-cta:hover::before { opacity: 1; }
+    .hero-cta:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 24px rgba(34,211,238,0.3);
+    }
+
+    /* ===== 统计带 ===== */
+    .stats-band {
+      padding: 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .stat-card {
+      flex: 1 1 180px;
+      max-width: 220px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 24px rgba(34,211,238,0.15);
+    }
+
+    .stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ===== 作品区 ===== */
+    .works {
+      padding: 60px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 24px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .game-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-4px);
+      box-shadow:
+        0 8px 32px rgba(168,85,247,0.2),
+        inset 0 0 20px rgba(168,85,247,0.04);
+    }
+
+    .game-icon { font-size: 2.2rem; line-height: 1; }
+
+    .game-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .game-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      padding: 10px 0;
+      border: 1px solid var(--border-cyan);
+      color: var(--cyan);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+    .game-btn:hover {
+      background: rgba(34,211,238,0.12);
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(34,211,238,0.25);
+    }
+
+    /* ===== 关于 ===== */
+    .about {
+      padding: 60px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .about h2 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .about-stat {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .about-stat-num {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .about-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ===== 页脚 ===== */
+    .site-footer {
+      padding: 40px 0 28px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-logo {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .footer-copy a { color: inherit; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 768px) {
+      .hero-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .site-nav { display: none; }
+      .game-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo gradient-text">✦ 编程拾光</div>
+      <nav class="site-nav">
+        <a href="#works">作品</a>
+        <a href="#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+      <p class="hero-eyebrow">Browser Game Collection · 2026</p>
+      <h1 class="hero-title">
+        <span class="gradient-text">编程</span><br>
+        <span class="glow-cyan">拾光</span>
+      </h1>
+      <p class="hero-sub">// 用代码还原记忆中的经典 · 22 款原生游戏 //</p>
+      <a href="#works" class="hero-cta">浏览作品</a>
+    </div>
+  </section>
+
+  <!-- 分隔 01 -->
+  <div class="neon-rule" aria-hidden="true">
+    <div class="neon-rule-inner">
+      <span class="neon-rule-diamond">◆ 数据看板 ◆</span>
+    </div>
+  </div>
+
+  <!-- 统计带 -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value glow-cyan" id="stat-today-uv">—</span>
+          <span class="stat-label">今日访问</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value glow-purple" id="stat-total-uv">—</span>
+          <span class="stat-label">累计访问</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value glow-cyan" id="stat-today-play">—</span>
+          <span class="stat-label">今日游玩</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value glow-purple" id="stat-total-play">—</span>
+          <span class="stat-label">累计游玩</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 02 -->
+  <div class="neon-rule" aria-hidden="true">
+    <div class="neon-rule-inner">
+      <span class="neon-rule-diamond">◆ 作品集 ◆</span>
+    </div>
+  </div>
+
+  <!-- 作品区 -->
+  <section class="works" id="works">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Game Library</p>
+        <h2 class="section-title gradient-text">22 款游戏</h2>
+      </div>
+      <div class="game-grid" id="game-grid" id="game-grid">
+        <div class="game-card"><div class="game-icon">🐍</div><div class="game-title">贪吃蛇</div><a href="贪吃蛇/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">👻</div><div class="game-title">吃豆人</div><a href="吃豆人/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">💣</div><div class="game-title">扫雷</div><a href="扫雷/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🔢</div><div class="game-title">24 点</div><a href="24点/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🔫</div><div class="game-title">魂斗罗</div><a href="魂斗罗/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">⚔️</div><div class="game-title">根本守不住</div><a href="根本守不住/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🌻</div><div class="game-title">植物大战僵尸</div><a href="植物大战僵尸2/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🚣</div><div class="game-title">农户过河</div><a href="农户过河/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🍄</div><div class="game-title">超级玛丽 2</div><a href="超级玛丽2/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">⛏️</div><div class="game-title">我的世界</div><a href="我的世界/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">💰</div><div class="game-title">黄金矿工</div><a href="黄金矿工/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🦕</div><div class="game-title">石器时代</div><a href="石器时代/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🐉</div><div class="game-title">怪物猎人</div><a href="怪物猎人/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🔫</div><div class="game-title">反恐精英 2D</div><a href="反恐精英2D/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🧱</div><div class="game-title">打砖块</div><a href="打砖块/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🔢</div><div class="game-title">2048</div><a href="2048/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">📦</div><div class="game-title">推箱子</div><a href="推箱子/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🫧</div><div class="game-title">泡泡龙</div><a href="泡泡龙/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🏰</div><div class="game-title">塔防</div><a href="塔防/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🏃</div><div class="game-title">平台跳跃</div><a href="平台跳跃/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">🎴</div><div class="game-title">卡牌地牢</div><a href="卡牌地牢/index.html" target="_blank" class="game-btn">Play</a></div>
+        <div class="game-card"><div class="game-icon">⚡</div><div class="game-title">五位一体</div><a href="五位一体/index.html" target="_blank" class="game-btn">Play</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 03 -->
+  <div class="neon-rule" aria-hidden="true">
+    <div class="neon-rule-inner">
+      <span class="neon-rule-diamond">◆ 关于本站 ◆</span>
+    </div>
+  </div>
+
+  <!-- 关于 -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2 class="gradient-text">关于本站</h2>
+          <p>编程拾光是用原生 HTML、CSS、JavaScript 还原经典游戏的集合。每一款游戏都是对技术能力的磨练，也是对那些年经典的致敬。</p>
+          <p>所有游戏均可在浏览器中直接运行，无需任何插件或安装。这里展现的是纯技术、纯创意、纯回忆。</p>
+        </div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num glow-cyan">22</span>
+            <span class="about-stat-label">游戏数</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num glow-purple">0</span>
+            <span class="about-stat-label">框架依赖</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num glow-cyan">∞</span>
+            <span class="about-stat-label">回忆</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num glow-purple">1</span>
+            <span class="about-stat-label">热爱</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 04 -->
+  <div class="neon-rule" aria-hidden="true">
+    <div class="neon-rule-inner">
+      <span class="neon-rule-diamond">◆ EOF ◆</span>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-logo gradient-text">✦ 编程拾光</p>
+      <div class="footer-links">
+        <a href="#works">作品</a>
+        <a href="#about">关于</a>
+        <a href="mailto:contact@example.com">联系</a>
+      </div>
+      <p class="footer-copy">© 2026 编程拾光 | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" style="color:inherit;">闽ICP备2026008676号-1</a></p>
+      <p class="footer-copy">
+        <a href="https://beian.mps.gov.cn/#/query/webSearch?code=35020302037063" target="_blank" rel="noreferrer" style="color:inherit; display:inline-flex; align-items:center; gap:4px;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAANklEQVQokWP8z8BQDwAChgH/QZITBgYGBgZGBgYGhv//GRj+MzD8Z2BgYGBgZGBg+P+fgQEAi3sI4SgHmV0AAAAASUVORK5CYII=" alt="公安备案图标" style="vertical-align:middle;" />
+          闽公网安备35020302037063号
+        </a>
+      </p>
+      <p class="footer-copy" style="opacity:0.5;">本站所有游戏均为原创复刻，仅供学习交流，不涉及商业用途。</p>
+    </div>
+  </footer>
+
+  <script>
+    (function loadStats() {
+      fetch('/stats.json', { cache: 'no-store' })
+        .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+        .then(function(data) {
+          var f = function(v) { return (v !== null && v !== undefined) ? v : '—'; };
+          document.getElementById('stat-today-uv').textContent   = f(data.today_uv);
+          document.getElementById('stat-total-uv').textContent   = f(data.total_uv);
+          document.getElementById('stat-today-play').textContent = f(data.today_play);
+          document.getElementById('stat-total-play').textContent = f(data.total_play);
+        })
+        .catch(function() {});
+    })();
+
+    var _hmt = _hmt || [];
+    (function() {
+      var el = document.createElement('script');
+      el.src = 'https://hm.baidu.com/hm.js?c1e5e0b226b2ebd860b7d2dba141a896';
+      el.defer = true;
+      document.head.appendChild(el);
+    })();
+
+    document.querySelectorAll('.game-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var title = this.closest('.game-card').querySelector('.game-title');
+        var name = title ? title.textContent.trim() : 'unknown';
+        if (_hmt && typeof _hmt.push === 'function') {
+          _hmt.push(['_trackEvent', 'game', 'start_click', name]);
+        }
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>  <script src="games.js"></script>
+  <script>renderGames('game-grid', {btnText: 'Play', iconClass: 'game-icon'});</script>
+  <script src="switcher.js"></script>
+
+</body>
+</html>

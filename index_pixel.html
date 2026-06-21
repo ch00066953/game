@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编程拾光 — 像素终端</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:   #00ff41;
+      --amber:   #ffb000;
+      --dim:     #006614;
+      --bg:      #020b02;
+      --surface: #060e06;
+      --border:  #00cc33;
+      --text:    #c8ffc8;
+      --muted:   #3a7a3a;
+      --red:     #ff3c3c;
+      --container: 1080px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      line-height: 1.5;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* CRT 扫描线叠层 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.10) 0px,
+        rgba(0, 0, 0, 0.10) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    }
+
+    /* CRT 磷光余晖角落暗角 */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 60%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== 闪烁光标 ===== */
+    @keyframes blink { 50% { opacity: 0; } }
+    .cursor::after {
+      content: '▮';
+      color: var(--green);
+      animation: blink 1s step-end infinite;
+      margin-left: 4px;
+    }
+
+    /* ===== 字体发光 ===== */
+    .glow {
+      text-shadow:
+        0 0 4px var(--green),
+        0 0 12px var(--green),
+        0 0 24px rgba(0,255,65,0.4);
+    }
+    .glow-amber {
+      text-shadow:
+        0 0 4px var(--amber),
+        0 0 12px var(--amber),
+        0 0 24px rgba(255,176,0,0.4);
+    }
+
+    /* ===== 页头 ===== */
+    .site-header {
+      border-bottom: 2px solid var(--border);
+      padding: 12px 0;
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.85rem;
+      color: var(--green);
+      text-shadow: 0 0 8px var(--green);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--amber);
+      text-shadow: 0 0 8px var(--amber);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 24px;
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+    }
+
+    .site-nav a {
+      color: var(--dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .site-nav a:hover {
+      color: var(--green);
+      text-shadow: 0 0 6px var(--green);
+    }
+
+    /* ===== ASCII 分隔带 ===== */
+    .ascii-rule {
+      padding: 10px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ascii-rule-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .ascii-rule-inner::before,
+    .ascii-rule-inner::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--border) 0px, var(--border) 6px,
+        transparent 6px, transparent 10px
+      );
+      display: block;
+    }
+
+    .ascii-rule-label {
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      flex-shrink: 0;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-prefix {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1rem, 3.5vw, 2.2rem);
+      color: var(--green);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .hero-title .line2 {
+      display: block;
+      color: var(--amber);
+      font-size: clamp(0.6rem, 2vw, 1.1rem);
+      margin-top: 16px;
+      text-shadow: 0 0 8px var(--amber);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+      padding: 14px 28px;
+      border: 3px solid var(--green);
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: all 0.15s;
+    }
+    .hero-cta:hover {
+      background: var(--green);
+      color: var(--bg);
+    }
+
+    .hero-boot {
+      margin-top: 40px;
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== 统计带 ===== */
+    .stats-band {
+      background: var(--surface);
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      padding: 28px 0;
+    }
+
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      flex: 1 1 140px;
+      text-align: center;
+      padding: 16px 20px;
+      border-right: 2px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-label {
+      font-family: 'VT323', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--amber);
+      text-shadow: 0 0 8px var(--amber);
+      display: block;
+    }
+
+    /* ===== 作品区 ===== */
+    .works {
+      padding: 56px 0;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-pre {
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+      color: var(--green);
+      text-shadow: 0 0 6px var(--green);
+      line-height: 1.6;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+
+    .game-card::before {
+      content: '>';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      font-family: 'VT323', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .game-card:hover {
+      border-color: var(--amber);
+      box-shadow: 0 0 12px rgba(255,176,0,0.3);
+    }
+
+    .game-icon {
+      font-size: 2rem;
+      line-height: 1;
+      image-rendering: pixelated;
+    }
+
+    .game-title {
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      color: var(--text);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    .game-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      padding: 8px 0;
+      border: 2px solid var(--green);
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: all 0.15s;
+      margin-top: 4px;
+    }
+    .game-btn:hover {
+      background: var(--green);
+      color: var(--bg);
+    }
+
+    /* ===== 关于 ===== */
+    .about {
+      background: var(--surface);
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      padding: 56px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about h2 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.7rem, 2vw, 1rem);
+      color: var(--green);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-stat {
+      border: 2px solid var(--border);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .about-stat-num {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1rem, 3vw, 1.8rem);
+      color: var(--amber);
+      text-shadow: 0 0 8px var(--amber);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .about-stat-label {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+
+    /* ===== 页脚 ===== */
+    .site-footer {
+      padding: 32px 0 24px;
+      text-align: center;
+      border-top: 2px solid var(--border);
+    }
+
+    .footer-ascii {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--green); }
+
+    .footer-copy {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-copy a { color: inherit; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 0.9rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+      .stat-item { border-right: none; border-bottom: 2px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .site-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 页头 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">[ <span>编程</span>拾光 ]</div>
+      <nav class="site-nav">
+        <a href="#works">_作品</a>
+        <a href="#about">_关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-prefix">// BOOT SEQUENCE 2026.01.01 //</span>
+      <h1 class="hero-title glow cursor">
+        编程拾光
+        <span class="line2 glow-amber">用代码还原记忆中的经典</span>
+      </h1>
+      <p class="hero-subtitle">22 款浏览器原生游戏 · 零依赖 · 纯像素</p>
+      <a href="#works" class="hero-cta">&gt; 开始游戏</a>
+      <p class="hero-boot">SYSTEM READY · PRESS ANY KEY</p>
+    </div>
+  </section>
+
+  <!-- 分隔 01 -->
+  <div class="ascii-rule" aria-hidden="true">
+    <div class="ascii-rule-inner">
+      <span class="ascii-rule-label">// STATS //</span>
+    </div>
+  </div>
+
+  <!-- 统计带 -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-label">UV_TODAY</span>
+          <span class="stat-value" id="stat-today-uv">---</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">UV_TOTAL</span>
+          <span class="stat-value" id="stat-total-uv">---</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">PLAY_TODAY</span>
+          <span class="stat-value" id="stat-today-play">---</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">PLAY_TOTAL</span>
+          <span class="stat-value" id="stat-total-play">---</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 02 -->
+  <div class="ascii-rule" aria-hidden="true">
+    <div class="ascii-rule-inner">
+      <span class="ascii-rule-label">// GAME LIST //</span>
+    </div>
+  </div>
+
+  <!-- 作品区 -->
+  <section class="works" id="works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pre">LIST_GAMES.EXE</span>
+        <h2 class="section-title">22 TITLES LOADED</h2>
+      </div>
+
+      <div class="game-grid" id="game-grid" id="game-grid">
+        <div class="game-card">
+          <div class="game-icon">🐍</div>
+          <div class="game-title">贪吃蛇</div>
+          <a href="贪吃蛇/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">👻</div>
+          <div class="game-title">吃豆人</div>
+          <a href="吃豆人/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">💣</div>
+          <div class="game-title">扫雷</div>
+          <a href="扫雷/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🔢</div>
+          <div class="game-title">24 点</div>
+          <a href="24点/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🔫</div>
+          <div class="game-title">魂斗罗</div>
+          <a href="魂斗罗/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">⚔️</div>
+          <div class="game-title">根本守不住</div>
+          <a href="根本守不住/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🌻</div>
+          <div class="game-title">植物大战僵尸</div>
+          <a href="植物大战僵尸2/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🚣</div>
+          <div class="game-title">农户过河</div>
+          <a href="农户过河/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🍄</div>
+          <div class="game-title">超级玛丽 2</div>
+          <a href="超级玛丽2/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">⛏️</div>
+          <div class="game-title">我的世界</div>
+          <a href="我的世界/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">💰</div>
+          <div class="game-title">黄金矿工</div>
+          <a href="黄金矿工/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🦕</div>
+          <div class="game-title">石器时代</div>
+          <a href="石器时代/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🐉</div>
+          <div class="game-title">怪物猎人</div>
+          <a href="怪物猎人/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🔫</div>
+          <div class="game-title">反恐精英 2D</div>
+          <a href="反恐精英2D/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🧱</div>
+          <div class="game-title">打砖块</div>
+          <a href="打砖块/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🔢</div>
+          <div class="game-title">2048</div>
+          <a href="2048/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">📦</div>
+          <div class="game-title">推箱子</div>
+          <a href="推箱子/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🫧</div>
+          <div class="game-title">泡泡龙</div>
+          <a href="泡泡龙/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🏰</div>
+          <div class="game-title">塔防</div>
+          <a href="塔防/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🏃</div>
+          <div class="game-title">平台跳跃</div>
+          <a href="平台跳跃/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🎴</div>
+          <div class="game-title">卡牌地牢</div>
+          <a href="卡牌地牢/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">⚡</div>
+          <div class="game-title">五位一体</div>
+          <a href="五位一体/index.html" target="_blank" class="game-btn">RUN</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 03 -->
+  <div class="ascii-rule" aria-hidden="true">
+    <div class="ascii-rule-inner">
+      <span class="ascii-rule-label">// ABOUT //</span>
+    </div>
+  </div>
+
+  <!-- 关于 -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>关于本站</h2>
+          <p>编程拾光用原生 HTML/CSS/JS 还原了 22 款经典浏览器游戏。每一行代码都是对技术的磨砺，也是对那些年经典的致敬。</p>
+          <p>零框架·零插件·即开即玩。这是属于代码本身的游乐场。</p>
+        </div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num">22</span>
+            <span class="about-stat-label">TITLES</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">0</span>
+            <span class="about-stat-label">DEPS</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">∞</span>
+            <span class="about-stat-label">回忆</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">01</span>
+            <span class="about-stat-label">PASSION</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分隔 04 -->
+  <div class="ascii-rule" aria-hidden="true">
+    <div class="ascii-rule-inner">
+      <span class="ascii-rule-label">// END OF FILE //</span>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-ascii">[ 编程拾光 — BCHENG.GAMES.SYS ]</p>
+      <div class="footer-links">
+        <a href="#works">_作品</a>
+        <a href="#about">_关于</a>
+        <a href="mailto:contact@example.com">_联系</a>
+      </div>
+      <p class="footer-copy">© 2026 编程拾光 | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">闽ICP备2026008676号-1</a></p>
+      <p class="footer-copy">
+        <a href="https://beian.mps.gov.cn/#/query/webSearch?code=35020302037063" target="_blank" rel="noreferrer" style="color:inherit;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAANklEQVQokWP8z8BQDwAChgH/QZITBgYGBgZGBgYGhv//GRj+MzD8Z2BgYGBgZGBg+P+fgQEAi3sI4SgHmV0AAAAASUVORK5CYII=" alt="公安备案图标" style="vertical-align:middle;margin-right:4px;" />
+          闽公网安备35020302037063号
+        </a>
+      </p>
+      <p class="footer-copy" style="opacity:0.5;">本站所有游戏均为原创复刻，仅供学习交流，不涉及商业用途。</p>
+    </div>
+  </footer>
+
+  <script>
+    // 读取 stats.json
+    (function loadStats() {
+      fetch('/stats.json', { cache: 'no-store' })
+        .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+        .then(function(data) {
+          var f = function(v) { return (v !== null && v !== undefined) ? v : '---'; };
+          document.getElementById('stat-today-uv').textContent   = f(data.today_uv);
+          document.getElementById('stat-total-uv').textContent   = f(data.total_uv);
+          document.getElementById('stat-today-play').textContent = f(data.today_play);
+          document.getElementById('stat-total-play').textContent = f(data.total_play);
+        })
+        .catch(function() {});
+    })();
+
+    // 百度统计
+    var _hmt = _hmt || [];
+    (function() {
+      var el = document.createElement('script');
+      el.src = 'https://hm.baidu.com/hm.js?c1e5e0b226b2ebd860b7d2dba141a896';
+      el.defer = true;
+      document.head.appendChild(el);
+    })();
+
+    // 游戏点击跟踪
+    document.querySelectorAll('.game-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var title = this.closest('.game-card').querySelector('.game-title');
+        var name = title ? title.textContent.trim() : 'unknown';
+        if (_hmt && typeof _hmt.push === 'function') {
+          _hmt.push(['_trackEvent', 'game', 'start_click', name]);
+        }
+      });
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>  <script src="games.js"></script>
+  <script>renderGames('game-grid', {btnText: 'RUN', iconClass: 'game-icon'});</script>
+  <script src="switcher.js"></script>
+
+</body>
+</html>
